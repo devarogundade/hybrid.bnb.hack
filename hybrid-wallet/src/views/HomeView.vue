@@ -5,92 +5,94 @@ import ReceiveIcon from '@/components/icons/ReceiveIcon.vue';
 import SendIcon from '@/components/icons/SendIcon.vue';
 import LogoutIcon from '@/components/icons/LogoutIcon.vue';
 import ArrowDownIcon from '@/components/icons/ArrowDownIcon.vue';
-import ApproveSheet from '@/sheets/ApproveSheet.vue';
-import { ref } from 'vue';
 
-const pop = ref<Boolean>(false);
+import { useStore } from 'vuex';
+import { key } from '../../store';
+
+const store = useStore(key)
+
 </script>
 
 <template>
-  <section>
-    <div class="app_width">
-      <div class="home_header">
-        <div class="home_header_name">
-          <HybridIcon />
-          <p>Home</p>
+  <div class="home_container">
+    <section>
+      <div class="app_width">
+        <div class="home_header">
+          <div class="home_header_name">
+            <HybridIcon />
+            <p>Home</p>
+          </div>
+
+          <div class="home_header_account">
+            <p>{{ store.state.address }}</p>
+            <ProfileIcon />
+          </div>
         </div>
 
-        <div class="home_header_account">
-          <p>0x839...934a</p>
-          <ProfileIcon />
-        </div>
-      </div>
-
-      <div class="home_worth">
-        <h3>$50.93</h3>
-      </div>
-
-      <div class="home_actions">
-        <div class="home_action">
-          <ReceiveIcon />
-          <p>Receive</p>
+        <div class="home_worth">
+          <h3>$50.93</h3>
         </div>
 
-        <div class="home_action">
-          <SendIcon />
-          <p>Send</p>
+        <div class="home_actions">
+          <div class="home_action">
+            <ReceiveIcon />
+            <p>Receive</p>
+          </div>
+
+          <div class="home_action">
+            <SendIcon />
+            <p>Send</p>
+          </div>
+
+          <div class="home_action">
+            <LogoutIcon />
+            <p>Unbind</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="home_tabs">
+        <div class="home_tab home_tab_active">
+          <p>Requests <span>10</span></p>
+          <div class="indicator"></div>
         </div>
 
-        <div class="home_action">
-          <LogoutIcon />
-          <p>Unbind</p>
+        <div class="home_tab">
+          <p>Completed</p>
+          <div class="indicator"></div>
         </div>
       </div>
-    </div>
-  </section>
-  <section>
-    <div class="home_tabs">
-      <div class="home_tab home_tab_active">
-        <p>Requests <span>10</span></p>
-        <div class="indicator"></div>
-      </div>
+    </section>
+    <section>
+      <div class="app_width">
+        <div class="requests">
+          <div class="request" v-for="i in 10" :key="i">
+            <div class="request_head">
+              <div class="request_head_token">
+                <img src="/images/usdc.png" alt="">
+                <p>Circle USD</p>
+              </div>
 
-      <div class="home_tab">
-        <p>Completed</p>
-        <div class="indicator"></div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="app_width">
-      <div class="requests">
-        <div class="request" v-for="i in 10" :key="i">
-          <div class="request_head">
-            <div class="request_head_token">
-              <img src="/images/usdc.png" alt="">
-              <p>Circle USD</p>
+              <div class="request_head_amount">
+                <p>30 USDC</p>
+                <ArrowDownIcon />
+              </div>
             </div>
 
-            <div class="request_head_amount">
-              <p>30 USDC</p>
-              <ArrowDownIcon />
+            <div class="request_sender">
+              <p>Spender: 0x60E0a0eAd05...34A97f13E6ff21</p>
             </div>
-          </div>
 
-          <div class="request_sender">
-            <p>Spender: 0x60E0a0eAd051314E7510AE803334A97f13E6ff21</p>
-          </div>
-
-          <div class="request_actions">
-            <button class="request_action">Reject</button>
-            <button class="request_action" @click="pop = !pop">Approve</button>
+            <div class="request_actions">
+              <button class="request_action" @click="$emit('pin_request', 2)">Reject</button>
+              <button class="request_action" @click="$emit('approve_request', 1)">Approve</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <ApproveSheet :active="pop.valueOf()" @close="pop = !pop" />
-  </section>
+    </section>
+  </div>
 </template>
 
 <style scoped>
@@ -102,7 +104,6 @@ section:first-child {
 section:last-child {
   overflow-y: auto;
   height: 330px;
-  position: relative;
 }
 
 section:last-child::-webkit-scrollbar {

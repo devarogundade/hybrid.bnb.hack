@@ -28,7 +28,7 @@ const props = defineProps({
 
                     <tr>
                         <td>Spender</td>
-                        <td>0x60E0a0eAd051314E7510AE803334A97f13E6ff21</td>
+                        <td>0x60E0a0eAd05...34A97f13E6ff21</td>
                     </tr>
 
                     <tr>
@@ -52,14 +52,14 @@ main {
     justify-content: center;
     background: #141617;
     width: 350px;
-    position: fixed;
-    transition: .4s;
-    bottom: -999px;
+    position: absolute;
+    bottom: -100vh;
     left: 0;
     z-index: 999;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding-bottom: 10px;
+    border-top: 1px solid rgba(165, 169, 164, 0.15)
 }
 
 .main_active {

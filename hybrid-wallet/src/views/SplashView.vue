@@ -3,11 +3,11 @@ import HybridIcon from '@/components/icons/HybridIcon.vue';
 import { onMounted } from 'vue';
 import { useRouter } from "vue-router";
 
-const SPLASH_DELAY_MS = 1000;
+const SPLASH_DELAY_MS = 2000;
 
 onMounted(() => {
     const router = useRouter();
-    setTimeout(() => { router.push('/home'); }, SPLASH_DELAY_MS);
+    setTimeout(() => { router.push('/import'); }, SPLASH_DELAY_MS);
 });
 </script>
 
