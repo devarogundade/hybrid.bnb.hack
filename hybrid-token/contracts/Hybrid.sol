@@ -184,12 +184,6 @@ contract Hybrid is IHybrid, Context {
         emit AssetUpgraded(assetId, owner);
     }
 
-    function onRequestDowngrade(address owner) external override {
-        address assetId = _msgSender();
-
-        emit DowngradeRequested(assetId, owner);
-    }
-
     function onDowngradeAsset(
         bytes32 messageHash,
         uint8 v,

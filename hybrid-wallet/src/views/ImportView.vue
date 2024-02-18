@@ -10,26 +10,16 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { bindWallet, isEOA, signerOf } from '@/scripts/bind';
+import { bindWallet as domBindWllet, getBinding } from '@/scripts/dom';
+import { config, projectId, chains } from '../scripts/config';
 
 const router = useRouter();
 
-const projectId = 'c8af093fb15a6a3b6e325460f68d1587';
-
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
-};
-
-const chains = [polygonMumbai];
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
-
 createWeb3Modal({
-  wagmiConfig,
-  projectId,
-  chains,
-  enableAnalytics: true // Optional - defaults to your Cloud configuration
+  wagmiConfig: config,
+  projectId: projectId,
+  chains: chains,
+  enableAnalytics: true
 });
 
 const modal = useWeb3Modal();
@@ -39,7 +29,7 @@ const isEmail = ref(false);
 const email = ref('');
 
 onMounted(() => {
-  watchAccount(wagmiConfig, {
+  watchAccount(config, {
     onChange(account, _) {
       store.commit('setAddress', account.address);
       getSigner();
@@ -50,8 +40,37 @@ onMounted(() => {
 const getSigner = async () => {
   if (store.state.address) {
     const signer = await signerOf(store.state.address);
+    const result = await getBinding(store.state.address);
 
-    store.commit('setSigner', signer);
+    if (result.code == OK) {
+      store.commit('setSigner', signer);
+    }
+  }
+};
+
+const OK = 200;
+
+const tryBindWallet = async () => {
+  if (store.state.address) {
+
+    const result = await domBindWllet(store.state.address, email.value);
+
+    if (result.code != OK) {
+      alert(result.message);
+      return;
+    }
+
+    if (!store.state.signer) {
+      const txId = await bindWallet(result.data);
+
+      if (!txId) {
+        return;
+      }
+    }
+
+    await getSigner();
+
+    router.push('/home');
   }
 };
 
@@ -99,7 +118,8 @@ const gotoHomeView = async () => {
         </form>
 
         <div class="import_actions">
-          <button class="import_action" @click="gotoHomeView">Bind and Continue</button>
+          <button class="import_action" @click="!isEOA(store.state.signer) ? tryBindWallet() : gotoHomeView()">Bind and
+            Continue</button>
         </div>
       </div>
     </div>

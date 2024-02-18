@@ -18,8 +18,6 @@ interface IHybrid {
 
     event AssetDowngraded(address assetId, address owner);
 
-    event DowngradeRequested(address assetId, address owner);
-
     event CloseHybrid(
         address owner,
         uint256 endTimestamp,
@@ -74,8 +72,6 @@ interface IHybrid {
     ) external;
 
     function onUpgradeAsset(address owner) external;
-
-    function onRequestDowngrade(address owner) external;
 
     function onDowngradeAsset(
         bytes32 messageHash,

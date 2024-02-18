@@ -10,6 +10,7 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 abstract contract HybridToken is ERC20, IHybridToken {
     IHybrid private _hybrid;
     mapping(address => bool) private _opts;
+    mapping(address => mapping(address => uint256)) private _spendables;
 
     constructor(
         string memory name,
@@ -31,6 +32,21 @@ abstract contract HybridToken is ERC20, IHybridToken {
     function optOut() external override optRequired upgradeRequired {
         address owner = _msgSender();
         _opts[owner] = false;
+    }
+
+    function upgradeAsset() external override {
+        address owner = _msgSender();
+        _hybrid.onUpgradeAsset(owner);
+    }
+
+    function dowgradeAsset(
+        bytes32 messageHash,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external override {
+        address owner = _msgSender();
+        _hybrid.onDowngradeAsset(messageHash, v, r, s, owner);
     }
 
     // ============================= //
@@ -55,6 +71,8 @@ abstract contract HybridToken is ERC20, IHybridToken {
         );
 
         super._approve(owner, spender, value, true);
+
+        _spendables[owner][spender] = value;
     }
 
     function rejectApproval(bytes32 approvalId) external upgradeRequired {
@@ -121,7 +139,8 @@ abstract contract HybridToken is ERC20, IHybridToken {
             return;
         }
 
-        // middleware missing - TO DO
+        require(_spendables[from][to] >= value, "Insufficient spendable");
+        _spendables[from][to] = _spendables[from][to] - value;
 
         super._update(from, to, value);
     }
@@ -133,8 +152,21 @@ abstract contract HybridToken is ERC20, IHybridToken {
     ) public virtual override returns (bool) {
         address spender = _msgSender();
         _spendAllowance(from, spender, value);
-        _transfer(from, to, value);
+        transferX(from, spender, to, value);
         return true;
+    }
+
+    function transferX(
+        address from,
+        address spender,
+        address to,
+        uint256 value
+    ) internal {
+        require(_spendables[from][spender] >= value, "Insufficient spendable");
+        _spendables[from][spender] = _spendables[from][spender] - value;
+
+        _spendables[from][to] = _spendables[from][to] + value;
+        _transfer(from, to, value);
     }
 
     // ============================= //

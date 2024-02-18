@@ -1,9 +1,20 @@
-import { http, createConfig } from '@wagmi/core';
+import { walletConnect } from '@wagmi/connectors';
 import { polygonMumbai } from '@wagmi/core/chains';
+import { defaultWagmiConfig } from '@web3modal/wagmi';
 
-export const config = createConfig({
-    chains: [polygonMumbai],
-    transports: {
-        [polygonMumbai.id]: http()
-    },
+export const projectId = 'c8af093fb15a6a3b6e325460f68d1587';
+
+const metadata = {
+    name: 'Web3Modal',
+    description: 'Web3Modal Example',
+    url: 'https://web3modal.com',
+    icons: ['https://avatars.githubusercontent.com/u/37784886']
+};
+
+export const chains = [polygonMumbai];
+
+export const config = defaultWagmiConfig({
+    chains, projectId, metadata, connectors: [walletConnect({
+        projectId: projectId
+    })]
 });

@@ -1,11 +1,101 @@
-import { readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
+import { getToken, readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
 import { abi as hybridAbi } from './hybrid-abi';
+import { abi as hybridTokenAbi } from './hybrid-token-abi';
 import { config } from './config';
 
 const contractId: `0x${string}` = '0xd15E42aeF1E2Fb06233B31Ae7E40d3f92cfEa945';
 
 export function isEOA(address: string | null): boolean {
     return (address != null && address != '0x0000000000000000000000000000000000000000');
+}
+
+export function splitSignedHash(hash: string) {
+    return;
+}
+
+export function getTokens() {
+    const json = localStorage.getItem('assets') || JSON.stringify([]);
+    return JSON.parse(json);
+}
+
+export function saveToken(tokenInfo: any) {
+    let json = localStorage.getItem('assets');
+
+    if (json) {
+        const assets = JSON.parse(json);
+        assets.push(tokenInfo);
+        json = JSON.stringify(assets);
+    } else {
+        json = JSON.stringify([tokenInfo]);
+    }
+
+    localStorage.setItem('assets', json);
+}
+
+export async function upgradeAsset(token: `0x${string}`) {
+    try {
+        const result = await writeContract(config, {
+            abi: hybridTokenAbi,
+            address: contractId,
+            functionName: 'upgradeAsset'
+        });
+
+        const receipt = await waitForTransactionReceipt(config, { hash: result });
+
+        return receipt.transactionHash;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+export async function readToken(token: `0x${string}`) {
+    try {
+        const info = await getToken(config, { address: token });
+        return { address: token, name: info.name, symbol: info.symbol };
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+export async function optIn(token: `0x${string}`) {
+    try {
+        const result = await writeContract(config, {
+            abi: hybridTokenAbi,
+            address: token,
+            functionName: 'optIn'
+        });
+
+        const receipt = await waitForTransactionReceipt(config, { hash: result });
+
+        return receipt.transactionHash;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+export async function approve(token: `0x${string}`, spender: `0x${string}`, amount: bigint) {
+    try {
+        const result = await writeContract(config, {
+            abi: hybridTokenAbi,
+            address: token,
+            functionName: 'approve',
+            args: [spender, amount],
+        });
+
+        const receipt = await waitForTransactionReceipt(config, { hash: result });
+
+        return receipt.transactionHash;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
 }
 
 export async function bindWallet(signer: `0x${string}`): Promise<string | null> {

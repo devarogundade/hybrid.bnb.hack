@@ -9,4 +9,13 @@ interface IHybridToken {
     function optIn() external;
 
     function optOut() external;
-}   
+
+    function upgradeAsset() external;
+
+    function dowgradeAsset(
+        bytes32 messageHash,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
+}

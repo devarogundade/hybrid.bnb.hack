@@ -8,33 +8,41 @@ import ArrowDownIcon from '@/components/icons/ArrowDownIcon.vue';
 
 import { useStore } from 'vuex';
 import { key } from '../../store';
-import { onMounted } from 'vue';
-import { polygonMumbai } from 'viem/chains';
-import { defaultWagmiConfig } from '@web3modal/wagmi/vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import type { Approval } from '@/types';
+import { allApprovals } from '../scripts/graph';
+import { getTokens } from '../scripts/bind';
 
 const store = useStore(key);
 
-const projectId = 'c8af093fb15a6a3b6e325460f68d1587';
+const router = useRouter();
 
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+const approvals = ref<Approval[]>([]);
+const tokens = ref([]);
+
+const tab = ref('tokens');
+
+const tryGetApprovals = async () => {
+  approvals.value = await allApprovals(store.state.address);
 };
 
-const chains = [polygonMumbai];
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
-
-const router = useRouter();
+const tryGetTokens = () => {
+  tokens.value = getTokens();
+};
 
 onMounted(() => {
   if (!store.state.address || !store.state.signer) {
     router.push('/import');
+  } else {
+    tryGetTokens();
+    tryGetApprovals();
   }
 });
 
+onMounted(() => {
+  tryGetTokens();
+});
 </script>
 
 <template>
@@ -54,21 +62,21 @@ onMounted(() => {
         </div>
 
         <div class="home_worth">
-          <h3>$50.93</h3>
+          <h3>$0.00</h3>
         </div>
 
         <div class="home_actions">
-          <div class="home_action">
+          <div class="home_action" @click="$emit('import_token')">
             <ReceiveIcon />
+            <p>Add Token</p>
+          </div>
+
+          <div class="home_action" @click="$emit('approval_request')">
+            <SendIcon />
             <p>Approve</p>
           </div>
 
-          <div class="home_action">
-            <SendIcon />
-            <p>Send</p>
-          </div>
-
-          <div class="home_action">
+          <div class="home_action" @click="$emit('unbind_wallet')">
             <LogoutIcon />
             <p>Unbind</p>
           </div>
@@ -77,13 +85,13 @@ onMounted(() => {
     </section>
     <section>
       <div class="home_tabs">
-        <div class="home_tab home_tab_active">
-          <p>Requests <span>10</span></p>
+        <div @click="tab = 'tokens'" :class="tab.valueOf() == 'tokens' ? `home_tab home_tab_active` : `home_tab`">
+          <p>Tokens</p>
           <div class="indicator"></div>
         </div>
 
-        <div class="home_tab">
-          <p>Completed</p>
+        <div @click="tab = 'approvals'" :class="tab.valueOf() == 'approvals' ? `home_tab home_tab_active` : `home_tab`">
+          <p>Requests <span>10</span></p>
           <div class="indicator"></div>
         </div>
       </div>
@@ -91,7 +99,21 @@ onMounted(() => {
     <section>
       <div class="app_width">
         <div class="requests">
-          <div class="request" v-for="i in 10" :key="i">
+          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in tokens" :key="index">
+            <div class="request_head">
+              <div class="request_head_token">
+                <img src="/images/usdc.png" alt="">
+                <p>{{ token.name }}</p>
+              </div>
+
+              <div class="request_head_amount">
+                <p>10 {{ token.symbol }}</p>
+                <ArrowDownIcon :style="'rotate: 90deg;'" />
+              </div>
+            </div>
+          </div>
+
+          <div class="request" v-show="tab.valueOf() == 'approvals'" v-for="approval, index in approvals" :key="index">
             <div class="request_head">
               <div class="request_head_token">
                 <img src="/images/usdc.png" alt="">
@@ -99,13 +121,13 @@ onMounted(() => {
               </div>
 
               <div class="request_head_amount">
-                <p>30 USDC</p>
+                <p>{{ $fromWei(approval.value) }} USDC</p>
                 <ArrowDownIcon />
               </div>
             </div>
 
             <div class="request_sender">
-              <p>Spender: 0x60E0a0eAd05...34A97f13E6ff21</p>
+              <p>Spender: {{ $fineHash(approval.spender, 10) }}</p>
             </div>
 
             <div class="request_actions">
@@ -279,6 +301,8 @@ section:last-child::-webkit-scrollbar {
 .request {
   border: 1px solid #252728;
   border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .request_head {

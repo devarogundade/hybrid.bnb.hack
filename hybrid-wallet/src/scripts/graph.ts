@@ -1,34 +1,50 @@
+import axios from 'axios';
 import { Status } from './../types';
 import type { Approval, BindWallet } from "@/types";
 
-class GraphEnpoint {
+const endPoint = 'https://api.thegraph.com/subgraphs/name/devarogundade/hybrid';
 
-    async bindWalletOf(owner: string): Promise<BindWallet | null> {
+export async function allApprovals(owner: string): Promise<Approval[]> {
+    const response = await axios.post(`${endPoint}`,
+        {
+            query: `approvalRequests(where: {owner: "${owner}"}, orderBy: blockTimestamp, orderDirection: desc) {
+                id
+                approvalId
+                assetId
+                owner
+            }`
+        }
+    );
 
-
-
-        return null;
-    }
-
-    async allApprovals(owner: string): Promise<Approval[]> {
-
-
-
-        return [];
-    }
-
-    async getApproval(approvalId: string): Promise<Approval | null> {
-
-
-
-        return null;
-    }
-
-    async allApprovalsOf(owner: string, status: Status): Promise<Approval[]> {
-
-
-
-        return [];
-    }
-
+    return response.data.data.approvalRequests;
 }
+
+export async function getApproval(approvalId: string): Promise<Approval | null> {
+    const response = await axios.post(`${endPoint}`,
+        {
+            query: `approvalRequest(id: ${approvalId}) {
+                id
+                approvalId
+                assetId
+                owner
+            }`
+        }
+    );
+
+    return response.data.data.approvalRequest;
+}
+
+export async function allApprovalsOf(owner: string, status: Status): Promise<Approval[]> {
+    const response = await axios.post(`${endPoint}`,
+        {
+            query: `approvalRequests(where: {owner: "${owner}", status: ${status}}, orderBy: blockTimestamp, orderDirection: desc) {
+            id
+            approvalId
+            assetId
+            owner
+        }`
+        }
+    );
+
+    return response.data.data.approvalRequests;
+};
