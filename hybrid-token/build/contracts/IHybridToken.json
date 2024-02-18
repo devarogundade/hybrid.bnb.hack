@@ -1,0 +1,230 @@
+{
+  "contractName": "IHybridToken",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OptInRequired",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "optIn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "optOut",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OptInRequired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"optIn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"optOut\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IHybridToken.sol\":\"IHybridToken\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IHybridToken.sol\":{\"keccak256\":\"0x9803167a60d9d9caa28e3b6b87669a46aed5ce0f897539775cfbb62a788393d3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bb0fe436ccfb68369886f4c05bf240d6a9a56ab79bb6165ea5d1f48bee8cd6a3\",\"dweb:/ipfs/QmdzsQevwvJLTi8hsYJxC3YrRnrozBVbjQ5oaT1qURzBaA\"]},\"project:/contracts/libraries/Structs.sol\":{\"keccak256\":\"0x8cc61b9a18c1c036afac035e728381ca2279f72f235f86c510184286724b3307\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2c6fe6cd72a7f80f4f1d09bd3a80e56f6becb741513bd091ed67c70aa6538fe4\",\"dweb:/ipfs/QmciNip3ugCvfYjuxKgjUgVmrkPCqT6a1aTfaCGaDM63iX\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\nimport {Structs} from \"../libraries/Structs.sol\";\r\n\r\ninterface IHybridToken {\r\n    error OptInRequired(address owner);\r\n\r\n    function optIn() external;\r\n\r\n    function optOut() external;\r\n}   ",
+  "sourcePath": "C:\\Users\\DELL\\Documents\\hybrid.bnb.hack\\hybrid-token\\contracts\\interfaces\\IHybridToken.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/IHybridToken.sol",
+    "exportedSymbols": {
+      "IHybridToken": [
+        2064
+      ],
+      "Structs": [
+        2092
+      ]
+    },
+    "id": 2065,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2051,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".20"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:24:9"
+      },
+      {
+        "absolutePath": "project:/contracts/libraries/Structs.sol",
+        "file": "../libraries/Structs.sol",
+        "id": 2053,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 2065,
+        "sourceUnit": 2093,
+        "src": "61:49:9",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 2052,
+              "name": "Structs",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 2092,
+              "src": "69:7:9",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IHybridToken",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 2064,
+        "linearizedBaseContracts": [
+          2064
+        ],
+        "name": "IHybridToken",
+        "nameLocation": "124:12:9",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "errorSelector": "1594b2f1",
+            "id": 2057,
+            "name": "OptInRequired",
+            "nameLocation": "150:13:9",
+            "nodeType": "ErrorDefinition",
+            "parameters": {
+              "id": 2056,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2055,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "nameLocation": "172:5:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2057,
+                  "src": "164:13:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2054,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "164:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "163:15:9"
+            },
+            "src": "144:35:9"
+          },
+          {
+            "functionSelector": "5b48684e",
+            "id": 2060,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "optIn",
+            "nameLocation": "196:5:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2058,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:2:9"
+            },
+            "returnParameters": {
+              "id": 2059,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "212:0:9"
+            },
+            "scope": 2064,
+            "src": "187:26:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "d4eec5a6",
+            "id": 2063,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "optOut",
+            "nameLocation": "230:6:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2061,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "236:2:9"
+            },
+            "returnParameters": {
+              "id": 2062,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "247:0:9"
+            },
+            "scope": 2064,
+            "src": "221:27:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2065,
+        "src": "114:137:9",
+        "usedErrors": [
+          2057
+        ],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:221:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.20+commit.a1b79de6.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.11",
+  "updatedAt": "2024-02-18T08:16:16.699Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Hybrid
+    network: mumbai
+    source:
+      address: "0xd15E42aeF1E2Fb06233B31Ae7E40d3f92cfEa945"
+      abi: Hybrid
+      startBlock: 46051024
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalRequested
+        - ApprovalResult
+        - AssetDowngraded
+        - AssetUpgraded
+        - DowngradeRequested
+        - WalletBind
+        - WalletUnBind
+      abis:
+        - name: Hybrid
+          file: ./abis/Hybrid.json
+      eventHandlers:
+        - event: ApprovalRequested(bytes32,address,address,address,uint256)
+          handler: handleApprovalRequested
+        - event: ApprovalResult(address,uint8)
+          handler: handleApprovalResult
+        - event: AssetDowngraded(address,address)
+          handler: handleAssetDowngraded
+        - event: AssetUpgraded(address,address)
+          handler: handleAssetUpgraded
+        - event: DowngradeRequested(address,address)
+          handler: handleDowngradeRequested
+        - event: WalletBind(address,address)
+          handler: handleWalletBind
+        - event: WalletUnBind(address)
+          handler: handleWalletUnBind
+      file: ./src/hybrid.ts
