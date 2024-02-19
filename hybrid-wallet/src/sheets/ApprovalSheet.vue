@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
+// @ts-ignore
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { onMounted, ref } from 'vue';

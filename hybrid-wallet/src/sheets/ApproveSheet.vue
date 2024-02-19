@@ -2,12 +2,15 @@
 import CloseIconVue from '@/components/icons/CloseIcon.vue';
 
 import { ref } from 'vue';
+// @ts-ignore
 import { useStore } from 'vuex';
+// @ts-ignore
 import { key } from '../../store';
 import { notify } from '../reactives/notify';
 import { newSignedMessage } from '@/scripts/dom';
 import { splitSignedHash, submitApprovalProof } from '@/scripts/bind';
 import { allApprovalsOf } from '@/scripts/graph';
+import Converter from '@/scripts/converter';
 
 const props = defineProps({
     active: { type: Boolean, required: true },
@@ -58,7 +61,7 @@ const trySubmitProof = async () => {
             title: 'Approval successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
 
@@ -91,12 +94,12 @@ const trySubmitProof = async () => {
                 <table>
                     <tr>
                         <td>Amount</td>
-                        <td>{{ $fromWei(approval.value) }} {{ tokenInfo.symbol }}</td>
+                        <td>{{ Converter.fromWei(approval.value) }} {{ tokenInfo.symbol }}</td>
                     </tr>
 
                     <tr>
                         <td>Spender</td>
-                        <td>{{ $fineHash(approval.spender, 10) }}</td>
+                        <td>{{ Converter.fineHash(approval.spender, 10) }}</td>
                     </tr>
 
                     <tr>

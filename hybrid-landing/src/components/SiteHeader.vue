@@ -8,11 +8,11 @@
                 </div>
 
                 <div class="navigation">
-                    <p>Docs</p>
-                    <p>BNB Hackathon</p>
-                    <p>LitePaper</p>
-                    <p>Blogs</p>
-                    <p>About</p>
+                    <a href="#">Docs</a>
+                    <a target="_blank" href="https://dorahacks.io/hackathon/bnbchain-hackathon/detail">BNB Hackathon</a>
+                    <a target="_blank" href="https://github.com/devarogundade/hybrid.bnb.hack">GitHub</a>
+                    <a target="_blank" href="">#BuildonBNB</a>
+                    <a target="_blank" href="https://www.linkedin.com/in/devarogundade">About Me</a>
                 </div>
 
                 <div class="header_actions">
@@ -89,7 +89,7 @@ header {
     align-items: center;
 }
 
-.navigation p {
+.navigation a {
     color: var(--text-dimmed);
     cursor: pointer;
 }

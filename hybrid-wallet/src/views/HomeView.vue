@@ -6,6 +6,7 @@ import SendIcon from '@/components/icons/SendIcon.vue';
 import LogoutIcon from '@/components/icons/LogoutIcon.vue';
 import ArrowDownIcon from '@/components/icons/ArrowDownIcon.vue';
 
+// @ts-ignore
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { onMounted, ref } from 'vue';
@@ -13,6 +14,7 @@ import { useRouter } from 'vue-router';
 import { allApprovalsOf } from '../scripts/graph';
 import { getTokens, getToken, rejectAprroval } from '../scripts/bind';
 import { notify } from '@/reactives/notify';
+import Converter from '@/scripts/converter';
 
 const store = useStore(key);
 
@@ -71,7 +73,7 @@ onMounted(() => {
           </div>
 
           <div class="home_header_account">
-            <p>{{ $fineHash(store.state.address, 3) }} + {{ $fineHash(store.state.signer, 3) }}</p>
+            <p>{{ Converter.fineHash(store.state.address, 3) }} + {{ Converter.fineHash(store.state.signer, 3) }}</p>
             <ProfileIcon />
           </div>
         </div>
@@ -138,13 +140,13 @@ onMounted(() => {
               </div>
 
               <div class="request_head_amount">
-                <p>{{ $fromWei(approval.value) }} {{ getToken(approval.assetId).symbol }}</p>
+                <p>{{ Converter.fromWei(approval.value) }} {{ getToken(approval.assetId).symbol }}</p>
                 <ArrowDownIcon />
               </div>
             </div>
 
             <div class="request_sender">
-              <p>Spender: {{ $fineHash(approval.spender, 10) }}</p>
+              <p>Spender: {{ Converter.fineHash(approval.spender, 10) }}</p>
             </div>
 
             <div class="request_actions">

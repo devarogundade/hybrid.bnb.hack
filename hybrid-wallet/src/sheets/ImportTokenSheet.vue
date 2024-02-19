@@ -2,6 +2,7 @@
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
 import { ref } from 'vue';
+// @ts-ignore
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { getTokens, readToken, upgradeAsset } from '../scripts/bind';

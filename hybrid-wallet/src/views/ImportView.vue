@@ -6,17 +6,20 @@ import { useWeb3Modal } from '@web3modal/wagmi/vue';
 import { watchAccount } from '@wagmi/core';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+// @ts-ignore
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { bindWallet, isEOA, signerOf } from '@/scripts/bind';
 import { bindWallet as domBindWllet, getBinding } from '@/scripts/dom';
 import { config, projectId, chains } from '../scripts/config';
+import Converter from '@/scripts/converter';
 
 const router = useRouter();
 
 createWeb3Modal({
   wagmiConfig: config,
   projectId: projectId,
+  // @ts-ignore
   chains: chains,
   enableAnalytics: true
 });
@@ -40,7 +43,6 @@ const getSigner = async () => {
   if (store.state.address) {
     const signer = await signerOf(store.state.address);
     const result = await getBinding(store.state.address);
-
 
     if (result.code == OK) {
       store.commit('setSigner', signer);
@@ -100,7 +102,7 @@ const gotoHomeView = async () => {
           <!-- <textarea type="text" rows="5" v-model="mnemonic" name="mnemonic_input" class="mnemonic_input"
             placeholder="Paste signed data here."></textarea> -->
           <button class="wallet_connect" type="button" @click="modal.open()">{{ store.state.address ? `Connected to
-            ${$fineHash(store.state.address, 4)}`
+            ${Converter.fineHash(store.state.address, 4)}`
             : 'Wallet Connect'
           }}</button>
 
@@ -114,7 +116,7 @@ const gotoHomeView = async () => {
           <label style="font-weight: 600; font-size: 20px; color: green; text-align: center;"
             v-if="isEOA(store.state.signer)" for="mnemonic_input">{{ (`Your account has
             been connected to
-            ${$fineHash(store.state.signer, 4)} as a secondary signer!.`) }}</label>
+            ${Converter.fineHash(store.state.signer, 4)} as a secondary signer!.`) }}</label>
         </form>
 
         <div class="import_actions">

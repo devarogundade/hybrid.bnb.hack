@@ -9,7 +9,7 @@ export const notify = reactive({
 
         setTimeout(() => {
             this.remove(this.messages.length - 1);
-        }, 30000);
+        }, 10000);
     },
 
     remove: function (index: number) {

@@ -2,6 +2,7 @@
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
 import { ref } from 'vue';
+// @ts-ignore
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { notify } from '../reactives/notify';
@@ -53,7 +54,7 @@ const tryUnBind = async () => {
             title: 'Approval successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
 

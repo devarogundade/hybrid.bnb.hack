@@ -1,4 +1,4 @@
-import convert from './baseconverter.ts';
+import convert from './baseconverter';
 
 const Converter = {
     fineHash: function (hash: string | null, space: number) {

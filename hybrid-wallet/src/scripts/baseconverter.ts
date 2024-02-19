@@ -1,3 +1,4 @@
+// @ts-ignore
 import BigNumber from 'bignumber.js';
 
 BigNumber.config({ DECIMAL_PLACES: 18 });
