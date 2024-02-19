@@ -4,10 +4,10 @@
             <div class="socials_container">
                 <p class="socials_title">🔔 Stay connected with us.</p>
                 <div class="socials">
-                    <a href="" target="_blank">
-                        <button>Discord</button>
+                    <a href="https://www.linkedin.com/in/devarogundade" target="_blank">
+                        <button>LinkedIn</button>
                     </a>
-                    <a href="" target="_blank">
+                    <a href="https://x.com/devarogundade/status/1759672192332075305?s=20" target="_blank">
                         <button>Twitter</button>
                     </a>
                 </div>
