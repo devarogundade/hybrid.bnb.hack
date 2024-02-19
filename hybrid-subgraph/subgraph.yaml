@@ -16,14 +16,29 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Transfer
+        - ApprovalRequested
+        - ApprovalResult
+        - AssetDowngraded
+        - AssetUpgraded
+        - CloseHybrid
+        - WalletBind
+        - WalletUnBind
       abis:
         - name: Hybrid
           file: ./abis/Hybrid.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
+        - event: ApprovalRequested(bytes32,address,address,address,uint256)
+          handler: handleApprovalRequested
+        - event: ApprovalResult(bytes32,uint8)
+          handler: handleApprovalResult
+        - event: AssetDowngraded(address,address)
+          handler: handleAssetDowngraded
+        - event: AssetUpgraded(address,address)
+          handler: handleAssetUpgraded
+        - event: CloseHybrid(address,uint256,uint8)
+          handler: handleCloseHybrid
+        - event: WalletBind(address,address)
+          handler: handleWalletBind
+        - event: WalletUnBind(address)
+          handler: handleWalletUnBind
       file: ./src/hybrid.ts
