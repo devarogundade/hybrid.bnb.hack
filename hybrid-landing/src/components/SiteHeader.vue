@@ -8,11 +8,10 @@
                 </div>
 
                 <div class="navigation">
-                    <a href="#">Docs</a>
-                    <a target="_blank" href="https://dorahacks.io/hackathon/bnbchain-hackathon/detail">BNB Hackathon</a>
+                    <a target="_blank" href="">#BuildonBNBChain</a>
+                    <a target="_blank" href="https://dorahacks.io/hackathon/bnbchain-hackathon/detail">Hackathon</a>
                     <a target="_blank" href="https://github.com/devarogundade/hybrid.bnb.hack">GitHub</a>
-                    <a target="_blank" href="">#BuildonBNB</a>
-                    <a target="_blank" href="https://www.linkedin.com/in/devarogundade">About Me</a>
+                    <a target="_blank" href="https://www.linkedin.com/in/devarogundade">Me</a>
                 </div>
 
                 <div class="header_actions">
