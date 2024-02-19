@@ -124,7 +124,7 @@ const gotoHomeView = () => {
           <input type="email" v-model="email" v-show="isEmail" placeholder="Enter your email">
 
           <label style="font-weight: 600; font-size: 20px; color: green; text-align: center;"
-            v-if="store.state.address && gotoHomeView" for="mnemonic_input">{{ (`Your account has
+            v-if="store.state.address && isEOA(store.state.signer)" for="mnemonic_input">{{ (`Your account has
             been connected to
             ${Converter.fineHash(store.state.signer, 4)} as a secondary signer!.`) }}</label>
         </form>

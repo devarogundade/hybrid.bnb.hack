@@ -1,4 +1,5 @@
 import type { InjectionKey } from 'vue';
+// @ts-ignore
 import { createStore, Store } from 'vuex';
 
 // define your typings for the store state

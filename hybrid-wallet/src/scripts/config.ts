@@ -14,6 +14,7 @@ const metadata = {
 export const chains = [polygonMumbai];
 
 export const config = defaultWagmiConfig({
+    // @ts-ignore
     chains, projectId, metadata, connectors: [walletConnect({
         projectId: projectId
     })]
