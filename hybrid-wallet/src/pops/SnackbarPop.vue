@@ -36,16 +36,11 @@ import CloseIcon from '../components/icons/CloseIcon.vue';
 import SuccessIcon from '../components/icons/SuccessIcon.vue';
 import FailedIcon from '../components/icons/FailedIcon.vue';
 import OutIcon from '../components/icons/OutIcon.vue';
-</script>
 
-<script>
 import { notify } from '../reactives/notify';
-export default {
-    methods: {
-        removeIndex: function (index: any) {
-            notify.remove(index);
-        }
-    }
+
+const removeIndex = (index: any) => {
+    notify.remove(index);
 };
 </script>
 
