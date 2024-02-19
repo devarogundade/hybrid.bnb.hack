@@ -13,12 +13,12 @@ export const abi = [
     {
         "inputs": [
             {
-                "internalType": "bytes32",
-                "name": "hash",
-                "type": "bytes32"
+                "internalType": "address",
+                "name": "signer",
+                "type": "address"
             }
         ],
-        "name": "InvalidSignedHash",
+        "name": "InvalidSigner",
         "type": "error"
     },
     {
@@ -96,14 +96,14 @@ export const abi = [
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "address",
+                "internalType": "bytes32",
                 "name": "approvalId",
-                "type": "address"
+                "type": "bytes32"
             },
             {
                 "indexed": false,
                 "internalType": "enum Structs.Status",
-                "name": "Status",
+                "name": "status",
                 "type": "uint8"
             }
         ],
@@ -204,25 +204,6 @@ export const abi = [
         ],
         "name": "WalletUnBind",
         "type": "event"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            }
-        ],
-        "name": "signerOf",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
     },
     {
         "inputs": [
@@ -334,52 +315,6 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "address",
-                "name": "signer",
-                "type": "address"
-            }
-        ],
-        "name": "walletBind",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "messageHash",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            }
-        ],
-        "name": "onWalletUnBind",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
                 "name": "owner",
                 "type": "address"
             }
@@ -444,6 +379,68 @@ export const abi = [
             }
         ],
         "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "signer",
+                "type": "address"
+            }
+        ],
+        "name": "onWalletBind",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "messageHash",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint8",
+                "name": "v",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "r",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "s",
+                "type": "bytes32"
+            }
+        ],
+        "name": "onWalletUnBind",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "signerOf",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
     }
 ] as const;

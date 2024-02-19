@@ -7,6 +7,7 @@ import { key } from '../../store';
 import { notify } from '../reactives/notify';
 import { newSignedMessage } from '@/scripts/dom';
 import { splitSignedHash, submitApprovalProof } from '@/scripts/bind';
+import { allApprovalsOf } from '@/scripts/graph';
 
 const props = defineProps({
     active: { type: Boolean, required: true },
@@ -60,6 +61,8 @@ const trySubmitProof = async () => {
             linkText: 'View Trx',
             linkUrl: ''
         });
+
+        store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
     } else {
         notify.push({
             title: 'Failed to send transaction.',
@@ -81,7 +84,7 @@ const trySubmitProof = async () => {
                 </div>
 
                 <div class="approve_token">
-                    <img src="/images/usdc.png" alt="">
+                    <img src="/images/coin.png" alt="">
                     <p>{{ tokenInfo.name }}</p>
                 </div>
 
@@ -190,6 +193,7 @@ main {
 .approve_token img {
     height: 40px;
     width: 40px;
+    border-radius: 50%;
 }
 
 .approve_token p {

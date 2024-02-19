@@ -6,7 +6,7 @@ import { config } from './config';
 const contractId: `0x${string}` = '0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730';
 
 export function isEOA(address: string | null): boolean {
-    return (address != null && address != '0x0000000000000000000000000000000000000000');
+    return (address != null && address != '0x0000000000000000000000000000000000000000' && address.length == 42);
 }
 
 export function splitSignedHash(hex: string) {
@@ -141,7 +141,7 @@ export async function bindWallet(signer: `0x${string}`): Promise<string | null> 
         const result = await writeContract(config, {
             abi: hybridAbi,
             address: contractId,
-            functionName: 'walletBind',
+            functionName: 'onWalletBind',
             args: [signer],
         });
 
@@ -231,13 +231,14 @@ export async function submitApprovalProof(
 }
 
 export async function rejectAprroval(
+    token: `0x${string}`,
     approvalId: `0x${string}`
 ): Promise<string | null> {
     try {
         const result = await writeContract(config, {
-            abi: hybridAbi,
-            address: contractId,
-            functionName: 'onRejectAprroval',
+            abi: hybridTokenAbi,
+            address: token,
+            functionName: 'rejectApproval',
             args: [approvalId],
         });
 

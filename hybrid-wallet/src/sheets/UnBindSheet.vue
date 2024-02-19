@@ -75,7 +75,7 @@ const tryUnBind = async () => {
         <div class="app_width">
             <div class="approval_container">
                 <div class="approval_header">
-                    <p>Approve Spender</p>
+                    <p>Unbind Wallet</p>
                     <CloseIcon @click="$emit('close')" />
                 </div>
 

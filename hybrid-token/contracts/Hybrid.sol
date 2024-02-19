@@ -130,8 +130,10 @@ contract Hybrid is IHybrid, Context {
     function onRejectAprroval(bytes32 approvalId) external override {
         Structs.Approval storage approval = _approvals[approvalId];
 
-        if (approval.assetId != _msgSender()) {
-            revert InvalidCaller(_msgSender());
+        address assetId = _msgSender();
+
+        if (approval.assetId != assetId) {
+            revert InvalidCaller(assetId);
         }
 
         if (approval.status != Structs.Status.PENDING) {

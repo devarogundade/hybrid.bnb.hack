@@ -41,6 +41,7 @@ const getSigner = async () => {
     const signer = await signerOf(store.state.address);
     const result = await getBinding(store.state.address);
 
+
     if (result.code == OK) {
       store.commit('setSigner', signer);
     }

@@ -10,24 +10,44 @@ import { useStore } from 'vuex';
 import { key } from '../../store';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { Approval } from '@/types';
-import { allApprovals, allApprovalsOf } from '../scripts/graph';
-import { getTokens, getToken } from '../scripts/bind';
+import { allApprovalsOf } from '../scripts/graph';
+import { getTokens, getToken, rejectAprroval } from '../scripts/bind';
+import { notify } from '@/reactives/notify';
 
 const store = useStore(key);
 
 const router = useRouter();
 
-const approvals = ref<Approval[]>([]);
-
 const tab = ref('tokens');
 
 const tryGetApprovals = async () => {
-  approvals.value = await allApprovalsOf(store.state.address, 2);
+  store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
 };
 
 const tryGetTokens = () => {
   store.commit('setAssets', (getTokens()));
+};
+
+const tryRejectApproval = async (token: any, approvalId: any) => {
+  const txId = await rejectAprroval(token, approvalId);
+
+  if (txId) {
+    notify.push({
+      title: 'Reject successful.',
+      description: 'Transaction was sent.',
+      category: 'success',
+      linkText: 'View Trx',
+      linkUrl: ''
+    });
+
+    store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
+  } else {
+    notify.push({
+      title: 'Failed to send transaction.',
+      description: 'Try again.',
+      category: 'error'
+    });
+  }
 };
 
 onMounted(() => {
@@ -37,10 +57,6 @@ onMounted(() => {
     tryGetTokens();
     tryGetApprovals();
   }
-});
-
-onMounted(() => {
-  tryGetTokens();
 });
 </script>
 
@@ -90,7 +106,7 @@ onMounted(() => {
         </div>
 
         <div @click="tab = 'approvals'" :class="tab.valueOf() == 'approvals' ? `home_tab home_tab_active` : `home_tab`">
-          <p>Requests <span>{{ approvals.length }}</span></p>
+          <p>Requests <span>{{ store.state.approvals.length }}</span></p>
           <div class="indicator"></div>
         </div>
       </div>
@@ -102,7 +118,7 @@ onMounted(() => {
             @click="$emit('token_info', token)">
             <div class="request_head">
               <div class="request_head_token">
-                <img src="/images/usdc.png" alt="">
+                <img src="/images/coin.png" alt="">
                 <p>{{ token.name }}</p>
               </div>
 
@@ -113,10 +129,11 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="request" v-show="tab.valueOf() == 'approvals'" v-for="approval, index in approvals" :key="index">
+          <div class="request" v-show="tab.valueOf() == 'approvals'" v-for="approval, index in store.state.approvals"
+            :key="index">
             <div class="request_head">
               <div class="request_head_token">
-                <img src="/images/usdc.png" alt="">
+                <img src="/images/coin.png" alt="">
                 <p>{{ getToken(approval.assetId).name }}</p>
               </div>
 
@@ -131,7 +148,8 @@ onMounted(() => {
             </div>
 
             <div class="request_actions">
-              <button class="request_action" @click="$emit('pin_request', 2)">Reject</button>
+              <button class="request_action"
+                @click="tryRejectApproval(getToken(approval.assetId).address, approval.approvalId)">Reject</button>
               <button class="request_action" @click="$emit('approve_request', {
                 tokenInfo: getToken(approval.assetId),
                 approval: approval
@@ -324,6 +342,7 @@ section:last-child::-webkit-scrollbar {
 .request_head_token img {
   width: 20px;
   height: 20px;
+  border-radius: 50%;
 }
 
 .request_head_token p {

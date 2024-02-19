@@ -7,6 +7,7 @@ import { onMounted, ref } from 'vue';
 import { notify } from '../reactives/notify';
 import { approve, getTokens } from '../scripts/bind';
 import Converter from '@/scripts/converter';
+import { allApprovalsOf } from '@/scripts/graph';
 
 const store = useStore(key);
 
@@ -33,8 +34,6 @@ const tryApprove = async () => {
         BigInt(Converter.toWei(amount.value))
     );
 
-    console.log(txId);
-
     if (txId) {
         notify.push({
             title: 'Approval successful.',
@@ -43,6 +42,8 @@ const tryApprove = async () => {
             linkText: 'View Trx',
             linkUrl: ''
         });
+
+        store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
     } else {
         notify.push({
             title: 'Failed to send transaction.',

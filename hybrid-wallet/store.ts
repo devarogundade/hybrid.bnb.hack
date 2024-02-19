@@ -6,6 +6,7 @@ export interface State {
     address: string;
     signer: string;
     assets: [];
+    approvals: [];
 }
 
 // define injection key
@@ -15,7 +16,8 @@ export const store = createStore<State>({
     state: {
         address: null,
         signer: null,
-        assets: []
+        assets: [],
+        approvals: []
     },
     mutations: {
         setAddress(state: State, newAddress: string) {
@@ -26,6 +28,9 @@ export const store = createStore<State>({
         },
         setAssets(state: State, newAssets: []) {
             state.assets = newAssets;
+        },
+        setApprovals(state: State, newApprovals: []) {
+            state.approvals = newApprovals;
         }
     }
 });
