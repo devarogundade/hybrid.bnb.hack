@@ -1,62 +1,68 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "caller", "type": "address" }
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "allowance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
     ],
-    "name": "InvalidCaller",
+    "name": "ERC20InsufficientAllowance",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "hash", "type": "bytes32" }
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "uint256", "name": "balance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
     ],
-    "name": "InvalidSignedHash",
+    "name": "ERC20InsufficientBalance",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "approvalId", "type": "bytes32" }
+      { "internalType": "address", "name": "approver", "type": "address" }
     ],
-    "name": "InvalidStatus",
+    "name": "ERC20InvalidApprover",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "signer", "type": "address" }
+      { "internalType": "address", "name": "receiver", "type": "address" }
     ],
-    "name": "WalletBinded",
+    "name": "ERC20InvalidReceiver",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "caller", "type": "address" }
+      { "internalType": "address", "name": "sender", "type": "address" }
     ],
-    "name": "ZeroAddress",
+    "name": "ERC20InvalidSender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" }
+    ],
+    "name": "ERC20InvalidSpender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OptInRequired",
     "type": "error"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "approvalId",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "assetId",
-        "type": "address"
-      },
-      {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "owner",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "spender",
         "type": "address"
@@ -68,177 +74,132 @@
         "type": "uint256"
       }
     ],
-    "name": "ApprovalRequested",
+    "name": "Approval",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
-        "name": "approvalId",
+        "name": "from",
         "type": "address"
       },
       {
-        "indexed": false,
-        "internalType": "enum Structs.Status",
-        "name": "Status",
-        "type": "uint8"
-      }
-    ],
-    "name": "ApprovalResult",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
-        "name": "assetId",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "AssetDowngraded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "assetId",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "AssetUpgraded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "owner",
+        "name": "to",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "endTimestamp",
+        "name": "value",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "enum Structs.Status",
-        "name": "status",
-        "type": "uint8"
       }
     ],
-    "name": "CloseHybrid",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "signer",
-        "type": "address"
-      }
-    ],
-    "name": "WalletBind",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "WalletUnBind",
+    "name": "Transfer",
     "type": "event"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
+      { "internalType": "address", "name": "owner", "type": "address" },
+      { "internalType": "address", "name": "spender", "type": "address" }
     ],
-    "name": "signerOf",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "allowance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "enum Structs.Status",
-        "name": "status",
-        "type": "uint8"
-      }
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
     ],
-    "name": "onRequestCloseHybrid",
+    "name": "approve",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "balanceOf",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ],
+    "name": "transfer",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "optIn",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "onCloseHybrid",
+    "name": "optOut",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "upgradeAsset",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" },
-      { "internalType": "address", "name": "spender", "type": "address" },
-      { "internalType": "uint256", "name": "value", "type": "uint256" }
-    ],
-    "name": "onRequestAprroval",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
+      { "internalType": "bytes32", "name": "approvalId", "type": "bytes32" },
       { "internalType": "bytes32", "name": "messageHash", "type": "bytes32" },
       { "internalType": "uint8", "name": "v", "type": "uint8" },
       { "internalType": "bytes32", "name": "r", "type": "bytes32" },
-      { "internalType": "bytes32", "name": "s", "type": "bytes32" },
-      { "internalType": "bytes32", "name": "approvalId", "type": "bytes32" }
+      { "internalType": "bytes32", "name": "s", "type": "bytes32" }
     ],
-    "name": "onValidApproval",
-    "outputs": [
-      { "internalType": "address", "name": "spender", "type": "address" },
-      { "internalType": "uint256", "name": "value", "type": "uint256" }
-    ],
+    "name": "submitApprovalProof",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -246,16 +207,7 @@
     "inputs": [
       { "internalType": "bytes32", "name": "approvalId", "type": "bytes32" }
     ],
-    "name": "onRejectAprroval",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "signer", "type": "address" }
-    ],
-    "name": "walletBind",
+    "name": "rejectApproval",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -265,45 +217,31 @@
       { "internalType": "bytes32", "name": "messageHash", "type": "bytes32" },
       { "internalType": "uint8", "name": "v", "type": "uint8" },
       { "internalType": "bytes32", "name": "r", "type": "bytes32" },
-      { "internalType": "bytes32", "name": "s", "type": "bytes32" },
-      { "internalType": "address", "name": "owner", "type": "address" }
+      { "internalType": "bytes32", "name": "s", "type": "bytes32" }
     ],
-    "name": "onWalletUnBind",
+    "name": "submitDowngradeProof",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
-    ],
-    "name": "onUpgradeAsset",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "bytes32", "name": "messageHash", "type": "bytes32" },
-      { "internalType": "uint8", "name": "v", "type": "uint8" },
-      { "internalType": "bytes32", "name": "r", "type": "bytes32" },
-      { "internalType": "bytes32", "name": "s", "type": "bytes32" },
-      { "internalType": "address", "name": "owner", "type": "address" }
-    ],
-    "name": "onDowngradeAsset",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "assetId", "type": "address" },
       { "internalType": "address", "name": "owner", "type": "address" }
     ],
     "name": "isUpgraded",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ],
+    "name": "transferFrom",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

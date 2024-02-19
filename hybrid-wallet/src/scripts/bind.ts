@@ -1,9 +1,9 @@
-import { getToken, readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
+import { getToken as readTokenFromAddress, readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
 import { abi as hybridAbi } from './hybrid-abi';
 import { abi as hybridTokenAbi } from './hybrid-token-abi';
 import { config } from './config';
 
-const contractId: `0x${string}` = '0xf3D893bD37fEA163F43A4D84144DC84Ea5b71f1F';
+const contractId: `0x${string}` = '0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730';
 
 export function isEOA(address: string | null): boolean {
     return (address != null && address != '0x0000000000000000000000000000000000000000');
@@ -28,7 +28,17 @@ export function getTokens() {
     return JSON.parse(json);
 }
 
+export function getToken(token: string) {
+    const json = localStorage.getItem('assets') || JSON.stringify([]);
+    const tokens = JSON.parse(json);
+    return tokens.find((t: any) => t.address.toLowerCase() == token.toLowerCase());
+}
+
 export function saveToken(tokenInfo: any) {
+    const wasAdded = getToken(tokenInfo.address);
+
+    if (wasAdded) return;
+
     let json = localStorage.getItem('assets');
 
     if (json) {
@@ -62,7 +72,7 @@ export async function upgradeAsset(token: `0x${string}`) {
 
 export async function readToken(token: `0x${string}`) {
     try {
-        const info = await getToken(config, { address: token });
+        const info = await readTokenFromAddress(config, { address: token });
         return { address: token, name: info.name, symbol: info.symbol };
     } catch (error) {
         console.log(error);
@@ -77,6 +87,24 @@ export async function optIn(token: `0x${string}`) {
             abi: hybridTokenAbi,
             address: token,
             functionName: 'optIn'
+        });
+
+        const receipt = await waitForTransactionReceipt(config, { hash: result });
+
+        return receipt.transactionHash;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+export async function optOut(token: `0x${string}`) {
+    try {
+        const result = await writeContract(config, {
+            abi: hybridTokenAbi,
+            address: token,
+            functionName: 'optOut'
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -131,15 +159,14 @@ export async function unBindWallet(
     messageHash: `0x${string}`,
     v: number,
     r: `0x${string}`,
-    s: `0x${string}`,
-    owner: `0x${string}`
+    s: `0x${string}`
 ): Promise<string | null> {
     try {
         const result = await writeContract(config, {
             abi: hybridAbi,
             address: contractId,
             functionName: 'onWalletUnBind',
-            args: [messageHash, v, r, s, owner],
+            args: [messageHash, v, r, s],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -180,7 +207,7 @@ export async function downgradeAsset(
 export async function submitApprovalProof(
     approvalId: `0x${string}`,
     messageHash: `0x${string}`,
-    v: number,
+    v: string,
     r: `0x${string}`,
     s: `0x${string}`,
     token: `0x${string}`
@@ -190,7 +217,28 @@ export async function submitApprovalProof(
             abi: hybridTokenAbi,
             address: token,
             functionName: 'submitApprovalProof',
-            args: [approvalId, messageHash, v, r, s],
+            args: [approvalId, messageHash, Number(v), r, s],
+        });
+
+        const receipt = await waitForTransactionReceipt(config, { hash: result });
+
+        return receipt.transactionHash;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+export async function rejectAprroval(
+    approvalId: `0x${string}`
+): Promise<string | null> {
+    try {
+        const result = await writeContract(config, {
+            abi: hybridAbi,
+            address: contractId,
+            functionName: 'onRejectAprroval',
+            args: [approvalId],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -215,5 +263,20 @@ export async function signerOf(owner: `0x${string}`): Promise<string | null> {
         console.log(error);
 
         return null;
+    }
+}
+
+export async function isUpgraded(token: `0x${string}`, owner: `0x${string}`): Promise<boolean | null> {
+    try {
+        return await readContract(config, {
+            abi: hybridAbi,
+            address: contractId,
+            functionName: 'isUpgraded',
+            args: [token, owner]
+        });
+    } catch (error) {
+        console.log(error);
+
+        return false;
     }
 }

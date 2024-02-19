@@ -7,21 +7,26 @@ import {Structs} from "./libraries/Structs.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
 contract Hybrid is IHybrid, Context {
+    // ============================= //
+    // GLOBAL VARS                   //
+    // ============================= //
+
+    uint256 private _sequence = 1;
     mapping(bytes32 => bool) private _usedSignedHash;
 
     bytes32 internal constant LEAF_DOMAIN_SEPARATOR =
         0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE000000000000000000000000;
 
-    uint256 internal constant SECONDS_TO_CLOSE_HYBRID = 3 * 24 * 60 * 60;
+    uint256 internal constant SECONDS_TO_CLOSE_HYBRID = 7 * 24 * 60 * 60;
 
     mapping(address => address) private _signers;
     mapping(bytes32 => Structs.Approval) private _approvals;
     mapping(address => mapping(address => bool)) private _isAssetUpgraded;
     mapping(address => Structs.CloseHybrid) private _closeHybrid;
 
-    function signerOf(address owner) public view override returns (address) {
-        return _signers[owner];
-    }
+    // ============================= //
+    // CLOSE FUNCTIONS               //
+    // ============================= //
 
     function onRequestCloseHybrid(Structs.Status status) external override {
         address owner = _msgSender();
@@ -53,6 +58,10 @@ contract Hybrid is IHybrid, Context {
         emit WalletUnBind(owner);
     }
 
+    // ============================= //
+    // APPROVAL FUNCTIONS            //
+    // ============================= //
+
     function onRequestAprroval(
         address owner,
         address spender,
@@ -61,7 +70,7 @@ contract Hybrid is IHybrid, Context {
         address assetId = _msgSender();
 
         Structs.Approval memory approval = Structs.Approval({
-            sequence: 0,
+            sequence: _sequence,
             assetId: assetId,
             owner: owner,
             spender: spender,
@@ -74,6 +83,7 @@ contract Hybrid is IHybrid, Context {
         emit ApprovalRequested(approvalId, assetId, owner, spender, value);
 
         _approvals[approvalId] = approval;
+        _sequence++;
 
         return approvalId;
     }
@@ -102,21 +112,17 @@ contract Hybrid is IHybrid, Context {
             revert InvalidStatus(approvalId);
         }
 
-        bool validate = _verifyHash(
-            messageHash,
-            v,
-            r,
-            s,
-            signerOf(approval.owner)
-        );
+        address extractedSigner = _verifyHash(messageHash, v, r, s);
 
-        if (!validate) {
-            revert InvalidSignedHash(messageHash);
+        if (extractedSigner != signerOf(approval.owner)) {
+            revert InvalidSigner(extractedSigner);
         }
 
         _usedSignedHash[messageHash] = true;
 
         approval.status = Structs.Status.ACCEPTED;
+
+        emit ApprovalResult(approvalId, Structs.Status.ACCEPTED);
 
         return (approval.spender, approval.value);
     }
@@ -133,43 +139,13 @@ contract Hybrid is IHybrid, Context {
         }
 
         approval.status = Structs.Status.REJECTED;
+
+        emit ApprovalResult(approvalId, Structs.Status.REJECTED);
     }
 
-    function walletBind(address signer) external override {
-        address owner = _msgSender();
-        address previousSigner = _signers[owner];
-
-        if (previousSigner != address(0)) {
-            revert WalletBinded(previousSigner);
-        }
-
-        if (signer == address(0)) {
-            revert ZeroAddress(signer);
-        }
-
-        _signers[owner] = signer;
-
-        emit WalletBind(owner, signer);
-    }
-
-    function onWalletUnBind(
-        bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
-        address owner
-    ) external override onlyUnusedSignedHash(messageHash) {
-        bool validate = _verifyHash(messageHash, v, r, s, signerOf(owner));
-
-        if (!validate) {
-            revert InvalidSignedHash(messageHash);
-        }
-
-        _usedSignedHash[messageHash] = true;
-        _signers[owner] = address(0);
-
-        emit WalletUnBind(owner);
-    }
+    // ============================= //
+    // UP/DOWN GRADE FUNCTIONS       //
+    // ============================= //
 
     function onUpgradeAsset(address owner) external override {
         address assetId = _msgSender();
@@ -193,10 +169,10 @@ contract Hybrid is IHybrid, Context {
     ) external override onlyUnusedSignedHash(messageHash) {
         address assetId = _msgSender();
 
-        bool validate = _verifyHash(messageHash, v, r, s, signerOf(owner));
+        address extractedSigner = _verifyHash(messageHash, v, r, s);
 
-        if (!validate) {
-            revert InvalidSignedHash(messageHash);
+        if (extractedSigner != signerOf(owner)) {
+            revert InvalidSigner(extractedSigner);
         }
 
         _usedSignedHash[messageHash] = true;
@@ -218,6 +194,47 @@ contract Hybrid is IHybrid, Context {
     // ============================= //
     // WALLET BINDING FUNCTIONS      //
     // ============================= //
+
+    function onWalletBind(address signer) external override {
+        address owner = _msgSender();
+        address previousSigner = _signers[owner];
+
+        if (previousSigner != address(0)) {
+            revert WalletBinded(previousSigner);
+        }
+
+        if (signer == address(0)) {
+            revert ZeroAddress(signer);
+        }
+
+        _signers[owner] = signer;
+
+        emit WalletBind(owner, signer);
+    }
+
+    function onWalletUnBind(
+        bytes32 messageHash,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external override onlyUnusedSignedHash(messageHash) {
+        address owner = _msgSender();
+
+        address extractedSigner = _verifyHash(messageHash, v, r, s);
+
+        if (extractedSigner != signerOf(owner)) {
+            revert InvalidSigner(extractedSigner);
+        }
+
+        _usedSignedHash[messageHash] = true;
+        _signers[owner] = address(0);
+
+        emit WalletUnBind(owner);
+    }
+
+    function signerOf(address owner) public view override returns (address) {
+        return _signers[owner];
+    }
 
     // ============================= //
     // INTERNAL FUNCTIONS            //
@@ -243,9 +260,8 @@ contract Hybrid is IHybrid, Context {
         bytes32 messageHash,
         uint8 v,
         bytes32 r,
-        bytes32 s,
-        address expectedSigner
-    ) internal pure returns (bool) {
+        bytes32 s
+    ) internal pure returns (address) {
         // Concatenate the message hash with the Ethereum prefix "\x19Ethereum Signed Message:\n32"
         bytes32 prefixedHash = keccak256(
             abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
@@ -255,7 +271,7 @@ contract Hybrid is IHybrid, Context {
         address recoveredAddress = ecrecover(prefixedHash, v, r, s);
 
         // Check if the recovered address matches the expected signer
-        return recoveredAddress == expectedSigner;
+        return recoveredAddress;
     }
 
     // ============================= //

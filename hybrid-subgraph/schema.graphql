@@ -1,7 +1,5 @@
-type ApprovalRequested @entity(immutable: true) {
+type Approval @entity(immutable: true) {
   id: Bytes!
-  approvalId: Bytes! # bytes32
-  assetId: Bytes! # address
   owner: Bytes! # address
   spender: Bytes! # address
   value: BigInt! # uint256
@@ -10,55 +8,11 @@ type ApprovalRequested @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type ApprovalResult @entity(immutable: true) {
+type Transfer @entity(immutable: true) {
   id: Bytes!
-  approvalId: Bytes! # address
-  Status: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type AssetDowngraded @entity(immutable: true) {
-  id: Bytes!
-  assetId: Bytes! # address
-  owner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type AssetUpgraded @entity(immutable: true) {
-  id: Bytes!
-  assetId: Bytes! # address
-  owner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type CloseHybrid @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  endTimestamp: BigInt! # uint256
-  status: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type WalletBind @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  signer: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type WalletUnBind @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

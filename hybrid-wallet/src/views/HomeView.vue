@@ -11,8 +11,8 @@ import { key } from '../../store';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Approval } from '@/types';
-import { allApprovals } from '../scripts/graph';
-import { getTokens } from '../scripts/bind';
+import { allApprovals, allApprovalsOf } from '../scripts/graph';
+import { getTokens, getToken } from '../scripts/bind';
 
 const store = useStore(key);
 
@@ -23,7 +23,7 @@ const approvals = ref<Approval[]>([]);
 const tab = ref('tokens');
 
 const tryGetApprovals = async () => {
-  approvals.value = await allApprovals(store.state.address);
+  approvals.value = await allApprovalsOf(store.state.address, 2);
 };
 
 const tryGetTokens = () => {
@@ -55,7 +55,7 @@ onMounted(() => {
           </div>
 
           <div class="home_header_account">
-            <p>{{ $fineHash(store.state.address, 4) }} + {{ $fineHash(store.state.signer, 4) }}</p>
+            <p>{{ $fineHash(store.state.address, 3) }} + {{ $fineHash(store.state.signer, 3) }}</p>
             <ProfileIcon />
           </div>
         </div>
@@ -90,7 +90,7 @@ onMounted(() => {
         </div>
 
         <div @click="tab = 'approvals'" :class="tab.valueOf() == 'approvals' ? `home_tab home_tab_active` : `home_tab`">
-          <p>Requests <span>10</span></p>
+          <p>Requests <span>{{ approvals.length }}</span></p>
           <div class="indicator"></div>
         </div>
       </div>
@@ -98,7 +98,8 @@ onMounted(() => {
     <section>
       <div class="app_width">
         <div class="requests">
-          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in store.state.assets" :key="index">
+          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in store.state.assets" :key="index"
+            @click="$emit('token_info', token)">
             <div class="request_head">
               <div class="request_head_token">
                 <img src="/images/usdc.png" alt="">
@@ -116,11 +117,11 @@ onMounted(() => {
             <div class="request_head">
               <div class="request_head_token">
                 <img src="/images/usdc.png" alt="">
-                <p>Circle USD</p>
+                <p>{{ getToken(approval.assetId).name }}</p>
               </div>
 
               <div class="request_head_amount">
-                <p>{{ $fromWei(approval.value) }} USDC</p>
+                <p>{{ $fromWei(approval.value) }} {{ getToken(approval.assetId).symbol }}</p>
                 <ArrowDownIcon />
               </div>
             </div>
@@ -131,7 +132,10 @@ onMounted(() => {
 
             <div class="request_actions">
               <button class="request_action" @click="$emit('pin_request', 2)">Reject</button>
-              <button class="request_action" @click="$emit('approve_request', 1)">Approve</button>
+              <button class="request_action" @click="$emit('approve_request', {
+                tokenInfo: getToken(approval.assetId),
+                approval: approval
+              })">Approve</button>
             </div>
           </div>
         </div>

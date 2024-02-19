@@ -59,7 +59,7 @@ const tryBindWallet = async () => {
       return;
     }
 
-    if (!store.state.signer) {
+    if (!isEOA(store.state.signer)) {
       const txId = await bindWallet(result.data);
 
       if (!txId) {

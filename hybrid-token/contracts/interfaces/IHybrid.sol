@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 import {Structs} from "../libraries/Structs.sol";
 
 interface IHybrid {
-    error InvalidSignedHash(bytes32 hash);
+    error InvalidSigner(address signer);
     error InvalidCaller(address caller);
     error InvalidStatus(bytes32 approvalId);
     error WalletBinded(address signer);
@@ -32,7 +32,7 @@ interface IHybrid {
         uint256 value
     );
 
-    event ApprovalResult(address approvalId, Structs.Status Status);
+    event ApprovalResult(bytes32 approvalId, Structs.Status status);
 
     function signerOf(address owner) external view returns (address);
 
@@ -61,14 +61,13 @@ interface IHybrid {
 
     function onRejectAprroval(bytes32 approvalId) external;
 
-    function walletBind(address signer) external;
+    function onWalletBind(address signer) external;
 
     function onWalletUnBind(
         bytes32 messageHash,
         uint8 v,
         bytes32 r,
-        bytes32 s,
-        address owner
+        bytes32 s
     ) external;
 
     function onUpgradeAsset(address owner) external;

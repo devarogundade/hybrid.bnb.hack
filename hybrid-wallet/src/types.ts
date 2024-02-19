@@ -1,6 +1,7 @@
 export interface Approval {
     sequence: number;
     assetId: string;
+    approvalId: string;
     owner: string;
     spender: string;
     value: string;

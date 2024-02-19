@@ -6,22 +6,32 @@ import SnackbarPop from './pops/SnackbarPop.vue';
 import { ref } from 'vue';
 import ImportTokenSheet from './sheets/ImportTokenSheet.vue';
 import UnBindSheet from './sheets/UnBindSheet.vue';
+import TokenSheet from './sheets/TokenSheet.vue';
 
 const pendingImportToken = ref<Boolean>(false);
-const pendingApprove = ref<Boolean>(false);
+const pendingApprove = ref<Object | null>(null);
 const pendingApproval = ref<Boolean>(false);
 const pendingUnBindWallet = ref<Boolean>(false);
+const pendingTokenInfo = ref<Object | null>(null);
 </script>
 
 <template>
   <div class="app">
     <RouterView @import_token="pendingImportToken = true" @approval_request="pendingApproval = true"
-      @approve_request="pendingApprove = true" @unbind_wallet="pendingUnBindWallet = true" />
+      @approve_request="pendingApprove = $event" @unbind_wallet="pendingUnBindWallet = true"
+      @token_info="pendingTokenInfo = $event" />
 
-    <ApproveSheet :active="pendingApprove.valueOf()" @close="pendingApprove = false" />
+    <ApproveSheet v-if="pendingApprove" :approval="pendingApprove.approval" :token-info="pendingApprove.tokenInfo"
+      :active="pendingApprove != null" @close="pendingApprove = null" />
+
     <ApprovalSheet :active="pendingApproval.valueOf()" @close="pendingApproval = false" />
+
     <ImportTokenSheet :active="pendingImportToken.valueOf()" @close="pendingImportToken = false" />
+
     <UnBindSheet :active="pendingUnBindWallet.valueOf()" @close="pendingUnBindWallet = false" />
+
+    <TokenSheet v-if="pendingTokenInfo" :token-info="pendingTokenInfo" :active="pendingTokenInfo != null"
+      @close="pendingTokenInfo = null" />
     <SnackbarPop />
   </div>
 </template>

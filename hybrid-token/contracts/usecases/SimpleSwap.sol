@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import {HybridToken} from "../HybridToken.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract SimpleSwap is Context {
     error InvalidAmount(uint256 amount);
@@ -11,19 +11,21 @@ contract SimpleSwap is Context {
 
     constructor(address wrappedBnb_) {
         wrappedBnb = wrappedBnb_;
+
+        HybridToken token = HybridToken(wrappedBnb);
+        token.optIn();
     }
 
     function buy() external payable {
         address owner = _msgSender();
-        uint256 amount = msg.value;
 
-        if (amount == 0) {
-            revert InvalidAmount(amount);
+        if (msg.value == 0) {
+            revert InvalidAmount(msg.value);
         }
 
-        uint256 amountOut = (amount * 1_000_000);
+        uint256 amountOut = (msg.value * 1_000_000);
 
-        IERC20 token = IERC20(wrappedBnb);
+        HybridToken token = HybridToken(wrappedBnb);
         token.transfer(owner, amountOut);
     }
 
@@ -36,7 +38,7 @@ contract SimpleSwap is Context {
 
         uint256 amountOut = (amount / 1_000_000);
 
-        IERC20 token = IERC20(wrappedBnb);
+        HybridToken token = HybridToken(wrappedBnb);
         token.transferFrom(owner, address(this), amountOut);
 
         payable(owner).transfer(amountOut);

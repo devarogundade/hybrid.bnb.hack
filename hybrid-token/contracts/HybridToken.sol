@@ -6,11 +6,16 @@ import {IHybrid} from "./interfaces/IHybrid.sol";
 import {IHybridToken} from "./interfaces/IHybridToken.sol";
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 abstract contract HybridToken is ERC20, IHybridToken {
+    // ============================= //
+    // GLOBAL VARS                   //
+    // ============================= //
+
     IHybrid private _hybrid;
-    mapping(address => bool) private _opts;
-    mapping(address => mapping(address => uint256)) private _spendables;
+    mapping(address => bool) private _isOptedIn;
+    mapping(address => mapping(address => uint256)) private _spendableOf;
 
     constructor(
         string memory name,
@@ -24,14 +29,14 @@ abstract contract HybridToken is ERC20, IHybridToken {
     // OPT IN/OUT FUNCTIONS          //
     // ============================= //
 
-    function optIn() external override upgradeRequired {
+    function optIn() external override {
         address owner = _msgSender();
-        _opts[owner] = true;
+        _isOptedIn[owner] = true;
     }
 
-    function optOut() external override optRequired upgradeRequired {
+    function optOut() external override optedInRequired {
         address owner = _msgSender();
-        _opts[owner] = false;
+        _isOptedIn[owner] = false;
     }
 
     function upgradeAsset() external override {
@@ -63,7 +68,7 @@ abstract contract HybridToken is ERC20, IHybridToken {
 
         super._approve(owner, spender, value, true);
 
-        _spendables[owner][spender] = value;
+        _spendableOf[owner][spender] = value;
     }
 
     function rejectApproval(bytes32 approvalId) external upgradeRequired {
@@ -108,14 +113,6 @@ abstract contract HybridToken is ERC20, IHybridToken {
         if (!isUpgraded(owner)) {
             super._approve(owner, spender, value, emitEvent);
         } else {
-            if (!_opts[owner]) {
-                revert OptInRequired(owner);
-            }
-
-            if (!_opts[spender]) {
-                revert OptInRequired(spender);
-            }
-
             _hybrid.onRequestAprroval(owner, spender, value);
         }
     }
@@ -125,13 +122,21 @@ abstract contract HybridToken is ERC20, IHybridToken {
         address to,
         uint256 value
     ) internal override {
+        if (!_isOptedIn[from]) {
+            revert OptInRequired(from);
+        }
+
+        if (!_isOptedIn[to]) {
+            revert OptInRequired(to);
+        }
+
         if (!isUpgraded(from)) {
             super._update(from, to, value);
             return;
         }
 
-        require(_spendables[from][to] >= value, "Insufficient spendable");
-        _spendables[from][to] = _spendables[from][to] - value;
+        require(_spendableOf[from][to] >= value, "Insufficient spendable");
+        _spendableOf[from][to] = _spendableOf[from][to] - value;
 
         super._update(from, to, value);
     }
@@ -140,7 +145,7 @@ abstract contract HybridToken is ERC20, IHybridToken {
         address from,
         address to,
         uint256 value
-    ) public virtual override returns (bool) {
+    ) public virtual override(ERC20, IERC20) returns (bool) {
         address spender = _msgSender();
         _spendAllowance(from, spender, value);
         transferX(from, spender, to, value);
@@ -153,10 +158,10 @@ abstract contract HybridToken is ERC20, IHybridToken {
         address to,
         uint256 value
     ) internal {
-        require(_spendables[from][spender] >= value, "Insufficient spendable");
-        _spendables[from][spender] = _spendables[from][spender] - value;
+        require(_spendableOf[from][spender] >= value, "Insufficient spendable");
+        _spendableOf[from][spender] = _spendableOf[from][spender] - value;
 
-        _spendables[from][to] = _spendables[from][to] + value;
+        _spendableOf[from][to] = _spendableOf[from][to] + value;
         _transfer(from, to, value);
     }
 
@@ -164,10 +169,10 @@ abstract contract HybridToken is ERC20, IHybridToken {
     // MODIFIERS FUNCTIONS           //
     // ============================= //
 
-    modifier optRequired() {
+    modifier optedInRequired() {
         address owner = _msgSender();
 
-        if (isUpgraded(owner) && !_opts[owner]) {
+        if (isUpgraded(owner) && !_isOptedIn[owner]) {
             revert OptInRequired(owner);
         }
 

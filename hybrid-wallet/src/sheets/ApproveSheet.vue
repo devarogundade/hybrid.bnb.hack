@@ -1,9 +1,74 @@
 <script setup lang="ts">
 import CloseIconVue from '@/components/icons/CloseIcon.vue';
 
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { key } from '../../store';
+import { notify } from '../reactives/notify';
+import { newSignedMessage } from '@/scripts/dom';
+import { splitSignedHash, submitApprovalProof } from '@/scripts/bind';
+
 const props = defineProps({
-    active: { type: Boolean, required: true }
+    active: { type: Boolean, required: true },
+    approval: { type: Object, required: true },
+    tokenInfo: { type: Object, required: true },
 });
+
+const store = useStore(key);
+
+const signedMessage = ref("");
+
+const OK = 200;
+
+const requestNewSignedHash = async () => {
+    const result = await newSignedMessage(store.state.address, "Approving Spender");
+
+    if (result.code == OK) {
+        notify.push({
+            title: 'Confirmation hash sent to mail.',
+            description: 'Mail was sent.',
+            category: 'success',
+            linkText: 'View Trx',
+            linkUrl: ''
+        });
+    } else {
+        notify.push({
+            title: 'Failed to send mail.',
+            description: 'Try again.',
+            category: 'error'
+        });
+    }
+};
+
+const trySubmitProof = async () => {
+    const splitedHash = splitSignedHash(signedMessage.value);
+
+    const txId = await submitApprovalProof(
+        props.approval.approvalId,
+        splitedHash.messageHash,
+        splitedHash.v,
+        splitedHash.r,
+        splitedHash.s,
+        props.tokenInfo.address
+    );
+
+    if (txId) {
+        notify.push({
+            title: 'Approval successful.',
+            description: 'Transaction was sent.',
+            category: 'success',
+            linkText: 'View Trx',
+            linkUrl: ''
+        });
+    } else {
+        notify.push({
+            title: 'Failed to send transaction.',
+            description: 'Try again.',
+            category: 'error'
+        });
+    }
+}
+
 </script>
 
 <template>
@@ -17,18 +82,18 @@ const props = defineProps({
 
                 <div class="approve_token">
                     <img src="/images/usdc.png" alt="">
-                    <p>Circle USD</p>
+                    <p>{{ tokenInfo.name }}</p>
                 </div>
 
                 <table>
                     <tr>
                         <td>Amount</td>
-                        <td>50 USDC</td>
+                        <td>{{ $fromWei(approval.value) }} {{ tokenInfo.symbol }}</td>
                     </tr>
 
                     <tr>
                         <td>Spender</td>
-                        <td>0x60E0a0eAd05...34A97f13E6ff21</td>
+                        <td>{{ $fineHash(approval.spender, 10) }}</td>
                     </tr>
 
                     <tr>
@@ -37,8 +102,14 @@ const props = defineProps({
                     </tr>
                 </table>
 
+                <div class="approval_details">
+                    <textarea v-model="signedMessage" placeholder="Enter signed hash" name="" id="" cols="30"
+                        rows="5"></textarea>
+                    <p class="request_hash" @click="requestNewSignedHash">Request confirmation hash</p>
+                </div>
+
                 <div class="approve_actions">
-                    <button>Approve</button>
+                    <button @click="trySubmitProof">Approve</button>
                     <button>Reject</button>
                 </div>
             </div>
@@ -82,6 +153,31 @@ main {
     cursor: pointer;
 }
 
+.approval_details textarea {
+    background: #252728;
+    border-radius: 4px;
+    border: none;
+    resize: none;
+    padding: 8px;
+    width: 100%;
+    color: #FFF;
+    margin-bottom: 6px;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.request_hash {
+    color: green;
+    padding: 6px 0;
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
 .approve_token {
     display: flex;
     align-items: center;
@@ -92,8 +188,8 @@ main {
 }
 
 .approve_token img {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
 }
 
 .approve_token p {

@@ -8,7 +8,7 @@ dataSources:
     name: Hybrid
     network: mumbai
     source:
-      address: "0x9FF6F18d9abb120B3E3a916BdE568FbC49f274D4"
+      address: "0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730"
       abi: Hybrid
       startBlock: 0
     mapping:
@@ -16,29 +16,14 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ApprovalRequested
-        - ApprovalResult
-        - AssetDowngraded
-        - AssetUpgraded
-        - CloseHybrid
-        - WalletBind
-        - WalletUnBind
+        - Approval
+        - Transfer
       abis:
         - name: Hybrid
           file: ./abis/Hybrid.json
       eventHandlers:
-        - event: ApprovalRequested(bytes32,address,address,address,uint256)
-          handler: handleApprovalRequested
-        - event: ApprovalResult(address,uint8)
-          handler: handleApprovalResult
-        - event: AssetDowngraded(address,address)
-          handler: handleAssetDowngraded
-        - event: AssetUpgraded(address,address)
-          handler: handleAssetUpgraded
-        - event: CloseHybrid(address,uint256,uint8)
-          handler: handleCloseHybrid
-        - event: WalletBind(address,address)
-          handler: handleWalletBind
-        - event: WalletUnBind(address)
-          handler: handleWalletUnBind
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
       file: ./src/hybrid.ts
