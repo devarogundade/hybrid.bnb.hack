@@ -39,7 +39,7 @@ import OutIcon from '../components/icons/OutIcon.vue';
 
 import { notify } from '../reactives/notify';
 
-const removeIndex = (index: any) => {
+const removeIndex = (index: number) => {
     notify.remove(index);
 };
 </script>

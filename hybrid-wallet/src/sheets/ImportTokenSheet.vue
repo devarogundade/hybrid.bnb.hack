@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
-
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '../../store';
@@ -47,7 +46,7 @@ const tryImportAndUpgrade = async () => {
             title: 'Approval successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
 

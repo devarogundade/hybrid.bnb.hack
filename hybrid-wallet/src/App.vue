@@ -9,10 +9,10 @@ import UnBindSheet from './sheets/UnBindSheet.vue';
 import TokenSheet from './sheets/TokenSheet.vue';
 
 const pendingImportToken = ref<Boolean>(false);
-const pendingApprove = ref<Object | null>(null);
+const pendingApprove = ref<any | null>(null);
 const pendingApproval = ref<Boolean>(false);
 const pendingUnBindWallet = ref<Boolean>(false);
-const pendingTokenInfo = ref<Object | null>(null);
+const pendingTokenInfo = ref<any | null>(null);
 </script>
 
 <template>

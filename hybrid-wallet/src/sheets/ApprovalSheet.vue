@@ -19,7 +19,7 @@ const tryGetTokens = () => {
     store.commit('setAssets', (getTokens()));
 };
 
-const selectToken = (e) => {
+const selectToken = (e: any) => {
     tokenAddress.value = e.target.value;
 };
 
@@ -39,7 +39,7 @@ const tryApprove = async () => {
             title: 'Approval successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
 

@@ -29,7 +29,7 @@ const requestNewSignedHash = async () => {
             title: 'Confirmation hash sent to mail.',
             description: 'Mail was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
     } else {

@@ -26,7 +26,7 @@ const requestNewSignedHash = async () => {
             title: 'Confirmation hash sent to mail.',
             description: 'Mail was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
     } else {
@@ -45,8 +45,7 @@ const tryUnBind = async () => {
         splitedHash.messageHash,
         splitedHash.v,
         splitedHash.r,
-        splitedHash.s,
-        store.state.address
+        splitedHash.s
     );
 
     if (txId) {

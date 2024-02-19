@@ -36,7 +36,7 @@ const tryRejectApproval = async (token: any, approvalId: any) => {
       title: 'Reject successful.',
       description: 'Transaction was sent.',
       category: 'success',
-      linkText: 'View Trx',
+      linkTitle: 'View Trx',
       linkUrl: ''
     });
 

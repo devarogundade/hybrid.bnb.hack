@@ -17,7 +17,7 @@ const tryOptIn = async () => {
             title: 'Opt In successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
     } else {
@@ -37,7 +37,7 @@ const tryOptOut = async () => {
             title: 'Opt Out successful.',
             description: 'Transaction was sent.',
             category: 'success',
-            linkText: 'View Trx',
+            linkTitle: 'View Trx',
             linkUrl: ''
         });
     } else {

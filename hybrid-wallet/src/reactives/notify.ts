@@ -1,9 +1,10 @@
+import type { Message } from '@/types';
 import { reactive } from 'vue';
 
 export const notify = reactive({
-    messages: [],
+    messages: [] as Message[],
 
-    push: function (message) {
+    push: function (message: Message) {
         this.messages = [...this.messages, message];
 
         setTimeout(() => {
@@ -11,7 +12,7 @@ export const notify = reactive({
         }, 30000);
     },
 
-    remove: function (index: any) {
+    remove: function (index: number) {
         this.messages.splice(index, 1);
     }
 });
