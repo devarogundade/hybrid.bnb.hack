@@ -8,7 +8,7 @@
                         Experience.</p>
                 </div>
                 <div class="hero_actions">
-                    <a href="https://hybrid-app.netlify.app">
+                    <a target="_blank" href="https://hybrid-app.netlify.app">
                         <button class="hero_action">
                             Try it!
                         </button>

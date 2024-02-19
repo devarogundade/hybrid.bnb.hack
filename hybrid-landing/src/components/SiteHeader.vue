@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="header_actions">
-                    <a href="https://hybrid-app.netlify.app">
+                    <a target="_blank" href="https://hybrid-app.netlify.app">
                         <button class="header_action">Launch App</button>
                     </a>
                 </div>
