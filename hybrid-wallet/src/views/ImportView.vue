@@ -10,6 +10,7 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { bindWallet, isEOA, signerOf } from '@/scripts/bind';
+import { notify } from '@/reactives/notify';
 import { bindWallet as domBindWllet, getBinding } from '@/scripts/dom';
 import { config, projectId, chains } from '../scripts/config';
 import Converter from '@/scripts/converter';
@@ -32,7 +33,7 @@ const email = ref('');
 
 onMounted(() => {
   watchAccount(config, {
-    onChange(account, _) {
+    onChange(account) {
       store.commit('setAddress', account.address);
       getSigner();
     },
@@ -58,7 +59,11 @@ const tryBindWallet = async () => {
     const result = await domBindWllet(store.state.address, email.value);
 
     if (result.code != OK) {
-      alert(result.message);
+      notify.push({
+        title: 'Failed to get binding.',
+        description: result.message,
+        category: 'error'
+      });
       return;
     }
 
@@ -66,17 +71,22 @@ const tryBindWallet = async () => {
       const txId = await bindWallet(result.data);
 
       if (!txId) {
+        notify.push({
+          title: 'Failed to send transaction.',
+          description: 'Try again.',
+          category: 'error'
+        });
         return;
       }
     }
 
     await getSigner();
 
-    router.push('/home');
+    gotoHomeView();
   }
 };
 
-const gotoHomeView = async () => {
+const gotoHomeView = () => {
   router.push('/home');
 };
 </script>
@@ -99,8 +109,6 @@ const gotoHomeView = async () => {
 
         <form class="mnemonic_form">
           <label for="mnemonic_input">Connect to a Web3 Wallet:</label>
-          <!-- <textarea type="text" rows="5" v-model="mnemonic" name="mnemonic_input" class="mnemonic_input"
-            placeholder="Paste signed data here."></textarea> -->
           <button class="wallet_connect" type="button" @click="modal.open()">{{ store.state.address ? `Connected to
             ${Converter.fineHash(store.state.address, 4)}`
             : 'Wallet Connect'
@@ -108,20 +116,22 @@ const gotoHomeView = async () => {
 
           <br> <br>
 
-          <label v-if="!isEOA(store.state.signer)" for="mnemonic_input">Connect to a social for 2FA Trx:</label>
-          <button @click="isEmail = true" v-if="!isEOA(store.state.signer)" class="telegram" type="button">Use Email
+          <label v-if="store.state.address && !isEOA(store.state.signer)" for="mnemonic_input">Connect to a social for 2FA
+            Trx:</label>
+          <button @click="isEmail = true" v-if="store.state.address && !isEOA(store.state.signer)" class="telegram"
+            type="button">Use Email
             Account</button>
           <input type="email" v-model="email" v-show="isEmail" placeholder="Enter your email">
 
           <label style="font-weight: 600; font-size: 20px; color: green; text-align: center;"
-            v-if="isEOA(store.state.signer)" for="mnemonic_input">{{ (`Your account has
+            v-if="store.state.address && gotoHomeView" for="mnemonic_input">{{ (`Your account has
             been connected to
             ${Converter.fineHash(store.state.signer, 4)} as a secondary signer!.`) }}</label>
         </form>
 
         <div class="import_actions">
-          <button class="import_action" @click="!isEOA(store.state.signer) ? tryBindWallet() : gotoHomeView()">Bind and
-            Continue</button>
+          <button class="import_action" @click="!isEOA(store.state.signer) ? tryBindWallet() : gotoHomeView()">{{
+            !isEOA(store.state.signer) ? 'Bind and Continue' : 'Continue' }}</button>
         </div>
       </div>
     </div>
@@ -248,7 +258,7 @@ const gotoHomeView = async () => {
   width: 100%;
   border: none;
   border-radius: 2px;
-  font-weight: 500;
+  font-weight: 600;
   color: #181A1C;
   background: #99F476;
   cursor: pointer;
