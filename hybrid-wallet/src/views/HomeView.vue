@@ -19,7 +19,6 @@ const store = useStore(key);
 const router = useRouter();
 
 const approvals = ref<Approval[]>([]);
-const tokens = ref([]);
 
 const tab = ref('tokens');
 
@@ -28,7 +27,7 @@ const tryGetApprovals = async () => {
 };
 
 const tryGetTokens = () => {
-  tokens.value = getTokens();
+  store.commit('setAssets', (getTokens()));
 };
 
 onMounted(() => {
@@ -56,7 +55,7 @@ onMounted(() => {
           </div>
 
           <div class="home_header_account">
-            <p>{{ $fineHash(store.state.address, 4) }}</p>
+            <p>{{ $fineHash(store.state.address, 4) }} + {{ $fineHash(store.state.signer, 4) }}</p>
             <ProfileIcon />
           </div>
         </div>
@@ -99,7 +98,7 @@ onMounted(() => {
     <section>
       <div class="app_width">
         <div class="requests">
-          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in tokens" :key="index">
+          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in store.state.assets" :key="index">
             <div class="request_head">
               <div class="request_head_token">
                 <img src="/images/usdc.png" alt="">

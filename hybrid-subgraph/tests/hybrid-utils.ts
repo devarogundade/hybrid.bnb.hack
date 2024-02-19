@@ -5,7 +5,7 @@ import {
   ApprovalResult,
   AssetDowngraded,
   AssetUpgraded,
-  DowngradeRequested,
+  CloseHybrid,
   WalletBind,
   WalletUnBind
 } from "../generated/Hybrid/Hybrid"
@@ -103,22 +103,32 @@ export function createAssetUpgradedEvent(
   return assetUpgradedEvent
 }
 
-export function createDowngradeRequestedEvent(
-  assetId: Address,
-  owner: Address
-): DowngradeRequested {
-  let downgradeRequestedEvent = changetype<DowngradeRequested>(newMockEvent())
+export function createCloseHybridEvent(
+  owner: Address,
+  endTimestamp: BigInt,
+  status: i32
+): CloseHybrid {
+  let closeHybridEvent = changetype<CloseHybrid>(newMockEvent())
 
-  downgradeRequestedEvent.parameters = new Array()
+  closeHybridEvent.parameters = new Array()
 
-  downgradeRequestedEvent.parameters.push(
-    new ethereum.EventParam("assetId", ethereum.Value.fromAddress(assetId))
-  )
-  downgradeRequestedEvent.parameters.push(
+  closeHybridEvent.parameters.push(
     new ethereum.EventParam("owner", ethereum.Value.fromAddress(owner))
   )
+  closeHybridEvent.parameters.push(
+    new ethereum.EventParam(
+      "endTimestamp",
+      ethereum.Value.fromUnsignedBigInt(endTimestamp)
+    )
+  )
+  closeHybridEvent.parameters.push(
+    new ethereum.EventParam(
+      "status",
+      ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(status))
+    )
+  )
 
-  return downgradeRequestedEvent
+  return closeHybridEvent
 }
 
 export function createWalletBindEvent(

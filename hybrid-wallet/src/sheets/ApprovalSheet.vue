@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
+import { useStore } from 'vuex';
+import { key } from '../../store';
 import { onMounted, ref } from 'vue';
 import { notify } from '../reactives/notify';
 import { approve, getTokens } from '../scripts/bind';
 import Converter from '@/scripts/converter';
 
+const store = useStore(key);
+
 const props = defineProps({
     active: { type: Boolean, required: true }
 });
 
-const tokens = ref([]);
-
 const tryGetTokens = () => {
-    tokens.value = getTokens();
+    store.commit('setAssets', (getTokens()));
 };
 
 const selectToken = (e) => {
-    console.log(e);
-
     tokenAddress.value = e.target.value;
 };
 
@@ -70,8 +70,8 @@ onMounted(() => {
                 <div class="approval_details">
                     <select name="" id="" @change="selectToken">
                         <option value="">Select token</option>
-                        <option v-for="token, index in tokens.values()" :key="index" :value="token.address">{{ token.name }}
-                            ~ {{ token.symbol }}</option>
+                        <option v-for="token, index in store.state.assets" :key="index" :value="token.address">
+                            {{ token.name }} ~ {{ token.symbol }}</option>
                     </select>
                     <input type="text" v-model="spenderAddress" placeholder="Enter spender address">
                     <input type="number" v-model="amount" placeholder="Enter amount">

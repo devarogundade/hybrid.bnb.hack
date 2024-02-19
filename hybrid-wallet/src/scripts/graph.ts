@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Status } from './../types';
-import type { Approval, BindWallet } from "@/types";
+import type { Approval } from "@/types";
 
 const endPoint = 'https://api.thegraph.com/subgraphs/name/devarogundade/hybrid';
 

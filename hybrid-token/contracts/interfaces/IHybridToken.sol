@@ -12,7 +12,15 @@ interface IHybridToken {
 
     function upgradeAsset() external;
 
-    function dowgradeAsset(
+    function submitDowngradeProof(
+        bytes32 messageHash,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
+
+    function submitApprovalProof(
+        bytes32 approvalId,
         bytes32 messageHash,
         uint8 v,
         bytes32 r,

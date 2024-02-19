@@ -3,10 +3,13 @@ import CloseIcon from '@/components/icons/CloseIcon.vue';
 
 
 import { ref } from 'vue';
-import { readToken, upgradeAsset } from '../scripts/bind';
-import type { GetTokenReturnType } from '@wagmi/core';
+import { useStore } from 'vuex';
+import { key } from '../../store';
+import { getTokens, readToken, upgradeAsset } from '../scripts/bind';
 import { notify } from '../reactives/notify';
 import { saveToken } from '../scripts/bind';
+
+const store = useStore(key);
 
 const props = defineProps({
     active: { type: Boolean, required: true }
@@ -36,6 +39,8 @@ const tryImportAndUpgrade = async () => {
     );
 
     saveToken(tokenInfo.value);
+
+    store.commit('setAssets', (getTokens()));
 
     if (txId) {
         notify.push({

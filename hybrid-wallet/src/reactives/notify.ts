@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 export const notify = reactive({
     messages: [],
 
-    push: function (message: never) {
+    push: function (message) {
         this.messages = [...this.messages, message];
 
         setTimeout(() => {

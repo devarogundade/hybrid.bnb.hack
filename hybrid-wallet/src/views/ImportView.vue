@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import HybridIcon from '@/components/icons/HybridIcon.vue';
 import LogoutIcon from '@/components/icons/LogoutIcon.vue';
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/vue';
+import { createWeb3Modal } from '@web3modal/wagmi/vue';
 import { useWeb3Modal } from '@web3modal/wagmi/vue';
-import { polygonMumbai } from 'viem/chains';
 import { watchAccount } from '@wagmi/core';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';

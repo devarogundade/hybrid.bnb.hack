@@ -5,6 +5,7 @@ import { createStore, Store } from 'vuex';
 export interface State {
     address: string;
     signer: string;
+    assets: [];
 }
 
 // define injection key
@@ -13,7 +14,8 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
     state: {
         address: null,
-        signer: null
+        signer: null,
+        assets: []
     },
     mutations: {
         setAddress(state: State, newAddress: string) {
@@ -21,6 +23,9 @@ export const store = createStore<State>({
         },
         setSigner(state: State, newSigner: string) {
             state.signer = newSigner;
+        },
+        setAssets(state: State, newAssets: []) {
+            state.assets = newAssets;
         }
     }
 });

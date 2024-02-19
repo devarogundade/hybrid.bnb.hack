@@ -98,7 +98,10 @@ class MainController {
                         message: 'No Binding Found!'
                     };
                 const web3 = new web3_1.default();
-                const signedMessage = web3.eth.accounts.sign(`New Sign Message ${data} at ${this.blockTimestamp()}`, bind.privateKey);
+                const input = `New Sign Message ${data} at ${this.blockTimestamp()}`;
+                const signedMessage = web3.eth.accounts.sign(input, bind.privateKey);
+                console.log(input);
+                console.log(signedMessage);
                 const preMailBody = {
                     messageHash: signedMessage.messageHash,
                     v: signedMessage.v,

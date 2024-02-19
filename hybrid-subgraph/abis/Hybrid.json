@@ -8,6 +8,13 @@
   },
   {
     "inputs": [
+      { "internalType": "bytes32", "name": "hash", "type": "bytes32" }
+    ],
+    "name": "InvalidSignedHash",
+    "type": "error"
+  },
+  {
+    "inputs": [
       { "internalType": "bytes32", "name": "approvalId", "type": "bytes32" }
     ],
     "name": "InvalidStatus",
@@ -127,17 +134,23 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "assetId",
+        "name": "owner",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "endTimestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum Structs.Status",
+        "name": "status",
+        "type": "uint8"
       }
     ],
-    "name": "DowngradeRequested",
+    "name": "CloseHybrid",
     "type": "event"
   },
   {
@@ -179,6 +192,27 @@
     "name": "signerOf",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum Structs.Status",
+        "name": "status",
+        "type": "uint8"
+      }
+    ],
+    "name": "onRequestCloseHybrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "onCloseHybrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -219,16 +253,19 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" },
       { "internalType": "address", "name": "signer", "type": "address" }
     ],
-    "name": "onWalletBind",
+    "name": "walletBind",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
+      { "internalType": "bytes32", "name": "messageHash", "type": "bytes32" },
+      { "internalType": "uint8", "name": "v", "type": "uint8" },
+      { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+      { "internalType": "bytes32", "name": "s", "type": "bytes32" },
       { "internalType": "address", "name": "owner", "type": "address" }
     ],
     "name": "onWalletUnBind",
@@ -247,15 +284,10 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
-    ],
-    "name": "onRequestDowngrade",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
+      { "internalType": "bytes32", "name": "messageHash", "type": "bytes32" },
+      { "internalType": "uint8", "name": "v", "type": "uint8" },
+      { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+      { "internalType": "bytes32", "name": "s", "type": "bytes32" },
       { "internalType": "address", "name": "owner", "type": "address" }
     ],
     "name": "onDowngradeAsset",
@@ -271,6 +303,7 @@
     "name": "isUpgraded",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   }
 ]

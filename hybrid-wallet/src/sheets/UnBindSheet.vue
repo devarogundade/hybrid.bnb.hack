@@ -5,7 +5,8 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '../../store';
 import { notify } from '../reactives/notify';
-import { newSignedMessage } from '@/scripts/dom';
+import { newSignedMessage, unBindWallet as domUnBindWallet } from '@/scripts/dom';
+import { splitSignedHash, unBindWallet } from '@/scripts/bind';
 
 const props = defineProps({
     active: { type: Boolean, required: true }
@@ -19,9 +20,6 @@ const OK = 200;
 
 const requestNewSignedHash = async () => {
     const result = await newSignedMessage(store.state.address, "Unbinding Wallet Request");
-
-    console.log(result);
-
 
     if (result.code == OK) {
         notify.push({
@@ -41,13 +39,14 @@ const requestNewSignedHash = async () => {
 };
 
 const tryUnBind = async () => {
-    const splitedHash = splitSignedHash(signedMessage);
+    const splitedHash = splitSignedHash(signedMessage.value);
 
     const txId = await unBindWallet(
         splitedHash.messageHash,
-        splitedHash.r,
         splitedHash.v,
-        splitedHash.s
+        splitedHash.r,
+        splitedHash.s,
+        store.state.address
     );
 
     if (txId) {
@@ -58,6 +57,8 @@ const tryUnBind = async () => {
             linkText: 'View Trx',
             linkUrl: ''
         });
+
+        await domUnBindWallet(store.state.address);
     } else {
         notify.push({
             title: 'Failed to send transaction.',
@@ -79,12 +80,13 @@ const tryUnBind = async () => {
                 </div>
 
                 <div class="approval_details">
-                    <textarea placeholder="Enter signed hash" name="" id="" cols="30" rows="5"></textarea>
+                    <textarea v-model="signedMessage" placeholder="Enter signed hash" name="" id="" cols="30"
+                        rows="5"></textarea>
                     <p class="request_hash" @click="requestNewSignedHash">Request confirmation hash</p>
                 </div>
 
                 <div class="approval_actions">
-                    <button @click="tryApprove">Confirm</button>
+                    <button @click="tryUnBind">Confirm</button>
                     <button @click="$emit('close')">Cancel</button>
                 </div>
             </div>

@@ -8,9 +8,9 @@ dataSources:
     name: Hybrid
     network: mumbai
     source:
-      address: "0xd15E42aeF1E2Fb06233B31Ae7E40d3f92cfEa945"
+      address: "0x9FF6F18d9abb120B3E3a916BdE568FbC49f274D4"
       abi: Hybrid
-      startBlock: 46051024
+      startBlock: 0
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -20,7 +20,7 @@ dataSources:
         - ApprovalResult
         - AssetDowngraded
         - AssetUpgraded
-        - DowngradeRequested
+        - CloseHybrid
         - WalletBind
         - WalletUnBind
       abis:
@@ -35,8 +35,8 @@ dataSources:
           handler: handleAssetDowngraded
         - event: AssetUpgraded(address,address)
           handler: handleAssetUpgraded
-        - event: DowngradeRequested(address,address)
-          handler: handleDowngradeRequested
+        - event: CloseHybrid(address,uint256,uint8)
+          handler: handleCloseHybrid
         - event: WalletBind(address,address)
           handler: handleWalletBind
         - event: WalletUnBind(address)

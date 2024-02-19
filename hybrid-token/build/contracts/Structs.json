@@ -15,15 +15,15 @@
     "absolutePath": "project:/contracts/libraries/Structs.sol",
     "exportedSymbols": {
       "Structs": [
-        2219
+        2206
       ]
     },
-    "id": 2220,
+    "id": 2207,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2193,
+        "id": 2180,
         "literals": [
           "solidity",
           "^",
@@ -40,9 +40,9 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 2219,
+        "id": 2206,
         "linearizedBaseContracts": [
-          2219
+          2206
         ],
         "name": "Structs",
         "nameLocation": "69:7:10",
@@ -50,31 +50,31 @@
         "nodes": [
           {
             "canonicalName": "Structs.Status",
-            "id": 2198,
+            "id": 2185,
             "members": [
               {
-                "id": 2194,
+                "id": 2181,
                 "name": "ACCEPTED",
                 "nameLocation": "107:8:10",
                 "nodeType": "EnumValue",
                 "src": "107:8:10"
               },
               {
-                "id": 2195,
+                "id": 2182,
                 "name": "REJECTED",
                 "nameLocation": "126:8:10",
                 "nodeType": "EnumValue",
                 "src": "126:8:10"
               },
               {
-                "id": 2196,
+                "id": 2183,
                 "name": "PENDING",
                 "nameLocation": "145:7:10",
                 "nodeType": "EnumValue",
                 "src": "145:7:10"
               },
               {
-                "id": 2197,
+                "id": 2184,
                 "name": "DEFAULT",
                 "nameLocation": "163:7:10",
                 "nodeType": "EnumValue",
@@ -88,16 +88,16 @@
           },
           {
             "canonicalName": "Structs.Approval",
-            "id": 2212,
+            "id": 2199,
             "members": [
               {
                 "constant": false,
-                "id": 2200,
+                "id": 2187,
                 "mutability": "mutable",
                 "name": "sequence",
                 "nameLocation": "220:8:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "212:16:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -106,7 +106,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2199,
+                  "id": 2186,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "212:7:10",
@@ -119,12 +119,12 @@
               },
               {
                 "constant": false,
-                "id": 2202,
+                "id": 2189,
                 "mutability": "mutable",
                 "name": "assetId",
                 "nameLocation": "247:7:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "239:15:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -133,7 +133,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2201,
+                  "id": 2188,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "239:7:10",
@@ -147,12 +147,12 @@
               },
               {
                 "constant": false,
-                "id": 2204,
+                "id": 2191,
                 "mutability": "mutable",
                 "name": "owner",
                 "nameLocation": "273:5:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "265:13:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -161,7 +161,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2203,
+                  "id": 2190,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "265:7:10",
@@ -175,12 +175,12 @@
               },
               {
                 "constant": false,
-                "id": 2206,
+                "id": 2193,
                 "mutability": "mutable",
                 "name": "spender",
                 "nameLocation": "297:7:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "289:15:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -189,7 +189,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2205,
+                  "id": 2192,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "289:7:10",
@@ -203,12 +203,12 @@
               },
               {
                 "constant": false,
-                "id": 2208,
+                "id": 2195,
                 "mutability": "mutable",
                 "name": "value",
                 "nameLocation": "323:5:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "315:13:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -217,7 +217,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2207,
+                  "id": 2194,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "315:7:10",
@@ -230,36 +230,36 @@
               },
               {
                 "constant": false,
-                "id": 2211,
+                "id": 2198,
                 "mutability": "mutable",
                 "name": "status",
                 "nameLocation": "346:6:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2212,
+                "scope": 2199,
                 "src": "339:13:10",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_Status_$2198",
+                  "typeIdentifier": "t_enum$_Status_$2185",
                   "typeString": "enum Structs.Status"
                 },
                 "typeName": {
-                  "id": 2210,
+                  "id": 2197,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 2209,
+                    "id": 2196,
                     "name": "Status",
                     "nameLocations": [
                       "339:6:10"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 2198,
+                    "referencedDeclaration": 2185,
                     "src": "339:6:10"
                   },
-                  "referencedDeclaration": 2198,
+                  "referencedDeclaration": 2185,
                   "src": "339:6:10",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$2198",
+                    "typeIdentifier": "t_enum$_Status_$2185",
                     "typeString": "enum Structs.Status"
                   }
                 },
@@ -269,22 +269,22 @@
             "name": "Approval",
             "nameLocation": "192:8:10",
             "nodeType": "StructDefinition",
-            "scope": 2219,
+            "scope": 2206,
             "src": "185:175:10",
             "visibility": "public"
           },
           {
             "canonicalName": "Structs.CloseHybrid",
-            "id": 2218,
+            "id": 2205,
             "members": [
               {
                 "constant": false,
-                "id": 2214,
+                "id": 2201,
                 "mutability": "mutable",
                 "name": "endTimestamp",
                 "nameLocation": "406:12:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2218,
+                "scope": 2205,
                 "src": "398:20:10",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -293,7 +293,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2213,
+                  "id": 2200,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "398:7:10",
@@ -306,36 +306,36 @@
               },
               {
                 "constant": false,
-                "id": 2217,
+                "id": 2204,
                 "mutability": "mutable",
                 "name": "status",
                 "nameLocation": "436:6:10",
                 "nodeType": "VariableDeclaration",
-                "scope": 2218,
+                "scope": 2205,
                 "src": "429:13:10",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_Status_$2198",
+                  "typeIdentifier": "t_enum$_Status_$2185",
                   "typeString": "enum Structs.Status"
                 },
                 "typeName": {
-                  "id": 2216,
+                  "id": 2203,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 2215,
+                    "id": 2202,
                     "name": "Status",
                     "nameLocations": [
                       "429:6:10"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 2198,
+                    "referencedDeclaration": 2185,
                     "src": "429:6:10"
                   },
-                  "referencedDeclaration": 2198,
+                  "referencedDeclaration": 2185,
                   "src": "429:6:10",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$2198",
+                    "typeIdentifier": "t_enum$_Status_$2185",
                     "typeString": "enum Structs.Status"
                   }
                 },
@@ -345,12 +345,12 @@
             "name": "CloseHybrid",
             "nameLocation": "375:11:10",
             "nodeType": "StructDefinition",
-            "scope": 2219,
+            "scope": 2206,
             "src": "368:82:10",
             "visibility": "public"
           }
         ],
-        "scope": 2220,
+        "scope": 2207,
         "src": "61:392:10",
         "usedErrors": [],
         "usedEvents": []
@@ -364,7 +364,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2024-02-18T19:26:37.530Z",
+  "updatedAt": "2024-02-19T06:18:36.294Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

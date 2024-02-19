@@ -1,143 +1,119 @@
-import { Bytes } from "@graphprotocol/graph-ts";
 import {
   ApprovalRequested as ApprovalRequestedEvent,
   ApprovalResult as ApprovalResultEvent,
   AssetDowngraded as AssetDowngradedEvent,
   AssetUpgraded as AssetUpgradedEvent,
-  DowngradeRequested as DowngradeRequestedEvent,
+  CloseHybrid as CloseHybridEvent,
   WalletBind as WalletBindEvent,
   WalletUnBind as WalletUnBindEvent
-} from "../generated/Hybrid/Hybrid";
+} from "../generated/Hybrid/Hybrid"
 import {
-  ApprovalRequest,
-  DowngradeRequest,
-  AssetGrade,
+  ApprovalRequested,
+  ApprovalResult,
+  AssetDowngraded,
+  AssetUpgraded,
+  CloseHybrid,
   WalletBind,
-  BindRequest
-} from "../generated/schema";
-
-enum Status {
-  ACCEPTED,
-  REJECTED,
-  PENDING,
-  DEFAULT
-}
+  WalletUnBind
+} from "../generated/schema"
 
 export function handleApprovalRequested(event: ApprovalRequestedEvent): void {
-  let entity = new ApprovalRequest(
-    event.params.approvalId
-  );
+  let entity = new ApprovalRequested(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.approvalId = event.params.approvalId
+  entity.assetId = event.params.assetId
+  entity.owner = event.params.owner
+  entity.spender = event.params.spender
+  entity.value = event.params.value
 
-  entity.approvalId = event.params.approvalId;
-  entity.assetId = event.params.assetId;
-  entity.owner = event.params.owner;
-  entity.spender = event.params.spender;
-  entity.value = event.params.value;
-  entity.status = Status.PENDING;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }
 
 export function handleApprovalResult(event: ApprovalResultEvent): void {
-  let entity = ApprovalRequest.load(
-    event.params.approvalId
-  );
+  let entity = new ApprovalResult(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.approvalId = event.params.approvalId
+  entity.Status = event.params.Status
 
-  if (!entity) return;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.status = event.params.Status;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }
 
 export function handleAssetDowngraded(event: AssetDowngradedEvent): void {
-  let entity = AssetGrade.load(
-    event.params.assetId.concat(event.params.owner)
-  );
+  let entity = new AssetDowngraded(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.assetId = event.params.assetId
+  entity.owner = event.params.owner
 
-  if (!entity) return;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.assetId = Bytes.empty();
-  entity.owner = Bytes.empty();
-
-  entity.save();
+  entity.save()
 }
 
 export function handleAssetUpgraded(event: AssetUpgradedEvent): void {
-  let entity = new AssetGrade(
-    event.params.assetId.concat(event.params.owner)
-  );
+  let entity = new AssetUpgraded(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.assetId = event.params.assetId
+  entity.owner = event.params.owner
 
-  entity.assetId = event.params.assetId;
-  entity.owner = event.params.owner;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }
 
-export function handleDowngradeRequested(event: DowngradeRequestedEvent): void {
-  let entity = new DowngradeRequest(
-    event.params.owner
-  );
+export function handleCloseHybrid(event: CloseHybridEvent): void {
+  let entity = new CloseHybrid(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.owner = event.params.owner
+  entity.endTimestamp = event.params.endTimestamp
+  entity.status = event.params.status
 
-  entity.owner = event.params.owner;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }
 
 export function handleWalletBind(event: WalletBindEvent): void {
   let entity = new WalletBind(
-    event.params.owner
-  );
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.owner = event.params.owner
+  entity.signer = event.params.signer
 
-  entity.owner = event.params.owner;
-  entity.signer = event.params.signer;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }
 
 export function handleWalletUnBind(event: WalletUnBindEvent): void {
-  let entity = WalletBind.load(
-    event.params.owner
-  );
+  let entity = new WalletUnBind(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.owner = event.params.owner
 
-  if (!entity) return;
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
 
-  entity.owner = Bytes.empty();
-  entity.signer = Bytes.empty();
-
-  entity.save();
-}
-
-export function handleBindRequest(event: WalletBindEvent): void {
-  let entity = new BindRequest(
-    event.params.owner
-  );
-
-  entity.status = Status.PENDING;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  entity.save()
 }

@@ -224,7 +224,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -446,7 +447,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"InvalidCaller\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"InvalidSignedHash\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"approvalId\",\"type\":\"bytes32\"}],\"name\":\"InvalidStatus\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"WalletBinded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"ZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"approvalId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"ApprovalRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"approvalId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum Structs.Status\",\"name\":\"Status\",\"type\":\"uint8\"}],\"name\":\"ApprovalResult\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"AssetDowngraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"AssetUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"endTimestamp\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"enum Structs.Status\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"CloseHybrid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"WalletBind\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"WalletUnBind\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetId\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"isUpgraded\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"onCloseHybrid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"messageHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"onDowngradeAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"approvalId\",\"type\":\"bytes32\"}],\"name\":\"onRejectAprroval\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"onRequestAprroval\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum Structs.Status\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"onRequestCloseHybrid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"onUpgradeAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"messageHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"approvalId\",\"type\":\"bytes32\"}],\"name\":\"onValidApproval\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"messageHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"onWalletUnBind\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"signerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"walletBind\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Hybrid.sol\":\"Hybrid\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12\",\"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF\"]},\"project:/contracts/Hybrid.sol\":{\"keccak256\":\"0xa5e2f79037f69304ef848df2db84bf854a49aa4a5780b04e8980e5f5b410ab87\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://35f6c9cc6da9f514e0837562058f244d97ac38e8ed78016d29c44678a4f50885\",\"dweb:/ipfs/Qmah3c5idBe4b975dsjzu78iUA3YQtMewVMWJ3XB986ic3\"]},\"project:/contracts/interfaces/IHybrid.sol\":{\"keccak256\":\"0xf82e81c4072c62c217c190ace744383fd6f981a89f07d81e46b16732c074a865\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2a6651df978de9f1ad3eefaf8c70a3cb117b4f3facd43eee0d9c8d3a525673d0\",\"dweb:/ipfs/QmWJSG9etFHHwpG3dLLvfczgnhMevfMbBgdCscs2m7RwAe\"]},\"project:/contracts/libraries/Structs.sol\":{\"keccak256\":\"0x8cc61b9a18c1c036afac035e728381ca2279f72f235f86c510184286724b3307\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2c6fe6cd72a7f80f4f1d09bd3a80e56f6becb741513bd091ed67c70aa6538fe4\",\"dweb:/ipfs/QmciNip3ugCvfYjuxKgjUgVmrkPCqT6a1aTfaCGaDM63iX\"]}},\"version\":1}",
@@ -4335,7 +4337,7 @@
                 }
               ]
             },
-            "name": "validator_revert_t_enum$_Status_$2198",
+            "name": "validator_revert_t_enum$_Status_$2185",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -4389,7 +4391,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "validator_revert_t_enum$_Status_$2198",
+                      "name": "validator_revert_t_enum$_Status_$2185",
                       "nodeType": "YulIdentifier",
                       "src": "7331:37:13"
                     },
@@ -4401,7 +4403,7 @@
                 }
               ]
             },
-            "name": "abi_decode_t_enum$_Status_$2198",
+            "name": "abi_decode_t_enum$_Status_$2185",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -4551,7 +4553,7 @@
                           }
                         ],
                         "functionName": {
-                          "name": "abi_decode_t_enum$_Status_$2198",
+                          "name": "abi_decode_t_enum$_Status_$2185",
                           "nodeType": "YulIdentifier",
                           "src": "7657:31:13"
                         },
@@ -4570,7 +4572,7 @@
                 }
               ]
             },
-            "name": "abi_decode_tuple_t_enum$_Status_$2198",
+            "name": "abi_decode_tuple_t_enum$_Status_$2185",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -6559,7 +6561,7 @@
                 }
               ]
             },
-            "name": "validator_assert_t_enum$_Status_$2198",
+            "name": "validator_assert_t_enum$_Status_$2185",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -6602,7 +6604,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "validator_assert_t_enum$_Status_$2198",
+                      "name": "validator_assert_t_enum$_Status_$2185",
                       "nodeType": "YulIdentifier",
                       "src": "12615:37:13"
                     },
@@ -6614,7 +6616,7 @@
                 }
               ]
             },
-            "name": "cleanup_t_enum$_Status_$2198",
+            "name": "cleanup_t_enum$_Status_$2185",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -6651,7 +6653,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "cleanup_t_enum$_Status_$2198",
+                      "name": "cleanup_t_enum$_Status_$2185",
                       "nodeType": "YulIdentifier",
                       "src": "12763:28:13"
                     },
@@ -6668,7 +6670,7 @@
                 }
               ]
             },
-            "name": "convert_t_enum$_Status_$2198_to_t_uint8",
+            "name": "convert_t_enum$_Status_$2185_to_t_uint8",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -6710,7 +6712,7 @@
                           }
                         ],
                         "functionName": {
-                          "name": "convert_t_enum$_Status_$2198_to_t_uint8",
+                          "name": "convert_t_enum$_Status_$2185_to_t_uint8",
                           "nodeType": "YulIdentifier",
                           "src": "12906:39:13"
                         },
@@ -6731,7 +6733,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_enum$_Status_$2198_to_t_uint8_fromStack",
+            "name": "abi_encode_t_enum$_Status_$2185_to_t_uint8_fromStack",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -6907,7 +6909,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "abi_encode_t_enum$_Status_$2198_to_t_uint8_fromStack",
+                      "name": "abi_encode_t_enum$_Status_$2185_to_t_uint8_fromStack",
                       "nodeType": "YulIdentifier",
                       "src": "13337:52:13"
                     },
@@ -6919,7 +6921,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_address_t_uint256_t_enum$_Status_$2198__to_t_address_t_uint256_t_uint8__fromStack_reversed",
+            "name": "abi_encode_tuple_t_address_t_uint256_t_enum$_Status_$2185__to_t_address_t_uint256_t_uint8__fromStack_reversed",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -8110,7 +8112,7 @@
           }
         ]
       },
-      "contents": "{\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function validator_revert_t_address(value) {\n        if iszero(eq(value, cleanup_t_address(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_address(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_address(value)\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function validator_revert_t_uint256(value) {\n        if iszero(eq(value, cleanup_t_uint256(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint256(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_addresst_addresst_uint256(headStart, dataEnd) -> value0, value1, value2 {\n        if slt(sub(dataEnd, headStart), 96) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_bytes32(value) -> cleaned {\n        cleaned := value\n    }\n\n    function abi_encode_t_bytes32_to_t_bytes32_fromStack(value, pos) {\n        mstore(pos, cleanup_t_bytes32(value))\n    }\n\n    function abi_encode_tuple_t_bytes32__to_t_bytes32__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_bytes32(value) {\n        if iszero(eq(value, cleanup_t_bytes32(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_bytes32(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_bytes32(value)\n    }\n\n    function cleanup_t_uint8(value) -> cleaned {\n        cleaned := and(value, 0xff)\n    }\n\n    function validator_revert_t_uint8(value) {\n        if iszero(eq(value, cleanup_t_uint8(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint8(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint8(value)\n    }\n\n    function abi_decode_tuple_t_bytes32t_uint8t_bytes32t_bytes32t_address(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 128\n\n            value4 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_decode_tuple_t_bytes32t_uint8t_bytes32t_bytes32t_bytes32(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 128\n\n            value4 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_t_uint256_to_t_uint256_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint256(value))\n    }\n\n    function abi_encode_tuple_t_address_t_uint256__to_t_address_t_uint256__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_tuple_t_bytes32(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_decode_tuple_t_addresst_address(headStart, dataEnd) -> value0, value1 {\n        if slt(sub(dataEnd, headStart), 64) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_bool(value) -> cleaned {\n        cleaned := iszero(iszero(value))\n    }\n\n    function abi_encode_t_bool_to_t_bool_fromStack(value, pos) {\n        mstore(pos, cleanup_t_bool(value))\n    }\n\n    function abi_encode_tuple_t_bool__to_t_bool__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bool_to_t_bool_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_enum$_Status_$2198(value) {\n        if iszero(lt(value, 4)) { revert(0, 0) }\n    }\n\n    function abi_decode_t_enum$_Status_$2198(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_enum$_Status_$2198(value)\n    }\n\n    function abi_decode_tuple_t_enum$_Status_$2198(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_enum$_Status_$2198(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function panic_error_0x21() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n\n    function abi_encode_tuple_t_bytes32_t_address_t_address_t_address_t_uint256__to_t_bytes32_t_address_t_address_t_address_t_uint256__fromStack_reversed(headStart , value4, value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 160)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_address_to_t_address_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_address_to_t_address_fromStack(value3,  add(headStart, 96))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value4,  add(headStart, 128))\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function store_literal_in_memory_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1(memPtr) {\n\n        mstore(add(memPtr, 0), \"SIGNED HASH USED\")\n\n    }\n\n    function abi_encode_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 16)\n        store_literal_in_memory_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function abi_encode_tuple_t_address_t_address__to_t_address_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function store_literal_in_memory_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6(memPtr) {\n\n        mstore(add(memPtr, 0), \"Request Not Mature!\")\n\n    }\n\n    function abi_encode_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 19)\n        store_literal_in_memory_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function store_literal_in_memory_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b(memPtr) {\n\n        mstore(add(memPtr, 0), \"Request Not Pending!\")\n\n    }\n\n    function abi_encode_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 20)\n        store_literal_in_memory_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function panic_error_0x11() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x11)\n        revert(0, 0x24)\n    }\n\n    function checked_add_t_uint256(x, y) -> sum {\n        x := cleanup_t_uint256(x)\n        y := cleanup_t_uint256(y)\n        sum := add(x, y)\n\n        if gt(x, sum) { panic_error_0x11() }\n\n    }\n\n    function validator_assert_t_enum$_Status_$2198(value) {\n        if iszero(lt(value, 4)) { panic_error_0x21() }\n    }\n\n    function cleanup_t_enum$_Status_$2198(value) -> cleaned {\n        cleaned := value validator_assert_t_enum$_Status_$2198(value)\n    }\n\n    function convert_t_enum$_Status_$2198_to_t_uint8(value) -> converted {\n        converted := cleanup_t_enum$_Status_$2198(value)\n    }\n\n    function abi_encode_t_enum$_Status_$2198_to_t_uint8_fromStack(value, pos) {\n        mstore(pos, convert_t_enum$_Status_$2198_to_t_uint8(value))\n    }\n\n    function abi_encode_tuple_t_address_t_uint256_t_enum$_Status_$2198__to_t_address_t_uint256_t_uint8__fromStack_reversed(headStart , value2, value1, value0) -> tail {\n        tail := add(headStart, 96)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_enum$_Status_$2198_to_t_uint8_fromStack(value2,  add(headStart, 64))\n\n    }\n\n    function abi_encode_tuple_t_bytes32_t_address_t_address_t_address_t_uint256_t_uint256__to_t_bytes32_t_address_t_address_t_address_t_uint256_t_uint256__fromStack_reversed(headStart , value5, value4, value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 192)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_address_to_t_address_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_address_to_t_address_fromStack(value3,  add(headStart, 96))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value4,  add(headStart, 128))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value5,  add(headStart, 160))\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_nonPadded_inplace_fromStack(pos, length) -> updated_pos {\n        updated_pos := pos\n    }\n\n    function store_literal_in_memory_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73(memPtr) {\n\n        mstore(add(memPtr, 0), 0x19457468657265756d205369676e6564204d6573736167653a0a333200000000)\n\n    }\n\n    function abi_encode_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_to_t_string_memory_ptr_nonPadded_inplace_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_nonPadded_inplace_fromStack(pos, 28)\n        store_literal_in_memory_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73(pos)\n        end := add(pos, 28)\n    }\n\n    function leftAlign_t_bytes32(value) -> aligned {\n        aligned := value\n    }\n\n    function abi_encode_t_bytes32_to_t_bytes32_nonPadded_inplace_fromStack(value, pos) {\n        mstore(pos, leftAlign_t_bytes32(cleanup_t_bytes32(value)))\n    }\n\n    function abi_encode_tuple_packed_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_t_bytes32__to_t_string_memory_ptr_t_bytes32__nonPadded_inplace_fromStack_reversed(pos , value0) -> end {\n\n        pos := abi_encode_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_to_t_string_memory_ptr_nonPadded_inplace_fromStack( pos)\n\n        abi_encode_t_bytes32_to_t_bytes32_nonPadded_inplace_fromStack(value0,  pos)\n        pos := add(pos, 32)\n\n        end := pos\n    }\n\n    function abi_encode_t_uint8_to_t_uint8_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint8(value))\n    }\n\n    function abi_encode_tuple_t_bytes32_t_uint8_t_bytes32_t_bytes32__to_t_bytes32_t_uint8_t_bytes32_t_bytes32__fromStack_reversed(headStart , value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 128)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint8_to_t_uint8_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value3,  add(headStart, 96))\n\n    }\n\n}\n",
+      "contents": "{\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function validator_revert_t_address(value) {\n        if iszero(eq(value, cleanup_t_address(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_address(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_address(value)\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function validator_revert_t_uint256(value) {\n        if iszero(eq(value, cleanup_t_uint256(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint256(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint256(value)\n    }\n\n    function abi_decode_tuple_t_addresst_addresst_uint256(headStart, dataEnd) -> value0, value1, value2 {\n        if slt(sub(dataEnd, headStart), 96) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint256(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_bytes32(value) -> cleaned {\n        cleaned := value\n    }\n\n    function abi_encode_t_bytes32_to_t_bytes32_fromStack(value, pos) {\n        mstore(pos, cleanup_t_bytes32(value))\n    }\n\n    function abi_encode_tuple_t_bytes32__to_t_bytes32__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_bytes32(value) {\n        if iszero(eq(value, cleanup_t_bytes32(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_bytes32(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_bytes32(value)\n    }\n\n    function cleanup_t_uint8(value) -> cleaned {\n        cleaned := and(value, 0xff)\n    }\n\n    function validator_revert_t_uint8(value) {\n        if iszero(eq(value, cleanup_t_uint8(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint8(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint8(value)\n    }\n\n    function abi_decode_tuple_t_bytes32t_uint8t_bytes32t_bytes32t_address(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 128\n\n            value4 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_decode_tuple_t_bytes32t_uint8t_bytes32t_bytes32t_bytes32(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 128\n\n            value4 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_t_uint256_to_t_uint256_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint256(value))\n    }\n\n    function abi_encode_tuple_t_address_t_uint256__to_t_address_t_uint256__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function abi_decode_tuple_t_bytes32(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bytes32(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function abi_decode_tuple_t_addresst_address(headStart, dataEnd) -> value0, value1 {\n        if slt(sub(dataEnd, headStart), 64) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_bool(value) -> cleaned {\n        cleaned := iszero(iszero(value))\n    }\n\n    function abi_encode_t_bool_to_t_bool_fromStack(value, pos) {\n        mstore(pos, cleanup_t_bool(value))\n    }\n\n    function abi_encode_tuple_t_bool__to_t_bool__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bool_to_t_bool_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_enum$_Status_$2185(value) {\n        if iszero(lt(value, 4)) { revert(0, 0) }\n    }\n\n    function abi_decode_t_enum$_Status_$2185(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_enum$_Status_$2185(value)\n    }\n\n    function abi_decode_tuple_t_enum$_Status_$2185(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_enum$_Status_$2185(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function panic_error_0x21() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n\n    function abi_encode_tuple_t_bytes32_t_address_t_address_t_address_t_uint256__to_t_bytes32_t_address_t_address_t_address_t_uint256__fromStack_reversed(headStart , value4, value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 160)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_address_to_t_address_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_address_to_t_address_fromStack(value3,  add(headStart, 96))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value4,  add(headStart, 128))\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function store_literal_in_memory_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1(memPtr) {\n\n        mstore(add(memPtr, 0), \"SIGNED HASH USED\")\n\n    }\n\n    function abi_encode_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 16)\n        store_literal_in_memory_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_27f49d066b194200952bd47c51a0cd1630b64f9e87e3e812472950041c1f58f1_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function abi_encode_tuple_t_address_t_address__to_t_address_t_address__fromStack_reversed(headStart , value1, value0) -> tail {\n        tail := add(headStart, 64)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n    }\n\n    function store_literal_in_memory_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6(memPtr) {\n\n        mstore(add(memPtr, 0), \"Request Not Mature!\")\n\n    }\n\n    function abi_encode_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 19)\n        store_literal_in_memory_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_588414ecd73cc05b7d761c73a684a8407d99df9573ec066676e2f809985789e6_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function store_literal_in_memory_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b(memPtr) {\n\n        mstore(add(memPtr, 0), \"Request Not Pending!\")\n\n    }\n\n    function abi_encode_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b_to_t_string_memory_ptr_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_fromStack(pos, 20)\n        store_literal_in_memory_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b(pos)\n        end := add(pos, 32)\n    }\n\n    function abi_encode_tuple_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b__to_t_string_memory_ptr__fromStack_reversed(headStart ) -> tail {\n        tail := add(headStart, 32)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_stringliteral_2c6958c2237065ab8c79b9ac545efc5d41f43be4fe609f1b996e578180e3f17b_to_t_string_memory_ptr_fromStack( tail)\n\n    }\n\n    function panic_error_0x11() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x11)\n        revert(0, 0x24)\n    }\n\n    function checked_add_t_uint256(x, y) -> sum {\n        x := cleanup_t_uint256(x)\n        y := cleanup_t_uint256(y)\n        sum := add(x, y)\n\n        if gt(x, sum) { panic_error_0x11() }\n\n    }\n\n    function validator_assert_t_enum$_Status_$2185(value) {\n        if iszero(lt(value, 4)) { panic_error_0x21() }\n    }\n\n    function cleanup_t_enum$_Status_$2185(value) -> cleaned {\n        cleaned := value validator_assert_t_enum$_Status_$2185(value)\n    }\n\n    function convert_t_enum$_Status_$2185_to_t_uint8(value) -> converted {\n        converted := cleanup_t_enum$_Status_$2185(value)\n    }\n\n    function abi_encode_t_enum$_Status_$2185_to_t_uint8_fromStack(value, pos) {\n        mstore(pos, convert_t_enum$_Status_$2185_to_t_uint8(value))\n    }\n\n    function abi_encode_tuple_t_address_t_uint256_t_enum$_Status_$2185__to_t_address_t_uint256_t_uint8__fromStack_reversed(headStart , value2, value1, value0) -> tail {\n        tail := add(headStart, 96)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_enum$_Status_$2185_to_t_uint8_fromStack(value2,  add(headStart, 64))\n\n    }\n\n    function abi_encode_tuple_t_bytes32_t_address_t_address_t_address_t_uint256_t_uint256__to_t_bytes32_t_address_t_address_t_address_t_uint256_t_uint256__fromStack_reversed(headStart , value5, value4, value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 192)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_address_to_t_address_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_address_to_t_address_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_address_to_t_address_fromStack(value3,  add(headStart, 96))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value4,  add(headStart, 128))\n\n        abi_encode_t_uint256_to_t_uint256_fromStack(value5,  add(headStart, 160))\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr_nonPadded_inplace_fromStack(pos, length) -> updated_pos {\n        updated_pos := pos\n    }\n\n    function store_literal_in_memory_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73(memPtr) {\n\n        mstore(add(memPtr, 0), 0x19457468657265756d205369676e6564204d6573736167653a0a333200000000)\n\n    }\n\n    function abi_encode_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_to_t_string_memory_ptr_nonPadded_inplace_fromStack(pos) -> end {\n        pos := array_storeLengthForEncoding_t_string_memory_ptr_nonPadded_inplace_fromStack(pos, 28)\n        store_literal_in_memory_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73(pos)\n        end := add(pos, 28)\n    }\n\n    function leftAlign_t_bytes32(value) -> aligned {\n        aligned := value\n    }\n\n    function abi_encode_t_bytes32_to_t_bytes32_nonPadded_inplace_fromStack(value, pos) {\n        mstore(pos, leftAlign_t_bytes32(cleanup_t_bytes32(value)))\n    }\n\n    function abi_encode_tuple_packed_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_t_bytes32__to_t_string_memory_ptr_t_bytes32__nonPadded_inplace_fromStack_reversed(pos , value0) -> end {\n\n        pos := abi_encode_t_stringliteral_178a2411ab6fbc1ba11064408972259c558d0e82fd48b0aba3ad81d14f065e73_to_t_string_memory_ptr_nonPadded_inplace_fromStack( pos)\n\n        abi_encode_t_bytes32_to_t_bytes32_nonPadded_inplace_fromStack(value0,  pos)\n        pos := add(pos, 32)\n\n        end := pos\n    }\n\n    function abi_encode_t_uint8_to_t_uint8_fromStack(value, pos) {\n        mstore(pos, cleanup_t_uint8(value))\n    }\n\n    function abi_encode_tuple_t_bytes32_t_uint8_t_bytes32_t_bytes32__to_t_bytes32_t_uint8_t_bytes32_t_bytes32__fromStack_reversed(headStart , value3, value2, value1, value0) -> tail {\n        tail := add(headStart, 128)\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value0,  add(headStart, 0))\n\n        abi_encode_t_uint8_to_t_uint8_fromStack(value1,  add(headStart, 32))\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value2,  add(headStart, 64))\n\n        abi_encode_t_bytes32_to_t_bytes32_fromStack(value3,  add(headStart, 96))\n\n    }\n\n}\n",
       "id": 13,
       "language": "Yul",
       "name": "#utility.yul"
@@ -8130,10 +8132,10 @@
         1466
       ],
       "IHybrid": [
-        2162
+        2136
       ],
       "Structs": [
-        2219
+        2206
       ]
     },
     "id": 1467,
@@ -8158,7 +8160,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 1467,
-        "sourceUnit": 2163,
+        "sourceUnit": 2137,
         "src": "61:49:5",
         "symbolAliases": [
           {
@@ -8167,7 +8169,7 @@
               "name": "IHybrid",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2162,
+              "referencedDeclaration": 2136,
               "src": "69:7:5",
               "typeDescriptions": {}
             },
@@ -8183,7 +8185,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 1467,
-        "sourceUnit": 2220,
+        "sourceUnit": 2207,
         "src": "112:48:5",
         "symbolAliases": [
           {
@@ -8192,7 +8194,7 @@
               "name": "Structs",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2219,
+              "referencedDeclaration": 2206,
               "src": "120:7:5",
               "typeDescriptions": {}
             },
@@ -8237,7 +8239,7 @@
                 "253:7:5"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2162,
+              "referencedDeclaration": 2136,
               "src": "253:7:5"
             },
             "id": 795,
@@ -8268,7 +8270,7 @@
         "linearizedBaseContracts": [
           1466,
           785,
-          2162
+          2136
         ],
         "name": "Hybrid",
         "nameLocation": "243:6:5",
@@ -8575,7 +8577,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2212_storage_$",
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2199_storage_$",
               "typeString": "mapping(bytes32 => struct Structs.Approval)"
             },
             "typeName": {
@@ -8595,7 +8597,7 @@
               "nodeType": "Mapping",
               "src": "596:36:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2212_storage_$",
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2199_storage_$",
                 "typeString": "mapping(bytes32 => struct Structs.Approval)"
               },
               "valueName": "",
@@ -8611,13 +8613,13 @@
                     "623:8:5"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 2212,
+                  "referencedDeclaration": 2199,
                   "src": "615:16:5"
                 },
-                "referencedDeclaration": 2212,
+                "referencedDeclaration": 2199,
                 "src": "615:16:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                  "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                   "typeString": "struct Structs.Approval"
                 }
               }
@@ -8709,7 +8711,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2218_storage_$",
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2205_storage_$",
               "typeString": "mapping(address => struct Structs.CloseHybrid)"
             },
             "typeName": {
@@ -8729,7 +8731,7 @@
               "nodeType": "Mapping",
               "src": "734:39:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2218_storage_$",
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2205_storage_$",
                 "typeString": "mapping(address => struct Structs.CloseHybrid)"
               },
               "valueName": "",
@@ -8745,13 +8747,13 @@
                     "761:11:5"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 2218,
+                  "referencedDeclaration": 2205,
                   "src": "753:19:5"
                 },
-                "referencedDeclaration": 2218,
+                "referencedDeclaration": 2205,
                 "src": "753:19:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage_ptr",
+                  "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage_ptr",
                   "typeString": "struct Structs.CloseHybrid"
                 }
               }
@@ -8760,7 +8762,7 @@
           },
           {
             "baseFunctions": [
-              2074
+              2048
             ],
             "body": {
               "id": 845,
@@ -8904,7 +8906,7 @@
           },
           {
             "baseFunctions": [
-              2080
+              2054
             ],
             "body": {
               "id": 882,
@@ -9106,7 +9108,7 @@
                         "referencedDeclaration": 833,
                         "src": "1126:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2218_storage_$",
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2205_storage_$",
                           "typeString": "mapping(address => struct Structs.CloseHybrid storage ref)"
                         }
                       },
@@ -9130,7 +9132,7 @@
                       "nodeType": "IndexAccess",
                       "src": "1126:19:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage",
+                        "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage",
                         "typeString": "struct Structs.CloseHybrid storage ref"
                       }
                     },
@@ -9158,7 +9160,7 @@
                           "referencedDeclaration": 849,
                           "src": "1232:6:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$2198",
+                            "typeIdentifier": "t_enum$_Status_$2185",
                             "typeString": "enum Structs.Status"
                           }
                         }
@@ -9170,7 +9172,7 @@
                             "typeString": "uint256"
                           },
                           {
-                            "typeIdentifier": "t_enum$_Status_$2198",
+                            "typeIdentifier": "t_enum$_Status_$2185",
                             "typeString": "enum Structs.Status"
                           }
                         ],
@@ -9179,10 +9181,10 @@
                           "name": "Structs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2219,
+                          "referencedDeclaration": 2206,
                           "src": "1148:7:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                            "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                             "typeString": "type(library Structs)"
                           }
                         },
@@ -9194,10 +9196,10 @@
                         "memberLocation": "1156:11:5",
                         "memberName": "CloseHybrid",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2218,
+                        "referencedDeclaration": 2205,
                         "src": "1148:19:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_CloseHybrid_$2218_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_CloseHybrid_$2205_storage_ptr_$",
                           "typeString": "type(struct Structs.CloseHybrid storage pointer)"
                         }
                       },
@@ -9219,13 +9221,13 @@
                       "src": "1148:102:5",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_CloseHybrid_$2218_memory_ptr",
+                        "typeIdentifier": "t_struct$_CloseHybrid_$2205_memory_ptr",
                         "typeString": "struct Structs.CloseHybrid memory"
                       }
                     },
                     "src": "1126:124:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage",
+                      "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage",
                       "typeString": "struct Structs.CloseHybrid storage ref"
                     }
                   },
@@ -9268,7 +9270,7 @@
                         "referencedDeclaration": 849,
                         "src": "1301:6:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_enum$_Status_$2198",
+                          "typeIdentifier": "t_enum$_Status_$2185",
                           "typeString": "enum Structs.Status"
                         }
                       }
@@ -9284,7 +9286,7 @@
                           "typeString": "uint256"
                         },
                         {
-                          "typeIdentifier": "t_enum$_Status_$2198",
+                          "typeIdentifier": "t_enum$_Status_$2185",
                           "typeString": "enum Structs.Status"
                         }
                       ],
@@ -9292,10 +9294,10 @@
                       "name": "CloseHybrid",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2048,
+                      "referencedDeclaration": 2022,
                       "src": "1268:11:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$_t_enum$_Status_$2198_$returns$__$",
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$_t_enum$_Status_$2185_$returns$__$",
                         "typeString": "function (address,uint256,enum Structs.Status)"
                       }
                     },
@@ -9351,7 +9353,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$2198",
+                    "typeIdentifier": "t_enum$_Status_$2185",
                     "typeString": "enum Structs.Status"
                   },
                   "typeName": {
@@ -9365,13 +9367,13 @@
                         "962:6:5"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2198,
+                      "referencedDeclaration": 2185,
                       "src": "954:14:5"
                     },
-                    "referencedDeclaration": 2198,
+                    "referencedDeclaration": 2185,
                     "src": "954:14:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$2198",
+                      "typeIdentifier": "t_enum$_Status_$2185",
                       "typeString": "enum Structs.Status"
                     }
                   },
@@ -9394,7 +9396,7 @@
           },
           {
             "baseFunctions": [
-              2083
+              2057
             ],
             "body": {
               "id": 934,
@@ -9487,7 +9489,7 @@
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_CloseHybrid_$2218_memory_ptr",
+                        "typeIdentifier": "t_struct$_CloseHybrid_$2205_memory_ptr",
                         "typeString": "struct Structs.CloseHybrid"
                       },
                       "typeName": {
@@ -9501,13 +9503,13 @@
                             "1427:11:5"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2218,
+                          "referencedDeclaration": 2205,
                           "src": "1419:19:5"
                         },
-                        "referencedDeclaration": 2218,
+                        "referencedDeclaration": 2205,
                         "src": "1419:19:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage_ptr",
+                          "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage_ptr",
                           "typeString": "struct Structs.CloseHybrid"
                         }
                       },
@@ -9524,7 +9526,7 @@
                       "referencedDeclaration": 833,
                       "src": "1456:12:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2218_storage_$",
+                        "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2205_storage_$",
                         "typeString": "mapping(address => struct Structs.CloseHybrid storage ref)"
                       }
                     },
@@ -9548,7 +9550,7 @@
                     "nodeType": "IndexAccess",
                     "src": "1456:19:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage",
+                      "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage",
                       "typeString": "struct Structs.CloseHybrid storage ref"
                     }
                   },
@@ -9577,7 +9579,7 @@
                             "referencedDeclaration": 896,
                             "src": "1496:7:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_CloseHybrid_$2218_memory_ptr",
+                              "typeIdentifier": "t_struct$_CloseHybrid_$2205_memory_ptr",
                               "typeString": "struct Structs.CloseHybrid memory"
                             }
                           },
@@ -9589,7 +9591,7 @@
                           "memberLocation": "1504:12:5",
                           "memberName": "endTimestamp",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2214,
+                          "referencedDeclaration": 2201,
                           "src": "1496:20:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -9698,7 +9700,7 @@
                     "arguments": [
                       {
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$2198",
+                          "typeIdentifier": "t_enum$_Status_$2185",
                           "typeString": "enum Structs.Status"
                         },
                         "id": 916,
@@ -9715,7 +9717,7 @@
                             "referencedDeclaration": 896,
                             "src": "1591:7:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_CloseHybrid_$2218_memory_ptr",
+                              "typeIdentifier": "t_struct$_CloseHybrid_$2205_memory_ptr",
                               "typeString": "struct Structs.CloseHybrid memory"
                             }
                           },
@@ -9727,10 +9729,10 @@
                           "memberLocation": "1599:6:5",
                           "memberName": "status",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2217,
+                          "referencedDeclaration": 2204,
                           "src": "1591:14:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$2198",
+                            "typeIdentifier": "t_enum$_Status_$2185",
                             "typeString": "enum Structs.Status"
                           }
                         },
@@ -9743,10 +9745,10 @@
                               "name": "Structs",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2219,
+                              "referencedDeclaration": 2206,
                               "src": "1609:7:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                                "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                                 "typeString": "type(library Structs)"
                               }
                             },
@@ -9758,10 +9760,10 @@
                             "memberLocation": "1617:6:5",
                             "memberName": "Status",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2198,
+                            "referencedDeclaration": 2185,
                             "src": "1609:14:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                               "typeString": "type(enum Structs.Status)"
                             }
                           },
@@ -9773,10 +9775,10 @@
                           "memberLocation": "1624:7:5",
                           "memberName": "PENDING",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2196,
+                          "referencedDeclaration": 2183,
                           "src": "1609:22:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$2198",
+                            "typeIdentifier": "t_enum$_Status_$2185",
                             "typeString": "enum Structs.Status"
                           }
                         },
@@ -9925,7 +9927,7 @@
                         "referencedDeclaration": 833,
                         "src": "1732:12:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2218_storage_$",
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_CloseHybrid_$2205_storage_$",
                           "typeString": "mapping(address => struct Structs.CloseHybrid storage ref)"
                         }
                       },
@@ -9949,7 +9951,7 @@
                       "nodeType": "IndexAccess",
                       "src": "1732:19:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_CloseHybrid_$2218_storage",
+                        "typeIdentifier": "t_struct$_CloseHybrid_$2205_storage",
                         "typeString": "struct Structs.CloseHybrid storage ref"
                       }
                     },
@@ -9989,7 +9991,7 @@
                       "name": "WalletUnBind",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2027,
+                      "referencedDeclaration": 2001,
                       "src": "1769:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -10052,7 +10054,7 @@
           },
           {
             "baseFunctions": [
-              2103
+              2077
             ],
             "body": {
               "id": 991,
@@ -10145,7 +10147,7 @@
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                        "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                         "typeString": "struct Structs.Approval"
                       },
                       "typeName": {
@@ -10159,13 +10161,13 @@
                             "2010:8:5"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2212,
+                          "referencedDeclaration": 2199,
                           "src": "2002:16:5"
                         },
-                        "referencedDeclaration": 2212,
+                        "referencedDeclaration": 2199,
                         "src": "2002:16:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval"
                         }
                       },
@@ -10246,10 +10248,10 @@
                             "name": "Structs",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2219,
+                            "referencedDeclaration": 2206,
                             "src": "2219:7:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                              "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                               "typeString": "type(library Structs)"
                             }
                           },
@@ -10261,10 +10263,10 @@
                           "memberLocation": "2227:6:5",
                           "memberName": "Status",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2198,
+                          "referencedDeclaration": 2185,
                           "src": "2219:14:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                            "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                             "typeString": "type(enum Structs.Status)"
                           }
                         },
@@ -10276,10 +10278,10 @@
                         "memberLocation": "2234:7:5",
                         "memberName": "PENDING",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2196,
+                        "referencedDeclaration": 2183,
                         "src": "2219:22:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_enum$_Status_$2198",
+                          "typeIdentifier": "t_enum$_Status_$2185",
                           "typeString": "enum Structs.Status"
                         }
                       }
@@ -10307,7 +10309,7 @@
                           "typeString": "uint256"
                         },
                         {
-                          "typeIdentifier": "t_enum$_Status_$2198",
+                          "typeIdentifier": "t_enum$_Status_$2185",
                           "typeString": "enum Structs.Status"
                         }
                       ],
@@ -10316,10 +10318,10 @@
                         "name": "Structs",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2219,
+                        "referencedDeclaration": 2206,
                         "src": "2037:7:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                          "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                           "typeString": "type(library Structs)"
                         }
                       },
@@ -10331,10 +10333,10 @@
                       "memberLocation": "2045:8:5",
                       "memberName": "Approval",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2212,
+                      "referencedDeclaration": 2199,
                       "src": "2037:16:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_struct$_Approval_$2212_storage_ptr_$",
+                        "typeIdentifier": "t_type$_t_struct$_Approval_$2199_storage_ptr_$",
                         "typeString": "type(struct Structs.Approval storage pointer)"
                       }
                     },
@@ -10364,7 +10366,7 @@
                     "src": "2037:216:5",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                      "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                       "typeString": "struct Structs.Approval memory"
                     }
                   },
@@ -10415,7 +10417,7 @@
                         "referencedDeclaration": 956,
                         "src": "2307:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                           "typeString": "struct Structs.Approval memory"
                         }
                       }
@@ -10423,7 +10425,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                           "typeString": "struct Structs.Approval memory"
                         }
                       ],
@@ -10434,7 +10436,7 @@
                       "referencedDeclaration": 1412,
                       "src": "2287:19:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Approval_$2212_memory_ptr_$returns$_t_bytes32_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Approval_$2199_memory_ptr_$returns$_t_bytes32_$",
                         "typeString": "function (struct Structs.Approval memory) pure returns (bytes32)"
                       }
                     },
@@ -10548,7 +10550,7 @@
                       "name": "ApprovalRequested",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2060,
+                      "referencedDeclaration": 2034,
                       "src": "2334:17:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_bytes32_$_t_address_$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -10591,7 +10593,7 @@
                         "referencedDeclaration": 822,
                         "src": "2408:10:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2212_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2199_storage_$",
                           "typeString": "mapping(bytes32 => struct Structs.Approval storage ref)"
                         }
                       },
@@ -10615,7 +10617,7 @@
                       "nodeType": "IndexAccess",
                       "src": "2408:22:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Approval_$2212_storage",
+                        "typeIdentifier": "t_struct$_Approval_$2199_storage",
                         "typeString": "struct Structs.Approval storage ref"
                       }
                     },
@@ -10629,13 +10631,13 @@
                       "referencedDeclaration": 956,
                       "src": "2433:8:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                        "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                         "typeString": "struct Structs.Approval memory"
                       }
                     },
                     "src": "2408:33:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Approval_$2212_storage",
+                      "typeIdentifier": "t_struct$_Approval_$2199_storage",
                       "typeString": "struct Structs.Approval storage ref"
                     }
                   },
@@ -10809,7 +10811,7 @@
           },
           {
             "baseFunctions": [
-              2120
+              2094
             ],
             "body": {
               "id": 1090,
@@ -10833,7 +10835,7 @@
                       "stateVariable": false,
                       "storageLocation": "storage",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                        "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                         "typeString": "struct Structs.Approval"
                       },
                       "typeName": {
@@ -10847,13 +10849,13 @@
                             "2789:8:5"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2212,
+                          "referencedDeclaration": 2199,
                           "src": "2781:16:5"
                         },
-                        "referencedDeclaration": 2212,
+                        "referencedDeclaration": 2199,
                         "src": "2781:16:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval"
                         }
                       },
@@ -10870,7 +10872,7 @@
                       "referencedDeclaration": 822,
                       "src": "2817:10:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2212_storage_$",
+                        "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2199_storage_$",
                         "typeString": "mapping(bytes32 => struct Structs.Approval storage ref)"
                       }
                     },
@@ -10894,7 +10896,7 @@
                     "nodeType": "IndexAccess",
                     "src": "2817:22:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Approval_$2212_storage",
+                      "typeIdentifier": "t_struct$_Approval_$2199_storage",
                       "typeString": "struct Structs.Approval storage ref"
                     }
                   },
@@ -10990,7 +10992,7 @@
                         "referencedDeclaration": 1017,
                         "src": "2899:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -11002,7 +11004,7 @@
                       "memberLocation": "2908:7:5",
                       "memberName": "assetId",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2202,
+                      "referencedDeclaration": 2189,
                       "src": "2899:16:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -11064,7 +11066,7 @@
                             "name": "InvalidCaller",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2005,
+                            "referencedDeclaration": 1979,
                             "src": "2950:13:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_address_$returns$__$",
@@ -11097,7 +11099,7 @@
                 {
                   "condition": {
                     "commonType": {
-                      "typeIdentifier": "t_enum$_Status_$2198",
+                      "typeIdentifier": "t_enum$_Status_$2185",
                       "typeString": "enum Structs.Status"
                     },
                     "id": 1042,
@@ -11114,7 +11116,7 @@
                         "referencedDeclaration": 1017,
                         "src": "3000:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -11126,10 +11128,10 @@
                       "memberLocation": "3009:6:5",
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2211,
+                      "referencedDeclaration": 2198,
                       "src": "3000:15:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -11142,10 +11144,10 @@
                           "name": "Structs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2219,
+                          "referencedDeclaration": 2206,
                           "src": "3019:7:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                            "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                             "typeString": "type(library Structs)"
                           }
                         },
@@ -11157,10 +11159,10 @@
                         "memberLocation": "3027:6:5",
                         "memberName": "Status",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2198,
+                        "referencedDeclaration": 2185,
                         "src": "3019:14:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                           "typeString": "type(enum Structs.Status)"
                         }
                       },
@@ -11172,10 +11174,10 @@
                       "memberLocation": "3034:7:5",
                       "memberName": "PENDING",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2196,
+                      "referencedDeclaration": 2183,
                       "src": "3019:22:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -11220,7 +11222,7 @@
                             "name": "InvalidStatus",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2009,
+                            "referencedDeclaration": 1983,
                             "src": "3065:13:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_bytes32_$returns$__$",
@@ -11345,7 +11347,7 @@
                               "referencedDeclaration": 1017,
                               "src": "3239:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                                 "typeString": "struct Structs.Approval storage pointer"
                               }
                             },
@@ -11357,7 +11359,7 @@
                             "memberLocation": "3248:5:5",
                             "memberName": "owner",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2204,
+                            "referencedDeclaration": 2191,
                             "src": "3239:14:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -11516,7 +11518,7 @@
                             "name": "InvalidSignedHash",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2001,
+                            "referencedDeclaration": 1975,
                             "src": "3315:17:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_bytes32_$returns$__$",
@@ -11634,7 +11636,7 @@
                         "referencedDeclaration": 1017,
                         "src": "3417:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -11646,10 +11648,10 @@
                       "memberLocation": "3426:6:5",
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2211,
+                      "referencedDeclaration": 2198,
                       "src": "3417:15:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -11662,10 +11664,10 @@
                           "name": "Structs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2219,
+                          "referencedDeclaration": 2206,
                           "src": "3435:7:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                            "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                             "typeString": "type(library Structs)"
                           }
                         },
@@ -11677,10 +11679,10 @@
                         "memberLocation": "3443:6:5",
                         "memberName": "Status",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2198,
+                        "referencedDeclaration": 2185,
                         "src": "3435:14:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                           "typeString": "type(enum Structs.Status)"
                         }
                       },
@@ -11692,16 +11694,16 @@
                       "memberLocation": "3450:8:5",
                       "memberName": "ACCEPTED",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2194,
+                      "referencedDeclaration": 2181,
                       "src": "3435:23:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
                     "src": "3417:41:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$2198",
+                      "typeIdentifier": "t_enum$_Status_$2185",
                       "typeString": "enum Structs.Status"
                     }
                   },
@@ -11721,7 +11723,7 @@
                           "referencedDeclaration": 1017,
                           "src": "3479:8:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                            "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                             "typeString": "struct Structs.Approval storage pointer"
                           }
                         },
@@ -11733,7 +11735,7 @@
                         "memberLocation": "3488:7:5",
                         "memberName": "spender",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2206,
+                        "referencedDeclaration": 2193,
                         "src": "3479:16:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -11749,7 +11751,7 @@
                           "referencedDeclaration": 1017,
                           "src": "3497:8:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                            "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                             "typeString": "struct Structs.Approval storage pointer"
                           }
                         },
@@ -11761,7 +11763,7 @@
                         "memberLocation": "3506:5:5",
                         "memberName": "value",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2208,
+                        "referencedDeclaration": 2195,
                         "src": "3497:14:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -12046,7 +12048,7 @@
           },
           {
             "baseFunctions": [
-              2125
+              2099
             ],
             "body": {
               "id": 1138,
@@ -12070,7 +12072,7 @@
                       "stateVariable": false,
                       "storageLocation": "storage",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                        "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                         "typeString": "struct Structs.Approval"
                       },
                       "typeName": {
@@ -12084,13 +12086,13 @@
                             "3611:8:5"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2212,
+                          "referencedDeclaration": 2199,
                           "src": "3603:16:5"
                         },
-                        "referencedDeclaration": 2212,
+                        "referencedDeclaration": 2199,
                         "src": "3603:16:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval"
                         }
                       },
@@ -12107,7 +12109,7 @@
                       "referencedDeclaration": 822,
                       "src": "3639:10:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2212_storage_$",
+                        "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Approval_$2199_storage_$",
                         "typeString": "mapping(bytes32 => struct Structs.Approval storage ref)"
                       }
                     },
@@ -12131,7 +12133,7 @@
                     "nodeType": "IndexAccess",
                     "src": "3639:22:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Approval_$2212_storage",
+                      "typeIdentifier": "t_struct$_Approval_$2199_storage",
                       "typeString": "struct Structs.Approval storage ref"
                     }
                   },
@@ -12158,7 +12160,7 @@
                         "referencedDeclaration": 1101,
                         "src": "3678:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -12170,7 +12172,7 @@
                       "memberLocation": "3687:7:5",
                       "memberName": "assetId",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2202,
+                      "referencedDeclaration": 2189,
                       "src": "3678:16:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -12270,7 +12272,7 @@
                             "name": "InvalidCaller",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2005,
+                            "referencedDeclaration": 1979,
                             "src": "3734:13:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_address_$returns$__$",
@@ -12303,7 +12305,7 @@
                 {
                   "condition": {
                     "commonType": {
-                      "typeIdentifier": "t_enum$_Status_$2198",
+                      "typeIdentifier": "t_enum$_Status_$2185",
                       "typeString": "enum Structs.Status"
                     },
                     "id": 1123,
@@ -12320,7 +12322,7 @@
                         "referencedDeclaration": 1101,
                         "src": "3789:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -12332,10 +12334,10 @@
                       "memberLocation": "3798:6:5",
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2211,
+                      "referencedDeclaration": 2198,
                       "src": "3789:15:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -12348,10 +12350,10 @@
                           "name": "Structs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2219,
+                          "referencedDeclaration": 2206,
                           "src": "3808:7:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                            "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                             "typeString": "type(library Structs)"
                           }
                         },
@@ -12363,10 +12365,10 @@
                         "memberLocation": "3816:6:5",
                         "memberName": "Status",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2198,
+                        "referencedDeclaration": 2185,
                         "src": "3808:14:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                           "typeString": "type(enum Structs.Status)"
                         }
                       },
@@ -12378,10 +12380,10 @@
                       "memberLocation": "3823:7:5",
                       "memberName": "PENDING",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2196,
+                      "referencedDeclaration": 2183,
                       "src": "3808:22:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -12426,7 +12428,7 @@
                             "name": "InvalidStatus",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2009,
+                            "referencedDeclaration": 1983,
                             "src": "3854:13:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_bytes32_$returns$__$",
@@ -12472,7 +12474,7 @@
                         "referencedDeclaration": 1101,
                         "src": "3903:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                          "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                           "typeString": "struct Structs.Approval storage pointer"
                         }
                       },
@@ -12484,10 +12486,10 @@
                       "memberLocation": "3912:6:5",
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2211,
+                      "referencedDeclaration": 2198,
                       "src": "3903:15:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
@@ -12500,10 +12502,10 @@
                           "name": "Structs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2219,
+                          "referencedDeclaration": 2206,
                           "src": "3921:7:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Structs_$2219_$",
+                            "typeIdentifier": "t_type$_t_contract$_Structs_$2206_$",
                             "typeString": "type(library Structs)"
                           }
                         },
@@ -12515,10 +12517,10 @@
                         "memberLocation": "3929:6:5",
                         "memberName": "Status",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2198,
+                        "referencedDeclaration": 2185,
                         "src": "3921:14:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$2198_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$2185_$",
                           "typeString": "type(enum Structs.Status)"
                         }
                       },
@@ -12530,16 +12532,16 @@
                       "memberLocation": "3936:8:5",
                       "memberName": "REJECTED",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2195,
+                      "referencedDeclaration": 2182,
                       "src": "3921:23:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$2198",
+                        "typeIdentifier": "t_enum$_Status_$2185",
                         "typeString": "enum Structs.Status"
                       }
                     },
                     "src": "3903:41:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$2198",
+                      "typeIdentifier": "t_enum$_Status_$2185",
                       "typeString": "enum Structs.Status"
                     }
                   },
@@ -12611,7 +12613,7 @@
           },
           {
             "baseFunctions": [
-              2130
+              2104
             ],
             "body": {
               "id": 1191,
@@ -12889,7 +12891,7 @@
                             "name": "WalletBinded",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2013,
+                            "referencedDeclaration": 1987,
                             "src": "4173:12:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_address_$returns$__$",
@@ -13046,7 +13048,7 @@
                             "name": "ZeroAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2017,
+                            "referencedDeclaration": 1991,
                             "src": "4273:11:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_address_$returns$__$",
@@ -13187,7 +13189,7 @@
                       "name": "WalletBind",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2023,
+                      "referencedDeclaration": 1997,
                       "src": "4358:10:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
@@ -13279,7 +13281,7 @@
           },
           {
             "baseFunctions": [
-              2143
+              2117
             ],
             "body": {
               "id": 1248,
@@ -13536,7 +13538,7 @@
                             "name": "InvalidSignedHash",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2001,
+                            "referencedDeclaration": 1975,
                             "src": "4721:17:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_bytes32_$returns$__$",
@@ -13782,7 +13784,7 @@
                       "name": "WalletUnBind",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2027,
+                      "referencedDeclaration": 2001,
                       "src": "4867:12:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
@@ -14013,7 +14015,7 @@
           },
           {
             "baseFunctions": [
-              2148
+              2122
             ],
             "body": {
               "id": 1291,
@@ -14291,7 +14293,7 @@
                             "name": "ZeroAddress",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2017,
+                            "referencedDeclaration": 1991,
                             "src": "5104:11:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_address_$returns$__$",
@@ -14461,7 +14463,7 @@
                       "name": "AssetUpgraded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2033,
+                      "referencedDeclaration": 2007,
                       "src": "5204:13:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
@@ -14553,7 +14555,7 @@
           },
           {
             "baseFunctions": [
-              2161
+              2135
             ],
             "body": {
               "id": 1353,
@@ -14879,7 +14881,7 @@
                             "name": "InvalidSignedHash",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2001,
+                            "referencedDeclaration": 1975,
                             "src": "5616:17:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_error_pure$_t_bytes32_$returns$__$",
@@ -15121,7 +15123,7 @@
                       "name": "AssetDowngraded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2039,
+                      "referencedDeclaration": 2013,
                       "src": "5776:15:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
@@ -15352,7 +15354,7 @@
           },
           {
             "baseFunctions": [
-              2092
+              2066
             ],
             "body": {
               "id": 1385,
@@ -15794,7 +15796,7 @@
                               "referencedDeclaration": 1389,
                               "src": "6574:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                                 "typeString": "struct Structs.Approval memory"
                               }
                             },
@@ -15806,7 +15808,7 @@
                             "memberLocation": "6583:7:5",
                             "memberName": "assetId",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2202,
+                            "referencedDeclaration": 2189,
                             "src": "6574:16:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -15822,7 +15824,7 @@
                               "referencedDeclaration": 1389,
                               "src": "6613:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                                 "typeString": "struct Structs.Approval memory"
                               }
                             },
@@ -15834,7 +15836,7 @@
                             "memberLocation": "6622:5:5",
                             "memberName": "owner",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2204,
+                            "referencedDeclaration": 2191,
                             "src": "6613:14:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -15850,7 +15852,7 @@
                               "referencedDeclaration": 1389,
                               "src": "6650:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                                 "typeString": "struct Structs.Approval memory"
                               }
                             },
@@ -15862,7 +15864,7 @@
                             "memberLocation": "6659:7:5",
                             "memberName": "spender",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2206,
+                            "referencedDeclaration": 2193,
                             "src": "6650:16:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -15878,7 +15880,7 @@
                               "referencedDeclaration": 1389,
                               "src": "6689:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                                 "typeString": "struct Structs.Approval memory"
                               }
                             },
@@ -15890,7 +15892,7 @@
                             "memberLocation": "6698:5:5",
                             "memberName": "value",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2208,
+                            "referencedDeclaration": 2195,
                             "src": "6689:14:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -15906,7 +15908,7 @@
                               "referencedDeclaration": 1389,
                               "src": "6726:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                                "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                                 "typeString": "struct Structs.Approval memory"
                               }
                             },
@@ -15918,7 +15920,7 @@
                             "memberLocation": "6735:8:5",
                             "memberName": "sequence",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2200,
+                            "referencedDeclaration": 2187,
                             "src": "6726:17:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -16060,7 +16062,7 @@
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Approval_$2212_memory_ptr",
+                    "typeIdentifier": "t_struct$_Approval_$2199_memory_ptr",
                     "typeString": "struct Structs.Approval"
                   },
                   "typeName": {
@@ -16074,13 +16076,13 @@
                         "6374:8:5"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2212,
+                      "referencedDeclaration": 2199,
                       "src": "6366:16:5"
                     },
-                    "referencedDeclaration": 2212,
+                    "referencedDeclaration": 2199,
                     "src": "6366:16:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Approval_$2212_storage_ptr",
+                      "typeIdentifier": "t_struct$_Approval_$2199_storage_ptr",
                       "typeString": "struct Structs.Approval"
                     }
                   },
@@ -16844,20 +16846,20 @@
         "scope": 1467,
         "src": "234:7490:5",
         "usedErrors": [
-          2001,
-          2005,
-          2009,
-          2013,
-          2017
+          1975,
+          1979,
+          1983,
+          1987,
+          1991
         ],
         "usedEvents": [
-          2023,
-          2027,
-          2033,
-          2039,
-          2048,
-          2060,
-          2067
+          1997,
+          2001,
+          2007,
+          2013,
+          2022,
+          2034,
+          2041
         ]
       }
     ],
@@ -17042,12 +17044,13 @@
         }
       },
       "links": {},
-      "address": "0xd15E42aeF1E2Fb06233B31Ae7E40d3f92cfEa945",
-      "transactionHash": "0x515769369653bded1cdc54dbe847f611b757a879b0cec6756193cc264d56a6e0"
+      "address": "0x9FF6F18d9abb120B3E3a916BdE568FbC49f274D4",
+      "transactionHash": "0xb2ad76145ffff4d97828684406b441b0d4a91e715030c164c9dbc0cfab448397"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2024-02-18T19:26:37.509Z",
+  "updatedAt": "2024-02-19T07:23:01.062Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
