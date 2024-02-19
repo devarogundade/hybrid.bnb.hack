@@ -157,9 +157,8 @@ const gotoHomeView = () => {
   gap: 10px;
 }
 
-.import_header_name>svg {
-  width: 36px;
-  height: 34.52px;
+.import_header_name svg {
+  width: 30px;
 }
 
 .import_header_name p {

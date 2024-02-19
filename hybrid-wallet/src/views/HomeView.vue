@@ -69,7 +69,7 @@ onMounted(() => {
         <div class="home_header">
           <div class="home_header_name">
             <HybridIcon />
-            <p>Home</p>
+            <p>App</p>
           </div>
 
           <div class="home_header_account">
@@ -186,16 +186,16 @@ section:last-child::-webkit-scrollbar {
   justify-content: space-between;
 }
 
+.home_header_name svg {
+  width: 30px;
+}
+
 .home_header_name {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.home_header_name>svg {
-  width: 36px;
-  height: 34.52px;
-}
 
 .home_header_name p {
   color: #FFF;
