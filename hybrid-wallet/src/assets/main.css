@@ -6,7 +6,9 @@ body {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background: #252729;
+    background: #121312;
+    background-image: url('https://clickhouse.com/dot_grid.svg');
+    background-repeat: repeat;
 }
 
 section {
