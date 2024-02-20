@@ -3,7 +3,7 @@ import { abi as hybridAbi } from './hybrid-abi';
 import { abi as hybridTokenAbi } from './hybrid-token-abi';
 import { config } from './config';
 
-const contractId: `0x${string}` = '0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730';
+const contractId: `0x${string}` = '0x49321b62D46A72d9F0D0275f1CDBED2CB7753306';
 
 export function splitSignedHash(hex: string) {
     console.log(hex);
