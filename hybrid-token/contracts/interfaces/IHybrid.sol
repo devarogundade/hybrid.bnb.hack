@@ -53,9 +53,7 @@ interface IHybrid {
 
     function onValidApproval(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
+        bytes memory signature,
         bytes32 approvalId
     ) external returns (address spender, uint256 value);
 
@@ -65,18 +63,14 @@ interface IHybrid {
 
     function onWalletUnBind(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        bytes memory signature
     ) external;
 
     function onUpgradeAsset(address owner) external;
 
     function onDowngradeAsset(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
+        bytes memory signature,
         address owner
     ) external;
 }

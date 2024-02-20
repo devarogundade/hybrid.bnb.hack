@@ -52,17 +52,13 @@ abstract contract HybridToken is ERC20, IHybridToken {
     function submitApprovalProof(
         bytes32 approvalId,
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        bytes memory signature
     ) external override upgradeRequired {
         address owner = _msgSender();
 
         (address spender, uint256 value) = _hybrid.onValidApproval(
             messageHash,
-            v,
-            r,
-            s,
+            signature,
             approvalId
         );
 
@@ -81,13 +77,11 @@ abstract contract HybridToken is ERC20, IHybridToken {
 
     function submitDowngradeProof(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        bytes memory signature
     ) external override upgradeRequired {
         address owner = _msgSender();
 
-        _hybrid.onDowngradeAsset(messageHash, v, r, s, owner);
+        _hybrid.onDowngradeAsset(messageHash, signature, owner);
     }
 
     // ============================= //

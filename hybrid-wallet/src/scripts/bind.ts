@@ -5,10 +5,6 @@ import { config } from './config';
 
 const contractId: `0x${string}` = '0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730';
 
-export function isEOA(address: string | null): boolean {
-    return (address != null && address != '0x0000000000000000000000000000000000000000' && address.length == 42);
-}
-
 export function splitSignedHash(hex: string) {
     console.log(hex);
     const json: string = Buffer.from(hex, 'hex').toString('utf-8');
@@ -17,10 +13,13 @@ export function splitSignedHash(hex: string) {
 
     return {
         messageHash: object.messageHash,
-        v: object.v,
-        r: object.r,
-        s: object.s
+        signature: object.signature
     };
+}
+
+
+export function isEOA(address: string | null): boolean {
+    return (address != null && address != '0x0000000000000000000000000000000000000000' && address.length == 42);
 }
 
 export function getTokens() {
@@ -157,16 +156,14 @@ export async function bindWallet(signer: `0x${string}`): Promise<string | null> 
 
 export async function unBindWallet(
     messageHash: `0x${string}`,
-    v: number,
-    r: `0x${string}`,
-    s: `0x${string}`
+    signature: `0x${string}`
 ): Promise<string | null> {
     try {
         const result = await writeContract(config, {
             abi: hybridAbi,
             address: contractId,
             functionName: 'onWalletUnBind',
-            args: [messageHash, v, r, s],
+            args: [messageHash, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -181,9 +178,7 @@ export async function unBindWallet(
 
 export async function downgradeAsset(
     messageHash: `0x${string}`,
-    v: number,
-    r: `0x${string}`,
-    s: `0x${string}`,
+    signature: `0x${string}`,
     token: `0x${string}`
 ): Promise<string | null> {
     try {
@@ -191,7 +186,7 @@ export async function downgradeAsset(
             abi: hybridTokenAbi,
             address: token,
             functionName: 'submitDowngradeProof',
-            args: [messageHash, v, r, s],
+            args: [messageHash, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -207,9 +202,7 @@ export async function downgradeAsset(
 export async function submitApprovalProof(
     approvalId: `0x${string}`,
     messageHash: `0x${string}`,
-    v: string,
-    r: `0x${string}`,
-    s: `0x${string}`,
+    signature: `0x${string}`,
     token: `0x${string}`
 ): Promise<string | null> {
     try {
@@ -217,7 +210,7 @@ export async function submitApprovalProof(
             abi: hybridTokenAbi,
             address: token,
             functionName: 'submitApprovalProof',
-            args: [approvalId, messageHash, Number(v), r, s],
+            args: [approvalId, messageHash, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });

@@ -15,16 +15,12 @@ interface IHybridToken is IERC20 {
 
     function submitDowngradeProof(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        bytes memory signature
     ) external;
 
     function submitApprovalProof(
         bytes32 approvalId,
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        bytes memory signature
     ) external;
 }

@@ -50,9 +50,7 @@ const trySubmitProof = async () => {
     const txId = await submitApprovalProof(
         props.approval.approvalId,
         splitedHash.messageHash,
-        splitedHash.v,
-        splitedHash.r,
-        splitedHash.s,
+        splitedHash.signature,
         props.tokenInfo.address
     );
 

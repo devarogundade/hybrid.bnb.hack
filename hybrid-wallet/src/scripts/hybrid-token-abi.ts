@@ -323,19 +323,9 @@ export const abi = [
                 "type": "bytes32"
             },
             {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
             }
         ],
         "name": "submitApprovalProof",
@@ -364,19 +354,9 @@ export const abi = [
                 "type": "bytes32"
             },
             {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
             }
         ],
         "name": "submitDowngradeProof",

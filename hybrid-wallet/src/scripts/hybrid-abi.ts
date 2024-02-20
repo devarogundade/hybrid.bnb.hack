@@ -262,19 +262,9 @@ export const abi = [
                 "type": "bytes32"
             },
             {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
             },
             {
                 "internalType": "bytes32",
@@ -332,19 +322,9 @@ export const abi = [
                 "type": "bytes32"
             },
             {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
             },
             {
                 "internalType": "address",
@@ -403,19 +383,9 @@ export const abi = [
                 "type": "bytes32"
             },
             {
-                "internalType": "uint8",
-                "name": "v",
-                "type": "uint8"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "r",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "s",
-                "type": "bytes32"
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
             }
         ],
         "name": "onWalletUnBind",
@@ -440,6 +410,31 @@ export const abi = [
             }
         ],
         "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "messageHash",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
+            }
+        ],
+        "name": "_verifyHash",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "pure",
         "type": "function",
         "constant": true
     }

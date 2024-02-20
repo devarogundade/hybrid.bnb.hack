@@ -104,9 +104,7 @@ export class MainController {
 
             const preMailBody: SignedMessage = {
                 messageHash: signedMessage.messageHash,
-                v: signedMessage.v,
-                r: signedMessage.r,
-                s: signedMessage.s
+                signature: signedMessage.signature
             };
 
             const preMailBodyAsJsonHex = this.stringToHex(JSON.stringify(preMailBody));

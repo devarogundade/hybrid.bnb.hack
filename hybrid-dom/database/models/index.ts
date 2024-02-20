@@ -25,9 +25,7 @@ export interface Bind {
 
 export interface SignedMessage {
     messageHash?: string;
-    v?: string;
-    r?: string;
-    s?: string;
+    signature?: string;
 }
 
 export interface BindRequest {

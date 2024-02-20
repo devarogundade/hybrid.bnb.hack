@@ -12,7 +12,7 @@ contract Hybrid is IHybrid, Context {
     // ============================= //
 
     uint256 private _sequence = 1;
-    mapping(bytes32 => bool) private _usedSignedHash;
+    mapping(bytes => bool) private _usedSignatures;
 
     bytes32 internal constant LEAF_DOMAIN_SEPARATOR =
         0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE000000000000000000000000;
@@ -90,14 +90,12 @@ contract Hybrid is IHybrid, Context {
 
     function onValidApproval(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
+        bytes memory signature,
         bytes32 approvalId
     )
         external
         override
-        onlyUnusedSignedHash(messageHash)
+        onlyUnusedSignature(signature)
         returns (address spender, uint256 value)
     {
         Structs.Approval storage approval = _approvals[approvalId];
@@ -112,13 +110,13 @@ contract Hybrid is IHybrid, Context {
             revert InvalidStatus(approvalId);
         }
 
-        address extractedSigner = _verifyHash(messageHash, v, r, s);
+        address extractedSigner = _verifyHash(messageHash, signature);
 
         if (extractedSigner != signerOf(approval.owner)) {
             revert InvalidSigner(extractedSigner);
         }
 
-        _usedSignedHash[messageHash] = true;
+        _usedSignatures[signature] = true;
 
         approval.status = Structs.Status.ACCEPTED;
 
@@ -164,20 +162,18 @@ contract Hybrid is IHybrid, Context {
 
     function onDowngradeAsset(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s,
+        bytes memory signature,
         address owner
-    ) external override onlyUnusedSignedHash(messageHash) {
+    ) external override onlyUnusedSignature(signature) {
         address assetId = _msgSender();
 
-        address extractedSigner = _verifyHash(messageHash, v, r, s);
+        address extractedSigner = _verifyHash(messageHash, signature);
 
         if (extractedSigner != signerOf(owner)) {
             revert InvalidSigner(extractedSigner);
         }
 
-        _usedSignedHash[messageHash] = true;
+        _usedSignatures[signature] = true;
 
         _isAssetUpgraded[assetId][owner] = false;
 
@@ -216,19 +212,17 @@ contract Hybrid is IHybrid, Context {
 
     function onWalletUnBind(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external override onlyUnusedSignedHash(messageHash) {
+        bytes memory signature
+    ) external override onlyUnusedSignature(signature) {
         address owner = _msgSender();
 
-        address extractedSigner = _verifyHash(messageHash, v, r, s);
+        address extractedSigner = _verifyHash(messageHash, signature);
 
         if (extractedSigner != signerOf(owner)) {
             revert InvalidSigner(extractedSigner);
         }
 
-        _usedSignedHash[messageHash] = true;
+        _usedSignatures[signature] = true;
         _signers[owner] = address(0);
 
         emit WalletUnBind(owner);
@@ -260,28 +254,36 @@ contract Hybrid is IHybrid, Context {
 
     function _verifyHash(
         bytes32 messageHash,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) internal pure returns (address) {
-        // Concatenate the message hash with the Ethereum prefix "\x19Ethereum Signed Message:\n32"
-        bytes32 prefixedHash = keccak256(
-            abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
-        );
+        bytes memory signature
+    ) public pure returns (address) {
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
 
-        // Recover the address from the signature
-        address recoveredAddress = ecrecover(prefixedHash, v, r, s);
+        // Extracting r, s, v values from the signature
+        assembly {
+            r := mload(add(signature, 32))
+            s := mload(add(signature, 64))
+            v := byte(0, mload(add(signature, 96)))
+        }
 
-        // Check if the recovered address matches the expected signer
-        return recoveredAddress;
+        // EIP-2: Consider v = {0, 1} as it might not be exactly 27 or 28
+        if (v < 27) {
+            v += 27;
+        }
+
+        // Recover the signer's address using ecrecover
+        address signer = ecrecover(messageHash, v, r, s);
+
+        return signer;
     }
 
     // ============================= //
     // MODIFIERS                     //
     // ============================= //
 
-    modifier onlyUnusedSignedHash(bytes32 hash) {
-        require(!_usedSignedHash[hash], "SIGNED HASH USED");
+    modifier onlyUnusedSignature(bytes memory signature) {
+        require(!_usedSignatures[signature], "Signature was used");
         _;
     }
 }
