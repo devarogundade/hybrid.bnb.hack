@@ -8,9 +8,9 @@ dataSources:
     name: Hybrid
     network: mumbai
     source:
-      address: "0x3Dc26D5Da7445Dc40C98cd8b803d454315cE6730"
+      address: "0x49321b62D46A72d9F0D0275f1CDBED2CB7753306"
       abi: Hybrid
-      startBlock: 46100428
+      startBlock: 46136475
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

@@ -6,7 +6,6 @@ import { config } from './config';
 const contractId: `0x${string}` = '0x49321b62D46A72d9F0D0275f1CDBED2CB7753306';
 
 export function splitSignedHash(hex: string) {
-    console.log(hex);
     const json: string = Buffer.from(hex, 'hex').toString('utf-8');
 
     const object = JSON.parse(json);
