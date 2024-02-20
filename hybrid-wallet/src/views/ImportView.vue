@@ -101,10 +101,12 @@ const gotoHomeView = () => {
             <p>Bind Wallet</p>
           </div>
 
-          <div class="import_header_account">
-            <p>Exit</p>
-            <LogoutIcon />
-          </div>
+          <a href="https://hybrid-protocol.netlify.app">
+            <div class="import_header_account">
+              <p>Exit</p>
+              <LogoutIcon />
+            </div>
+          </a>
         </div>
 
         <form class="mnemonic_form">
