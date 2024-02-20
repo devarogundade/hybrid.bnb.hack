@@ -11,7 +11,7 @@ export function splitSignedHash(hex: string) {
     const object = JSON.parse(json);
 
     return {
-        messageHash: object.messageHash,
+        message: object.message,
         signature: object.signature
     };
 }
@@ -154,7 +154,7 @@ export async function bindWallet(signer: `0x${string}`): Promise<string | null> 
 }
 
 export async function unBindWallet(
-    messageHash: `0x${string}`,
+    message: `0x${string}`,
     signature: `0x${string}`
 ): Promise<string | null> {
     try {
@@ -162,7 +162,7 @@ export async function unBindWallet(
             abi: hybridAbi,
             address: contractId,
             functionName: 'onWalletUnBind',
-            args: [messageHash, signature],
+            args: [message, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -176,7 +176,7 @@ export async function unBindWallet(
 }
 
 export async function downgradeAsset(
-    messageHash: `0x${string}`,
+    message: `0x${string}`,
     signature: `0x${string}`,
     token: `0x${string}`
 ): Promise<string | null> {
@@ -185,7 +185,7 @@ export async function downgradeAsset(
             abi: hybridTokenAbi,
             address: token,
             functionName: 'submitDowngradeProof',
-            args: [messageHash, signature],
+            args: [message, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });
@@ -200,7 +200,7 @@ export async function downgradeAsset(
 
 export async function submitApprovalProof(
     approvalId: `0x${string}`,
-    messageHash: `0x${string}`,
+    message: `0x${string}`,
     signature: `0x${string}`,
     token: `0x${string}`
 ): Promise<string | null> {
@@ -209,7 +209,7 @@ export async function submitApprovalProof(
             abi: hybridTokenAbi,
             address: token,
             functionName: 'submitApprovalProof',
-            args: [approvalId, messageHash, signature],
+            args: [approvalId, message, signature],
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });

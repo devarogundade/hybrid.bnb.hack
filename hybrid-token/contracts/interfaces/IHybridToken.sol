@@ -14,13 +14,13 @@ interface IHybridToken is IERC20 {
     function upgradeAsset() external;
 
     function submitDowngradeProof(
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature
     ) external;
 
     function submitApprovalProof(
         bytes32 approvalId,
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature
     ) external;
 }

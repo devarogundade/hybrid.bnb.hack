@@ -57,7 +57,7 @@
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "messageHash",
+          "name": "message",
           "type": "bytes32"
         },
         {
@@ -88,7 +88,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"pubKey\",\"type\":\"bytes32\"}],\"name\":\"OptedIn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OptedOut\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"pubKey\",\"type\":\"bytes32\"}],\"name\":\"optIn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"optOut\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"messageHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verifyHash\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IBaseEIP.sol\":\"IBaseEIP\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IBaseEIP.sol\":{\"keccak256\":\"0xbed4d8ee2acabf0239410ce3aede17f32fa6bb6942d2cfd5cdd190bc7ab254af\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8a21ef6ba146e1433f77d9b1c6e7757a4b1bbd80c8793d5e734849a3906ec173\",\"dweb:/ipfs/QmUWL2K97TohwbEc7afj5YZ37oHudmTuzzi2N1nnKg7BWw\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"pubKey\",\"type\":\"bytes32\"}],\"name\":\"OptedIn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OptedOut\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"pubKey\",\"type\":\"bytes32\"}],\"name\":\"optIn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"optOut\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"message\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verifyHash\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IBaseEIP.sol\":\"IBaseEIP\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IBaseEIP.sol\":{\"keccak256\":\"0xbed4d8ee2acabf0239410ce3aede17f32fa6bb6942d2cfd5cdd190bc7ab254af\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8a21ef6ba146e1433f77d9b1c6e7757a4b1bbd80c8793d5e734849a3906ec173\",\"dweb:/ipfs/QmUWL2K97TohwbEc7afj5YZ37oHudmTuzzi2N1nnKg7BWw\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -96,7 +96,7 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ninterface IBaseEIP {\r\n    event OptedIn(address owner, bytes32 pubKey);\r\n\r\n    event OptedOut(address owner);\r\n\r\n    function optIn(bytes32 pubKey) external;\r\n\r\n    function optOut() external;\r\n\r\n    function verifyHash(\r\n        bytes32 messageHash,\r\n        uint8 v,\r\n        bytes32 r,\r\n        bytes32 s\r\n    ) external view returns (bool);\r\n}\r\n",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ninterface IBaseEIP {\r\n    event OptedIn(address owner, bytes32 pubKey);\r\n\r\n    event OptedOut(address owner);\r\n\r\n    function optIn(bytes32 pubKey) external;\r\n\r\n    function optOut() external;\r\n\r\n    function verifyHash(\r\n        bytes32 message,\r\n        uint8 v,\r\n        bytes32 r,\r\n        bytes32 s\r\n    ) external view returns (bool);\r\n}\r\n",
   "sourcePath": "C:\\Users\\DELL\\Documents\\hybrid.bnb.hack\\hybrid-token\\contracts\\interfaces\\IBaseEIP.sol",
   "ast": {
     "absolutePath": "project:/contracts/interfaces/IBaseEIP.sol",
@@ -352,7 +352,7 @@
                   "constant": false,
                   "id": 1952,
                   "mutability": "mutable",
-                  "name": "messageHash",
+                  "name": "message",
                   "nameLocation": "299:11:7",
                   "nodeType": "VariableDeclaration",
                   "scope": 1963,

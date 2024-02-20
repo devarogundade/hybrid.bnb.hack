@@ -103,7 +103,7 @@ class MainController {
                 console.log(input);
                 console.log(signedMessage);
                 const preMailBody = {
-                    messageHash: signedMessage.messageHash,
+                    message: signedMessage.message,
                     v: signedMessage.v,
                     r: signedMessage.r,
                     s: signedMessage.s

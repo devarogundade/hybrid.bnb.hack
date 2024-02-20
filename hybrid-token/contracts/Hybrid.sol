@@ -89,7 +89,7 @@ contract Hybrid is IHybrid, Context {
     }
 
     function onValidApproval(
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature,
         bytes32 approvalId
     )
@@ -110,7 +110,7 @@ contract Hybrid is IHybrid, Context {
             revert InvalidStatus(approvalId);
         }
 
-        address extractedSigner = _verifyHash(messageHash, signature);
+        address extractedSigner = _verifyHash(message, signature);
 
         if (extractedSigner != signerOf(approval.owner)) {
             revert InvalidSigner(extractedSigner);
@@ -161,13 +161,13 @@ contract Hybrid is IHybrid, Context {
     }
 
     function onDowngradeAsset(
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature,
         address owner
     ) external override onlyUnusedSignature(signature) {
         address assetId = _msgSender();
 
-        address extractedSigner = _verifyHash(messageHash, signature);
+        address extractedSigner = _verifyHash(message, signature);
 
         if (extractedSigner != signerOf(owner)) {
             revert InvalidSigner(extractedSigner);
@@ -211,12 +211,12 @@ contract Hybrid is IHybrid, Context {
     }
 
     function onWalletUnBind(
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature
     ) external override onlyUnusedSignature(signature) {
         address owner = _msgSender();
 
-        address extractedSigner = _verifyHash(messageHash, signature);
+        address extractedSigner = _verifyHash(message, signature);
 
         if (extractedSigner != signerOf(owner)) {
             revert InvalidSigner(extractedSigner);
@@ -253,7 +253,7 @@ contract Hybrid is IHybrid, Context {
     }
 
     function _verifyHash(
-        bytes32 messageHash,
+        bytes32 message,
         bytes memory signature
     ) public pure returns (address) {
         bytes32 r;
@@ -273,7 +273,7 @@ contract Hybrid is IHybrid, Context {
         }
 
         // Recover the signer's address using ecrecover
-        address signer = ecrecover(messageHash, v, r, s);
+        address signer = ecrecover(message, v, r, s);
 
         return signer;
     }

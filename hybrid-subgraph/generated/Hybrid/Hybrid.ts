@@ -242,7 +242,7 @@ export class Hybrid extends ethereum.SmartContract {
   }
 
   onValidApproval(
-    messageHash: Bytes,
+    message: Bytes,
     v: i32,
     r: Bytes,
     s: Bytes,
@@ -252,7 +252,7 @@ export class Hybrid extends ethereum.SmartContract {
       "onValidApproval",
       "onValidApproval(bytes32,uint8,bytes32,bytes32,bytes32):(address,uint256)",
       [
-        ethereum.Value.fromFixedBytes(messageHash),
+        ethereum.Value.fromFixedBytes(message),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
         ethereum.Value.fromFixedBytes(s),
@@ -267,7 +267,7 @@ export class Hybrid extends ethereum.SmartContract {
   }
 
   try_onValidApproval(
-    messageHash: Bytes,
+    message: Bytes,
     v: i32,
     r: Bytes,
     s: Bytes,
@@ -277,7 +277,7 @@ export class Hybrid extends ethereum.SmartContract {
       "onValidApproval",
       "onValidApproval(bytes32,uint8,bytes32,bytes32,bytes32):(address,uint256)",
       [
-        ethereum.Value.fromFixedBytes(messageHash),
+        ethereum.Value.fromFixedBytes(message),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
         ethereum.Value.fromFixedBytes(s),
@@ -457,7 +457,7 @@ export class OnValidApprovalCall__Inputs {
     this._call = call;
   }
 
-  get messageHash(): Bytes {
+  get message(): Bytes {
     return this._call.inputValues[0].value.toBytes();
   }
 
@@ -571,7 +571,7 @@ export class OnDowngradeAssetCall__Inputs {
     this._call = call;
   }
 
-  get messageHash(): Bytes {
+  get message(): Bytes {
     return this._call.inputValues[0].value.toBytes();
   }
 
@@ -647,7 +647,7 @@ export class OnWalletUnBindCall__Inputs {
     this._call = call;
   }
 
-  get messageHash(): Bytes {
+  get message(): Bytes {
     return this._call.inputValues[0].value.toBytes();
   }
 

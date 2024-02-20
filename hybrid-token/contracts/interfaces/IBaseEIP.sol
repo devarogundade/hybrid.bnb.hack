@@ -11,7 +11,7 @@ interface IBaseEIP {
     function optOut() external;
 
     function verifyHash(
-        bytes32 messageHash,
+        bytes32 message,
         uint8 v,
         bytes32 r,
         bytes32 s

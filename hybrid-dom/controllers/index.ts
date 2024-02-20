@@ -96,11 +96,11 @@ export class MainController {
             };
 
             const web3 = new Web3();
-            const input = `New Sign Message ${data} at ${this.blockTimestamp()}`;
-            const signedMessage = web3.eth.accounts.sign(input, bind.privateKey);
+            const inputMessage = `New Sign Message ${data} at ${this.blockTimestamp()}`;
+            const signedMessage = web3.eth.accounts.sign(inputMessage, bind.privateKey);
 
             const preMailBody: SignedMessage = {
-                messageHash: signedMessage.messageHash,
+                message: signedMessage.messageHash,
                 signature: signedMessage.signature
             };
 

@@ -43,7 +43,7 @@ const tryUnBind = async () => {
     const splitedHash = splitSignedHash(signedMessage.value);
 
     const txId = await unBindWallet(
-        splitedHash.messageHash,
+        splitedHash.message,
         splitedHash.signature
     );
 

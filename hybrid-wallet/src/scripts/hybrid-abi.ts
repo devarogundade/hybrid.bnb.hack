@@ -258,7 +258,7 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "bytes32",
-                "name": "messageHash",
+                "name": "message",
                 "type": "bytes32"
             },
             {
@@ -318,7 +318,7 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "bytes32",
-                "name": "messageHash",
+                "name": "message",
                 "type": "bytes32"
             },
             {
@@ -379,7 +379,7 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "bytes32",
-                "name": "messageHash",
+                "name": "message",
                 "type": "bytes32"
             },
             {
@@ -417,7 +417,7 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "bytes32",
-                "name": "messageHash",
+                "name": "message",
                 "type": "bytes32"
             },
             {
