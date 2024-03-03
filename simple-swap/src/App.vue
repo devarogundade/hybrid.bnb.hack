@@ -11,7 +11,7 @@ const amount = ref<number | undefined>(undefined);
 const address = ref<`0x${string}` | undefined>(undefined);
 
 const buying = ref<boolean>(false);
-// const minting = ref<boolean>(false);
+const minting = ref<boolean>(false);
 const approving = ref<boolean>(false);
 const selling = ref<boolean>(false);
 
@@ -58,36 +58,39 @@ const getProfile = async (address?: `0x${string}`) => {
   );
 };
 
-// const mint = async (amount?: number) => {
-//   if (!amount) return;
+const mint = async (amount?: number) => {
+  // alert('Minting halt! Buy tokens instead!');
+  // return;
 
-//   if (address == null) {
-//     alert('Connect your Web3 wallet');
-//     return;
-//   }
+  if (!amount) return;
 
-//   if (amount <= 0) {
-//     alert('Enter a valid amount');
-//     return;
-//   }
+  if (address == null) {
+    alert('Connect your Web3 wallet');
+    return;
+  }
 
-//   if (minting.value) {
-//     return;
-//   }
+  if (amount <= 0) {
+    alert('Enter a valid amount');
+    return;
+  }
 
-//   minting.value = true;
+  if (minting.value) {
+    return;
+  }
 
-//   const trxId = await tryMint(Converter.toWei(amount));
+  minting.value = true;
 
-//   if (trxId) {
-//     alert('Minted tokens at ' + trxId);
-//     getProfile(address.value);
-//   } else {
-//     alert('Failed to mint tokens');
-//   }
+  const trxId = await tryMint(Converter.toWei(amount));
 
-//   minting.value = false;
-// };
+  if (trxId) {
+    alert('Minted tokens at ' + trxId);
+    getProfile(address.value);
+  } else {
+    alert('Failed to mint tokens');
+  }
+
+  minting.value = false;
+};
 
 
 const approve = async (amount?: number) => {
@@ -193,11 +196,11 @@ const buy = async (amount?: number) => {
     </div>
 
     <div v-if="address?.valueOf()" class="connected">
-      <!-- <div class="faucet">
+      <div class="faucet">
         <button class="faucet_button" @click="mint(amount?.valueOf())">
           {{ minting.valueOf() ? 'Minting...' : 'Mint Wrapped BNB' }}
         </button>
-      </div> -->
+      </div>
 
       <div class="swap">
         <div class="profile">
@@ -318,7 +321,7 @@ button {
 }
 
 .swap_input input {
-  font-size: 1px;
+  font-size: 18px;
   height: 40px;
   padding: 0 10px;
   width: 100%;

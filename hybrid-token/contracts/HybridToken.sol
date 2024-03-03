@@ -24,6 +24,7 @@ abstract contract HybridToken is ERC20, IHybridToken {
         address hybrid
     ) ERC20(name, symbol) {
         _hybrid = IHybrid(hybrid);
+        _isOptedIn[address(0)] = true;
     }
 
     // ============================= //

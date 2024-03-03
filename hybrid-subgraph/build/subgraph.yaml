@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Hybrid
-    network: mumbai
+    network: chapel
     source:
-      address: "0x49321b62D46A72d9F0D0275f1CDBED2CB7753306"
+      address: "0x56987D6A1ec5814630da45D4BD00E92ab5858e3F"
       abi: Hybrid
-      startBlock: 46136475
+      startBlock: 38266503
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
