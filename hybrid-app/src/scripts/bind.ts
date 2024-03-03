@@ -1,4 +1,4 @@
-import { getToken as readTokenFromAddress, readContract, waitForTransactionReceipt, writeContract } from '@wagmi/core';
+import { getToken as readTokenFromAddress, readContract, waitForTransactionReceipt, writeContract, getBalance } from '@wagmi/core';
 import { abi as hybridAbi } from './hybrid-abi';
 import { abi as hybridTokenAbi } from './hybrid-token-abi';
 import { config } from './config';
@@ -121,7 +121,7 @@ export async function approve(token: `0x${string}`, spender: `0x${string}`, amou
             abi: hybridTokenAbi,
             address: token,
             functionName: 'approve',
-            args: [spender, amount],
+            args: [spender, amount]
         });
 
         const receipt = await waitForTransactionReceipt(config, { hash: result });

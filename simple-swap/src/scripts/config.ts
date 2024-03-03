@@ -5,9 +5,9 @@ import { defaultWagmiConfig } from '@web3modal/wagmi';
 export const projectId = 'c8af093fb15a6a3b6e325460f68d1587';
 
 const metadata = {
-    name: 'Hybrid App',
-    description: 'Hybrid App',
-    url: 'https://hybrid-app.netlify.app',
+    name: 'Simple Swap',
+    description: 'Simple Swap',
+    url: 'https://hybrid-simple-swap.netlify.app',
     icons: ['https://avatars.githubusercontent.com/u/37784886']
 };
 

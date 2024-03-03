@@ -14,6 +14,7 @@ abstract contract HybridToken is ERC20, IHybridToken {
     // ============================= //
 
     IHybrid private _hybrid;
+
     mapping(address => bool) private _isOptedIn;
     mapping(address => mapping(address => uint256)) private _spendableOf;
 

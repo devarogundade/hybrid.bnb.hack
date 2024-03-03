@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: Hybrid
-    network: mumbai
+    network: chapel
     source:
       address: "0x49321b62D46A72d9F0D0275f1CDBED2CB7753306"
       abi: Hybrid

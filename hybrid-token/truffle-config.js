@@ -12,7 +12,7 @@ module.exports = {
   ],
 
   networks: {
-    bscTestnet: {
+    chapel: {
       provider: () => new HDWalletProvider(MNEMONIC, 'https://bsc-testnet.publicnode.com'),
       network_id: 97,
       confirmations: 2,
@@ -20,15 +20,6 @@ module.exports = {
       skipDryRun: true,
       networkCheckTimeout: 999999999
     },
-
-    mumbai: {
-      provider: () => new HDWalletProvider(MNEMONIC, 'https://rpc.ankr.com/polygon_mumbai'),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 9999999,
-      skipDryRun: true,
-      networkCheckTimeout: 999999999
-    }
   },
 
   // Set default mocha options here, use special reporters, etc.
