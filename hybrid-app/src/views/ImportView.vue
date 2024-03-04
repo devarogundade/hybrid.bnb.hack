@@ -67,6 +67,7 @@ const tryBindWallet = async () => {
         description: result.message,
         category: 'error'
       });
+      binding.value = false;
       return;
     }
 
@@ -79,6 +80,7 @@ const tryBindWallet = async () => {
           description: 'Try again.',
           category: 'error'
         });
+        binding.value = false;
         return;
       }
     }
