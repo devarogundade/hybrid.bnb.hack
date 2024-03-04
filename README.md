@@ -16,9 +16,5 @@ contract WrappedBNB is HybridToken {
     constructor(
         address hybridContract
     ) HybridToken("Wrapped BNB", "WBNB", hybridContract) {}
-
-    function faucet(uint256 amount) external {
-        _mint(_msgSender(), amount);
-    }
 }
 ```
