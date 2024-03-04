@@ -4,6 +4,8 @@ In the vast and dynamic landscape of blockchain technology, the Hybrid Asset Pro
 
 [Learn more](https://dorahacks.io/buidl/9727)
 
+![Untitled Diagram drawio (4)](https://github.com/devarogundade/hybrid.bnb.hack/assets/81397790/6bcdc591-df19-4a2c-94d7-34ffcae81ef0)
+
 ## Usage
 
 ```solidity
