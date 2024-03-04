@@ -104,8 +104,6 @@ export class MainController {
                 signature: signedMessage.signature
             };
 
-            console.log(preMailBody);
-
             const preMailBodyAsJsonHex = this.stringToHex(JSON.stringify(preMailBody));
 
             await this.sendMail(

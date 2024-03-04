@@ -14,6 +14,7 @@ const buying = ref<boolean>(false);
 const minting = ref<boolean>(false);
 const approving = ref<boolean>(false);
 const selling = ref<boolean>(false);
+const refreshing = ref<boolean>(false);
 
 const balance0 = ref<string>('0');
 const balance1 = ref<string>('0');
@@ -41,6 +42,8 @@ onMounted(() => {
 const getProfile = async (address?: `0x${string}`) => {
   if (!address) return;
 
+  refreshing.value = true;
+
   balance0.value = Converter.toMoney(
     Converter.fromWei(
       await tryNativeBalance(address)
@@ -56,11 +59,15 @@ const getProfile = async (address?: `0x${string}`) => {
   allowance.value = Converter.fromWei(
     await tryAllowance(address)
   );
+
+  refreshing.value = false;
 };
 
 const mint = async (amount?: number) => {
-  // alert('Minting halt! Buy tokens instead!');
-  // return;
+  if (Number(balance1.value) > 0) {
+    alert('You have some tokens already. Buy tokens instead!');
+    return;
+  }
 
   if (!amount) return;
 
@@ -231,10 +238,16 @@ const buy = async (amount?: number) => {
             </button>
 
             <button class="sell" v-else @click="approve(amount?.valueOf())">
-              {{ approving.valueOf() ? 'Apprving...' : 'Approve to sell' }}
+              {{ approving.valueOf() ? 'Approving...' : 'Approve to sell' }}
             </button>
           </div>
         </div>
+      </div>
+
+      <div>
+        <p class="refresh" @click="getProfile(address.valueOf() as `0x${string}`)">
+          {{ refreshing.valueOf() ? 'Refreshing...' : 'Refresh' }}
+        </p>
       </div>
     </div>
   </main>
@@ -338,5 +351,15 @@ button {
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+
+.refresh {
+  text-align: center;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  user-select: none;
+  color: teal;
+  font-weight: 600;
 }
 </style>
