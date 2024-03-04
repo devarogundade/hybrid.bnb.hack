@@ -28,9 +28,14 @@ const tokenAddress = ref("");
 const spenderAddress = ref("");
 const amount = ref("");
 
+const approving = ref(false);
+
 const emit = defineEmits(['close', 'unClose']);
 
 const tryApprove = async () => {
+    if (approving.value) return;
+    approving.value = true;
+
     const txId = await approve(
         tokenAddress.value as `0x${string}`,
         spenderAddress.value as `0x${string}`,
@@ -56,6 +61,8 @@ const tryApprove = async () => {
             category: 'error'
         });
     }
+
+    approving.value = false;
 };
 
 onMounted(() => {
@@ -84,7 +91,7 @@ onMounted(() => {
                 </div>
 
                 <div class="approval_actions">
-                    <button @click="tryApprove">Confirm</button>
+                    <button @click="tryApprove">{{ approving.valueOf() ? 'Confirming...' : 'Confirm' }}</button>
                     <button @click="$emit('close')">Cancel</button>
                 </div>
             </div>

@@ -11,6 +11,7 @@ import { newSignedMessage } from '@/scripts/dom';
 import { rejectAprroval, splitSignedHash, submitApprovalProof } from '@/scripts/bind';
 import { allApprovalsOf } from '@/scripts/graph';
 import Converter from '@/scripts/converter';
+import Countdown from '@/scripts/countdown';
 
 const props = defineProps({
     active: { type: Boolean, required: true },
@@ -21,12 +22,18 @@ const props = defineProps({
 const store = useStore(key);
 
 const signedMessage = ref("");
+const requesting = ref(false);
+const approving = ref(false);
+const rejecting = ref(false);
 
 const OK = 200;
 
 const emit = defineEmits(['close', 'unClose']);
 
 const requestNewSignedHash = async () => {
+    if (requesting.value) return;
+    requesting.value = true;
+
     const result = await newSignedMessage(store.state.address, "Approving Spender");
 
     if (result.code == OK) {
@@ -44,9 +51,14 @@ const requestNewSignedHash = async () => {
             category: 'error'
         });
     }
+
+    requesting.value = false;
 };
 
 const trySubmitProof = async () => {
+    if (approving.value) return;
+    approving.value = true;
+
     const splitedHash = splitSignedHash(signedMessage.value);
 
     const txId = await submitApprovalProof(
@@ -75,9 +87,14 @@ const trySubmitProof = async () => {
             category: 'error'
         });
     }
+
+    approving.value = false;
 };
 
 const tryRejectApproval = async () => {
+    if (rejecting.value) return;
+    rejecting.value = true;
+
     const txId = await rejectAprroval(
         props.tokenInfo.address,
         props.approval.approvalId,
@@ -102,6 +119,8 @@ const tryRejectApproval = async () => {
             category: 'error'
         });
     }
+
+    rejecting.value = false;
 }
 
 </script>
@@ -133,19 +152,25 @@ const tryRejectApproval = async () => {
 
                     <tr>
                         <td>Time</td>
-                        <td><span>08 : 45pm</span> 28th, Jan 2023</td>
+                        <td>{{ Countdown.toDate((approval.blockTimestamp * 1000)) }}</td>
                     </tr>
                 </table>
 
                 <div class="approval_details">
                     <textarea v-model="signedMessage" placeholder="Enter signed hash" name="" id="" cols="30"
                         rows="5"></textarea>
-                    <p class="request_hash" @click="requestNewSignedHash">Request confirmation hash</p>
+                    <p class="request_hash" @click="requestNewSignedHash">
+                        {{ requesting.valueOf() ? 'Requesting...' : 'Request confirmation hash' }}
+                    </p>
                 </div>
 
                 <div class="approve_actions">
-                    <button @click="trySubmitProof">Approve</button>
-                    <button @click="tryRejectApproval">Reject</button>
+                    <button @click="trySubmitProof">
+                        {{ approving.valueOf() ? 'Approving...' : 'Approve' }}
+                    </button>
+                    <button @click="tryRejectApproval">
+                        {{ rejecting.valueOf() ? 'Rejecting...' : 'Reject' }}
+                    </button>
                 </div>
             </div>
         </div>

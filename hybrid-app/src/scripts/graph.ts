@@ -16,6 +16,7 @@ export async function allApprovals(owner: string): Promise<Approval[]> {
                         owner
                         spender
                         value
+                        blockTimestamp
                     }
                 }`
             }
@@ -39,6 +40,7 @@ export async function getApproval(approvalId: string): Promise<Approval | null> 
                         owner
                         spender
                         value
+                        blockTimestamp
                     }
                 }`
             }
@@ -62,6 +64,7 @@ export async function allApprovalsOf(owner: string, status: Status): Promise<App
                         owner
                         spender
                         value
+                        blockTimestamp
                     }
                 }`
             }

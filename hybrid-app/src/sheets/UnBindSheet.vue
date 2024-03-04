@@ -16,10 +16,15 @@ const props = defineProps({
 const store = useStore(key);
 
 const signedMessage = ref("");
+const requesting = ref(false);
+const approving = ref(false);
 
 const OK = 200;
 
 const requestNewSignedHash = async () => {
+    if (requesting.value) return;
+    requesting.value = true;
+
     const result = await newSignedMessage(store.state.address, "Unbinding Wallet Request");
 
     if (result.code == OK) {
@@ -37,9 +42,14 @@ const requestNewSignedHash = async () => {
             category: 'error'
         });
     }
+
+    requesting.value = false;
 };
 
 const tryUnBind = async () => {
+    if (approving.value) return;
+    approving.value = true;
+
     const splitedHash = splitSignedHash(signedMessage.value);
 
     const txId = await unBindWallet(
@@ -64,6 +74,8 @@ const tryUnBind = async () => {
             category: 'error'
         });
     }
+
+    approving.value = false;
 };
 </script>
 
@@ -80,11 +92,15 @@ const tryUnBind = async () => {
                 <div class="approval_details">
                     <textarea v-model="signedMessage" placeholder="Enter signed hash" name="" id="" cols="30"
                         rows="5"></textarea>
-                    <p class="request_hash" @click="requestNewSignedHash">Request confirmation hash</p>
+                    <p class="request_hash" @click="requestNewSignedHash">
+                        {{ requesting.valueOf() ? 'Requesting...' : 'Request confirmation hash' }}
+                    </p>
                 </div>
 
                 <div class="approval_actions">
-                    <button @click="tryUnBind">Confirm</button>
+                    <button @click="tryUnBind">
+                        {{ approving.valueOf() ? 'Confirming...' : 'Confirm' }}
+                    </button>
                     <button @click="$emit('close')">Cancel</button>
                 </div>
             </div>

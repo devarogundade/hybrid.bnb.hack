@@ -3,6 +3,7 @@ import CloseIcon from '@/components/icons/CloseIcon.vue';
 
 import { notify } from '../reactives/notify';
 import { optIn, optOut, upgradeAsset } from '@/scripts/bind';
+import { ref } from 'vue';
 
 const props = defineProps({
     active: { type: Boolean, required: true },
@@ -11,7 +12,14 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'unClose']);
 
+const optingIn = ref(false);
+const optingOut = ref(false);
+const upgrading = ref(false);
+
 const tryOptIn = async () => {
+    if (optingIn.value) return;
+    optingIn.value = true;
+
     const txId = await optIn(props.tokenInfo.address);
 
     if (txId) {
@@ -31,9 +39,14 @@ const tryOptIn = async () => {
             category: 'error'
         });
     }
+
+    optingIn.value = false;
 };
 
 const tryUpgradeAsset = async () => {
+    if (upgrading.value) return;
+    upgrading.value = true;
+
     const txId = await upgradeAsset(
         props.tokenInfo.address as `0x${string}`
     );
@@ -55,9 +68,14 @@ const tryUpgradeAsset = async () => {
             category: 'error'
         });
     }
+
+    upgrading.value = true;
 };
 
 const tryOptOut = async () => {
+    if (optingOut.value) return;
+    optingOut.value = true;
+
     const txId = await optOut(props.tokenInfo.address);
 
     if (txId) {
@@ -77,6 +95,8 @@ const tryOptOut = async () => {
             category: 'error'
         });
     }
+
+    optingOut.value = true;
 };
 </script>
 
@@ -98,9 +118,15 @@ const tryOptOut = async () => {
 
                 <div class="approval_actions">
                     <div class="grid_action">
-                        <button @click="tryOptIn">Opt in to {{ tokenInfo.symbol }}</button>
-                        <button @click="tryUpgradeAsset">Upgrade to hybrid token</button>
-                        <button @click="tryOptOut">Opt out from {{ tokenInfo.symbol }}</button>
+                        <button @click="tryOptIn">
+                            {{ optingIn.valueOf() ? 'Opting in...' : `Opt in to ${tokenInfo.symbol}` }}
+                        </button>
+                        <button @click="tryUpgradeAsset">
+                            {{ upgrading.valueOf() ? 'Upgrading...' : 'Upgrade to hybrid token' }}
+                        </button>
+                        <button @click="tryOptOut">
+                            {{ optingOut.valueOf() ? 'Opting out...' : `Opt out from ${tokenInfo.symbol}` }}
+                        </button>
                     </div>
                     <button class="cancel" @click="$emit('close')">Cancel</button>
                 </div>

@@ -38,7 +38,7 @@ const tryImport = async () => {
 
     store.commit('setAssets', (getTokens()));
 
-    emit('close');
+    setTimeout(() => { emit('close'); }, 1000);
 };
 </script>
 
@@ -61,7 +61,7 @@ const tryImport = async () => {
                 </div>
 
                 <div class="approval_actions">
-                    <button @click="tryImport">Confirm</button>
+                    <button @click="tryImport">Import</button>
                     <button @click="$emit('close')">Cancel</button>
                 </div>
             </div>

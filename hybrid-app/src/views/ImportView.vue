@@ -30,6 +30,7 @@ const modal = useWeb3Modal();
 const store = useStore(key);
 const isEmail = ref(false);
 const email = ref('');
+const binding = ref(false);
 
 onMounted(() => {
   watchAccount(config, {
@@ -55,6 +56,8 @@ const OK = 200;
 
 const tryBindWallet = async () => {
   if (store.state.address) {
+    if (binding.value) return;
+    binding.value = true;
 
     const result = await domBindWllet(store.state.address, email.value);
 
@@ -81,6 +84,8 @@ const tryBindWallet = async () => {
     }
 
     await getSigner();
+
+    binding.value = false;
 
     gotoHomeView();
   }
@@ -114,11 +119,12 @@ const gotoHomeView = () => {
           <button class="wallet_connect" type="button" @click="modal.open()">{{ store.state.address ? `Connected to
             ${Converter.fineHash(store.state.address, 4)}`
             : 'Wallet Connect'
-          }}</button>
+            }}</button>
 
           <br> <br>
 
-          <label v-if="store.state.address && !isEOA(store.state.signer)" for="mnemonic_input">Connect to a social for 2FA
+          <label v-if="store.state.address && !isEOA(store.state.signer)" for="mnemonic_input">Connect to a social for
+            2FA
             Trx:</label>
           <button @click="isEmail = true" v-if="store.state.address && !isEOA(store.state.signer)" class="telegram"
             type="button">Use Email
@@ -126,14 +132,20 @@ const gotoHomeView = () => {
           <input type="email" v-model="email" v-show="isEmail" placeholder="Enter your email">
 
           <label style="font-weight: 600; font-size: 20px; color: green; text-align: center;"
-            v-if="store.state.address && isEOA(store.state.signer)" for="mnemonic_input">{{ (`Your account has
-            been connected to
-            ${Converter.fineHash(store.state.signer, 4)} as a secondary signer!.`) }}</label>
+            v-if="store.state.address && isEOA(store.state.signer)" for="mnemonic_input">
+            {{ `Your account has been connected to ${Converter.fineHash(store.state.signer, 4)} as a secondary
+            signer!.` }}
+          </label>
         </form>
 
         <div class="import_actions">
-          <button class="import_action" @click="!isEOA(store.state.signer) ? tryBindWallet() : gotoHomeView()">{{
-            !isEOA(store.state.signer) ? 'Bind and Continue' : 'Continue' }}</button>
+          <button class="import_action" v-if="!binding.valueOf()"
+            @click="!isEOA(store.state.signer) ? tryBindWallet() : gotoHomeView()">
+            {{ !isEOA(store.state.signer) ? 'Bind and Continue' : 'Continue' }}
+          </button>
+          <button class="import_action" v-else>
+            Binding...
+          </button>
         </div>
       </div>
     </div>

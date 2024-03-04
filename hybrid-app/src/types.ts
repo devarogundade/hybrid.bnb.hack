@@ -6,6 +6,7 @@ export interface Approval {
     spender: string;
     value: string;
     status: Status;
+    blockTimestamp: number;
 }
 
 export interface BindWallet {
