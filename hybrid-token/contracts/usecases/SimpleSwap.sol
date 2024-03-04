@@ -16,6 +16,8 @@ contract SimpleSwap is Context {
         token.optIn();
     }
 
+    receive() external payable {}
+
     function buy() external payable {
         address owner = _msgSender();
 

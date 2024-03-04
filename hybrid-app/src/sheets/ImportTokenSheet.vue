@@ -20,7 +20,7 @@ const tokenInfo = ref<any>(null);
 
 const emit = defineEmits(['close', 'unClose']);
 
-const tryImportAndUpgrade = async () => {
+const tryImport = async () => {
     tokenInfo.value = await readToken(
         tokenAddress.value as `0x${string}`
     );
@@ -34,31 +34,11 @@ const tryImportAndUpgrade = async () => {
         return;
     }
 
-    const txId = await upgradeAsset(
-        tokenAddress.value as `0x${string}`
-    );
-
     saveToken(tokenInfo.value);
 
     store.commit('setAssets', (getTokens()));
 
-    if (txId) {
-        notify.push({
-            title: 'Approval successful.',
-            description: 'Transaction was sent.',
-            category: 'success',
-            linkTitle: 'View Trx',
-            linkUrl: ''
-        });
-
-        emit('close');
-    } else {
-        notify.push({
-            title: 'Failed to send transaction.',
-            description: 'Try again.',
-            category: 'error'
-        });
-    }
+    emit('close');
 };
 </script>
 
@@ -68,7 +48,7 @@ const tryImportAndUpgrade = async () => {
         <div class="app_width">
             <div class="approval_container">
                 <div class="approval_header">
-                    <p>Import and Upgrade Token</p>
+                    <p>Import Token</p>
                     <CloseIcon @click="$emit('close')" />
                 </div>
 
@@ -81,7 +61,7 @@ const tryImportAndUpgrade = async () => {
                 </div>
 
                 <div class="approval_actions">
-                    <button @click="tryImportAndUpgrade">Confirm</button>
+                    <button @click="tryImport">Confirm</button>
                     <button @click="$emit('close')">Cancel</button>
                 </div>
             </div>

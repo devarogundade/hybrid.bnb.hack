@@ -102,12 +102,14 @@ onMounted(() => {
     </section>
     <section>
       <div class="home_tabs">
-        <div @click="tab = 'tokens'" :class="tab.valueOf() == 'tokens' ? `home_tab home_tab_active` : `home_tab`">
+        <div @click="tab = 'tokens'; tryGetTokens()"
+          :class="tab.valueOf() == 'tokens' ? `home_tab home_tab_active` : `home_tab`">
           <p>Tokens</p>
           <div class="indicator"></div>
         </div>
 
-        <div @click="tab = 'approvals'" :class="tab.valueOf() == 'approvals' ? `home_tab home_tab_active` : `home_tab`">
+        <div @click="tab = 'approvals'; tryGetApprovals()"
+          :class="tab.valueOf() == 'approvals' ? `home_tab home_tab_active` : `home_tab`">
           <p>Requests <span>{{ store.state.approvals.length }}</span></p>
           <div class="indicator"></div>
         </div>
@@ -116,8 +118,8 @@ onMounted(() => {
     <section>
       <div class="app_width">
         <div class="requests">
-          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in store.state.assets" :key="index"
-            @click="$emit('token_info', token)">
+          <div class="request" v-show="tab.valueOf() == 'tokens'" v-for="token, index in store.state.assets"
+            :key="index" @click="$emit('token_info', token)">
             <div class="request_head">
               <div class="request_head_token">
                 <img src="/images/coin.png" alt="">
@@ -125,7 +127,7 @@ onMounted(() => {
               </div>
 
               <div class="request_head_amount">
-                <p>10 {{ token.symbol }}</p>
+                <p> {{ token.symbol }}</p>
                 <ArrowDownIcon :style="'rotate: 90deg;'" />
               </div>
             </div>
@@ -153,9 +155,9 @@ onMounted(() => {
               <button class="request_action"
                 @click="tryRejectApproval(getToken(approval.assetId).address, approval.approvalId)">Reject</button>
               <button class="request_action" @click="$emit('approve_request', {
-                tokenInfo: getToken(approval.assetId),
-                approval: approval
-              })">Approve</button>
+              tokenInfo: getToken(approval.assetId),
+              approval: approval
+            })">Approve</button>
             </div>
           </div>
         </div>

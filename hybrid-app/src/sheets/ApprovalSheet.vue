@@ -28,6 +28,8 @@ const tokenAddress = ref("");
 const spenderAddress = ref("");
 const amount = ref("");
 
+const emit = defineEmits(['close', 'unClose']);
+
 const tryApprove = async () => {
     const txId = await approve(
         tokenAddress.value as `0x${string}`,
@@ -45,6 +47,8 @@ const tryApprove = async () => {
         });
 
         store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
+
+        emit('close');
     } else {
         notify.push({
             title: 'Failed to send transaction.',

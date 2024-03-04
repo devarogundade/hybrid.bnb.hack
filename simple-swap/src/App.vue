@@ -233,7 +233,9 @@ const buy = async (amount?: number) => {
           <button class="buy" @click="buy(amount?.valueOf())">{{ buying.valueOf() ? 'Buying...' : 'Buy' }}</button>
 
           <div>
-            <button class="sell" v-if="amount && Number(allowance) > amount.valueOf()" @click="sell(amount?.valueOf())">
+            <button class="sell"
+              v-if="(!amount && Number(allowance) > 0) || (amount && Number(allowance) >= amount.valueOf())"
+              @click="sell(amount?.valueOf())">
               {{ selling.valueOf() ? 'Selling...' : 'Sell' }}
             </button>
 

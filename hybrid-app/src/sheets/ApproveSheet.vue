@@ -8,7 +8,7 @@ import { useStore } from 'vuex';
 import { key } from '../../store';
 import { notify } from '../reactives/notify';
 import { newSignedMessage } from '@/scripts/dom';
-import { splitSignedHash, submitApprovalProof } from '@/scripts/bind';
+import { rejectAprroval, splitSignedHash, submitApprovalProof } from '@/scripts/bind';
 import { allApprovalsOf } from '@/scripts/graph';
 import Converter from '@/scripts/converter';
 
@@ -23,6 +23,8 @@ const store = useStore(key);
 const signedMessage = ref("");
 
 const OK = 200;
+
+const emit = defineEmits(['close', 'unClose']);
 
 const requestNewSignedHash = async () => {
     const result = await newSignedMessage(store.state.address, "Approving Spender");
@@ -64,6 +66,35 @@ const trySubmitProof = async () => {
         });
 
         store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
+
+        emit('close');
+    } else {
+        notify.push({
+            title: 'Failed to send transaction.',
+            description: 'Try again.',
+            category: 'error'
+        });
+    }
+};
+
+const tryRejectApproval = async () => {
+    const txId = await rejectAprroval(
+        props.tokenInfo.address,
+        props.approval.approvalId,
+    );
+
+    if (txId) {
+        notify.push({
+            title: 'Reject successful.',
+            description: 'Transaction was sent.',
+            category: 'success',
+            linkTitle: 'View Trx',
+            linkUrl: ''
+        });
+
+        store.commit('setApprovals', await allApprovalsOf(store.state.address, 2));
+
+        emit('close');
     } else {
         notify.push({
             title: 'Failed to send transaction.',
@@ -114,7 +145,7 @@ const trySubmitProof = async () => {
 
                 <div class="approve_actions">
                     <button @click="trySubmitProof">Approve</button>
-                    <button>Reject</button>
+                    <button @click="tryRejectApproval">Reject</button>
                 </div>
             </div>
         </div>

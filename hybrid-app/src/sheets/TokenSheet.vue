@@ -2,12 +2,14 @@
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 
 import { notify } from '../reactives/notify';
-import { optIn, optOut } from '@/scripts/bind';
+import { optIn, optOut, upgradeAsset } from '@/scripts/bind';
 
 const props = defineProps({
     active: { type: Boolean, required: true },
     tokenInfo: { type: Object, required: true }
 });
+
+const emit = defineEmits(['close', 'unClose']);
 
 const tryOptIn = async () => {
     const txId = await optIn(props.tokenInfo.address);
@@ -20,6 +22,32 @@ const tryOptIn = async () => {
             linkTitle: 'View Trx',
             linkUrl: ''
         });
+
+        emit('close');
+    } else {
+        notify.push({
+            title: 'Failed to send transaction.',
+            description: 'Try again.',
+            category: 'error'
+        });
+    }
+};
+
+const tryUpgradeAsset = async () => {
+    const txId = await upgradeAsset(
+        props.tokenInfo.address as `0x${string}`
+    );
+
+    if (txId) {
+        notify.push({
+            title: 'Upgrade successful.',
+            description: 'Transaction was sent.',
+            category: 'success',
+            linkTitle: 'View Trx',
+            linkUrl: ''
+        });
+
+        emit('close');
     } else {
         notify.push({
             title: 'Failed to send transaction.',
@@ -40,6 +68,8 @@ const tryOptOut = async () => {
             linkTitle: 'View Trx',
             linkUrl: ''
         });
+
+        emit('close');
     } else {
         notify.push({
             title: 'Failed to send transaction.',
@@ -68,8 +98,9 @@ const tryOptOut = async () => {
 
                 <div class="approval_actions">
                     <div class="grid_action">
-                        <button @click="tryOptIn">Opt In</button>
-                        <button @click="tryOptOut">Opt Out</button>
+                        <button @click="tryOptIn">Opt in to {{ tokenInfo.symbol }}</button>
+                        <button @click="tryUpgradeAsset">Upgrade to hybrid token</button>
+                        <button @click="tryOptOut">Opt out from {{ tokenInfo.symbol }}</button>
                     </div>
                     <button class="cancel" @click="$emit('close')">Cancel</button>
                 </div>
@@ -136,11 +167,24 @@ main {
 .grid_action {
     gap: 10px;
     display: flex;
+    flex-direction: column;
     align-content: center;
 }
 
 .grid_action button:first-child {
-    width: 50%;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #181A1C;
+    background: #99F476;
+    cursor: pointer;
+}
+
+.grid_action button:nth-child(2) {
+    width: 100%;
     height: 35px;
     border: none;
     border-radius: 4px;
@@ -152,7 +196,7 @@ main {
 }
 
 .grid_action button:last-child {
-    width: 50%;
+    width: 100%;
     height: 35px;
     border: none;
     border-radius: 4px;
