@@ -4,7 +4,8 @@
             <div class="hero_container">
                 <div class="hero_text">
                     <h2>Hybrid Protocol: Reinventing Blockchain Security.</h2>
-                    <p>Empowering Users with Two-Factor Authentication & Combatting Token Spamming for a Safer Blockchain
+                    <p>Empowering Users with Two-Factor Authentication & Combatting Token Spamming for a Safer
+                        Blockchain
                         Experience.</p>
                 </div>
                 <div class="hero_actions">
@@ -14,9 +15,12 @@
                         </button>
                     </a>
 
-                    <button class="hero_action">
-                        Read the Docs
-                    </button>
+                    <a target="_blank"
+                        href="https://github.com/devarogundade/hybrid.bnb.hack/blob/main/hybrid-token/contracts/usecases/WrappedBNB.sol">
+                        <button class="hero_action">
+                            Read the Docs
+                        </button>
+                    </a>
                 </div>
             </div>
 
