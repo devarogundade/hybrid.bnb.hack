@@ -18,3 +18,14 @@ contract WrappedBNB is HybridToken {
     ) HybridToken("Wrapped BNB", "WBNB", hybridContract) {}
 }
 ```
+
+```solidity
+interface IHybridToken is IERC20 {
+    function optIn() external;
+
+    function optOut() external;
+
+    function upgradeAsset() external;
+}
+
+```
