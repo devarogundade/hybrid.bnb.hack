@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endPoint = 'https://hybrid-g3v9.onrender.com/';
+const endPoint = 'https://hybrid-dom.azurewebsites.net/';
 
 export async function bindWallet(owner: string, email: string) {
     try {

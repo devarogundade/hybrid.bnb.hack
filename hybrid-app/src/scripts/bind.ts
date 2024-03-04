@@ -16,7 +16,6 @@ export function splitSignedHash(hex: string) {
     };
 }
 
-
 export function isEOA(address: string | null): boolean {
     return (address != null && address != '0x0000000000000000000000000000000000000000' && address.length == 42);
 }
