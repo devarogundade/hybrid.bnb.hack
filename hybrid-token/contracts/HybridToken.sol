@@ -109,6 +109,10 @@ abstract contract HybridToken is ERC20, IHybridToken {
         if (!isUpgraded(owner)) {
             super._approve(owner, spender, value, emitEvent);
         } else {
+            // internal call, should not request
+            // explicit approval should be use is _spendableOf is not enough
+            if (!emitEvent) return;
+
             _hybrid.onRequestAprroval(owner, spender, value);
         }
     }
@@ -146,6 +150,17 @@ abstract contract HybridToken is ERC20, IHybridToken {
         _spendAllowance(from, spender, value);
         transferX(from, spender, to, value);
         return true;
+    }
+
+    function allowance(
+        address owner,
+        address spender
+    ) public view virtual override(ERC20, IERC20) returns (uint256) {
+        if (!isUpgraded(owner)) {
+            return super.allowance(owner, spender);
+        }
+
+        return _spendableOf[owner][spender];
     }
 
     function transferX(
