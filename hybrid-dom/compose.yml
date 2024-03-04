@@ -1,0 +1,7 @@
+services:
+  server:
+    image: devarogundade/hybrid-dom:latest
+    container_name: hybrid-dom
+    restart: always
+    ports:
+      - "3000:3000"
