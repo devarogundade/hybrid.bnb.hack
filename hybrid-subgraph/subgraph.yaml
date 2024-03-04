@@ -8,9 +8,9 @@ dataSources:
     name: Hybrid
     network: chapel
     source:
-      address: "0x56987D6A1ec5814630da45D4BD00E92ab5858e3F"
+      address: "0x2879bCB9616D49dE40F4fFbCeDFAa10ee9069097"
       abi: Hybrid
-      startBlock: 38266503
+      startBlock: 38283527
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

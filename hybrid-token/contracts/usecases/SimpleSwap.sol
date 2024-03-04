@@ -5,6 +5,7 @@ import {HybridToken} from "../HybridToken.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
 contract SimpleSwap is Context {
+    uint256 private _rate = 1_000_000;
     error InvalidAmount(uint256 amount);
 
     address private wrappedBnb;
@@ -25,7 +26,7 @@ contract SimpleSwap is Context {
             revert InvalidAmount(msg.value);
         }
 
-        uint256 amountOut = (msg.value * 1_000_000);
+        uint256 amountOut = (msg.value * _rate);
 
         HybridToken token = HybridToken(wrappedBnb);
         token.transfer(owner, amountOut);
@@ -34,14 +35,14 @@ contract SimpleSwap is Context {
     function sell(uint256 amount) external {
         address owner = _msgSender();
 
-        if (amount < 1_000_000) {
+        if (amount < (_rate * 1)) {
             revert InvalidAmount(amount);
         }
 
-        uint256 amountOut = (amount / 1_000_000);
+        uint256 amountOut = (amount / _rate);
 
         HybridToken token = HybridToken(wrappedBnb);
-        token.transferFrom(owner, address(this), amountOut);
+        token.transferFrom(owner, address(this), amount);
 
         payable(owner).transfer(amountOut);
     }

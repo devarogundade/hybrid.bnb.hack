@@ -3,8 +3,8 @@ import { abi as wrappedBnbAbi } from './wrapped-bnb-abi';
 import { abi as simpleSwapAbi } from './simple-swap-abi';
 import { config } from './config';
 
-const wrappedBnbId: `0x${string}` = '0xfA1f8718658eB0aec9A9Fed5Cf9bBfEFc36347c2';
-const simpleSwapId: `0x${string}` = '0x5eA8F84fB0fe4Ac908F1ed1a21814F72D39463bc';
+const wrappedBnbId: `0x${string}` = '0x5486FA90eA13b6166bbc28DE3102a96EBc7a5794';
+const simpleSwapId: `0x${string}` = '0xb2A482D96CdC937E4cd84c3b08dD877b9CfCBA2f';
 
 export async function tryAllowance(address: `0x${string}`) {
     try {

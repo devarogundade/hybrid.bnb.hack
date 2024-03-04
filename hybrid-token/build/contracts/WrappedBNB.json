@@ -181,8 +181,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -225,8 +224,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -239,8 +237,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -259,8 +256,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -273,8 +269,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -355,8 +350,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -369,8 +363,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -13327,15 +13320,15 @@
         1939
       ],
       "WrappedBNB": [
-        2356
+        2366
       ]
     },
-    "id": 2357,
+    "id": 2367,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2328,
+        "id": 2338,
         "literals": [
           "solidity",
           "^",
@@ -13348,16 +13341,16 @@
       {
         "absolutePath": "project:/contracts/HybridToken.sol",
         "file": "../HybridToken.sol",
-        "id": 2330,
+        "id": 2340,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 2357,
+        "scope": 2367,
         "sourceUnit": 1940,
         "src": "61:47:12",
         "symbolAliases": [
           {
             "foreign": {
-              "id": 2329,
+              "id": 2339,
               "name": "HybridToken",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
@@ -13375,7 +13368,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 2331,
+              "id": 2341,
               "name": "HybridToken",
               "nameLocations": [
                 "135:11:12"
@@ -13384,7 +13377,7 @@
               "referencedDeclaration": 1939,
               "src": "135:11:12"
             },
-            "id": 2332,
+            "id": 2342,
             "nodeType": "InheritanceSpecifier",
             "src": "135:11:12"
           }
@@ -13393,9 +13386,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 2356,
+        "id": 2366,
         "linearizedBaseContracts": [
-          2356,
+          2366,
           1939,
           2166,
           651,
@@ -13410,12 +13403,12 @@
         "nodes": [
           {
             "body": {
-              "id": 2342,
+              "id": 2352,
               "nodeType": "Block",
               "src": "257:2:12",
               "statements": []
             },
-            "id": 2343,
+            "id": 2353,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -13423,7 +13416,7 @@
                 "arguments": [
                   {
                     "hexValue": "5772617070656420424e42",
-                    "id": 2337,
+                    "id": 2347,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -13439,7 +13432,7 @@
                   },
                   {
                     "hexValue": "57424e42",
-                    "id": 2338,
+                    "id": 2348,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -13454,11 +13447,11 @@
                     "value": "WBNB"
                   },
                   {
-                    "id": 2339,
+                    "id": 2349,
                     "name": "hybridContract",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 2334,
+                    "referencedDeclaration": 2344,
                     "src": "241:14:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -13466,10 +13459,10 @@
                     }
                   }
                 ],
-                "id": 2340,
+                "id": 2350,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 2336,
+                  "id": 2346,
                   "name": "HybridToken",
                   "nameLocations": [
                     "206:11:12"
@@ -13486,17 +13479,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2335,
+              "id": 2345,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2334,
+                  "id": 2344,
                   "mutability": "mutable",
                   "name": "hybridContract",
                   "nameLocation": "184:14:12",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2343,
+                  "scope": 2353,
                   "src": "176:22:12",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -13505,7 +13498,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2333,
+                    "id": 2343,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "176:7:12",
@@ -13521,12 +13514,12 @@
               "src": "165:40:12"
             },
             "returnParameters": {
-              "id": 2341,
+              "id": 2351,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "257:0:12"
             },
-            "scope": 2356,
+            "scope": 2366,
             "src": "154:105:12",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -13534,7 +13527,7 @@
           },
           {
             "body": {
-              "id": 2354,
+              "id": 2364,
               "nodeType": "Block",
               "src": "308:46:12",
               "statements": [
@@ -13545,7 +13538,7 @@
                         "arguments": [],
                         "expression": {
                           "argumentTypes": [],
-                          "id": 2349,
+                          "id": 2359,
                           "name": "_msgSender",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -13556,7 +13549,7 @@
                             "typeString": "function () view returns (address)"
                           }
                         },
-                        "id": 2350,
+                        "id": 2360,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -13573,11 +13566,11 @@
                         }
                       },
                       {
-                        "id": 2351,
+                        "id": 2361,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2345,
+                        "referencedDeclaration": 2355,
                         "src": "339:6:12",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -13596,7 +13589,7 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 2348,
+                      "id": 2358,
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -13607,7 +13600,7 @@
                         "typeString": "function (address,uint256)"
                       }
                     },
-                    "id": 2352,
+                    "id": 2362,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -13623,14 +13616,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2353,
+                  "id": 2363,
                   "nodeType": "ExpressionStatement",
                   "src": "319:27:12"
                 }
               ]
             },
             "functionSelector": "57915897",
-            "id": 2355,
+            "id": 2365,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -13638,17 +13631,17 @@
             "nameLocation": "276:6:12",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2346,
+              "id": 2356,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2345,
+                  "id": 2355,
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "291:6:12",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2355,
+                  "scope": 2365,
                   "src": "283:14:12",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -13657,7 +13650,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2344,
+                    "id": 2354,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "283:7:12",
@@ -13672,19 +13665,19 @@
               "src": "282:16:12"
             },
             "returnParameters": {
-              "id": 2347,
+              "id": 2357,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "308:0:12"
             },
-            "scope": 2356,
+            "scope": 2366,
             "src": "267:87:12",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2357,
+        "scope": 2367,
         "src": "112:245:12",
         "usedErrors": [
           11,
@@ -13711,8 +13704,8 @@
     "97": {
       "events": {},
       "links": {},
-      "address": "0xfA1f8718658eB0aec9A9Fed5Cf9bBfEFc36347c2",
-      "transactionHash": "0xbb495d05e2caf8c0da0656ed855ac972eb5fd7ebef2848716bb677557a8fe61f"
+      "address": "0x5486FA90eA13b6166bbc28DE3102a96EBc7a5794",
+      "transactionHash": "0xb6d5b9b51635b90f04c10e48eafd9498858b0ac5c814138d3da6b187a0458ea6"
     },
     "80001": {
       "events": {
@@ -13773,8 +13766,7 @@
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2024-03-03T23:56:12.940Z",
-  "networkType": "ethereum",
+  "updatedAt": "2024-03-04T14:21:51.863Z",
   "devdoc": {
     "errors": {
       "ERC20InsufficientAllowance(address,uint256,uint256)": [

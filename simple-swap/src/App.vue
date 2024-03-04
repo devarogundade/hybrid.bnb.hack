@@ -16,8 +16,21 @@ const approving = ref<boolean>(false);
 const selling = ref<boolean>(false);
 const refreshing = ref<boolean>(false);
 
+const error = ref<string | undefined>(undefined);
+const success = ref<string | undefined>(undefined);
+
 const balance0 = ref<string>('0');
 const balance1 = ref<string>('0');
+
+const setError = (text: string) => {
+  error.value = text;
+  setTimeout(() => { error.value = undefined; }, 5000);
+};
+
+const setSuccess = (text: string) => {
+  success.value = text;
+  setTimeout(() => { success.value = undefined; }, 5000);
+};
 
 createWeb3Modal({
   wagmiConfig: config,
@@ -63,21 +76,16 @@ const getProfile = async (address?: `0x${string}`) => {
   refreshing.value = false;
 };
 
-const mint = async (amount?: number) => {
+const mint = async () => {
   if (Number(balance1.value) > 0) {
-    alert('You have some tokens already. Buy tokens instead!');
+    setError('You have some tokens already. Buy tokens instead!');
     return;
   }
 
   if (!amount) return;
 
   if (address == null) {
-    alert('Connect your Web3 wallet');
-    return;
-  }
-
-  if (amount <= 0) {
-    alert('Enter a valid amount');
+    setError('Connect your Web3 wallet');
     return;
   }
 
@@ -87,13 +95,13 @@ const mint = async (amount?: number) => {
 
   minting.value = true;
 
-  const trxId = await tryMint(Converter.toWei(amount));
+  const trxId = await tryMint(Converter.toWei(2));
 
   if (trxId) {
-    alert('Minted tokens at ' + trxId);
+    setSuccess('Minted tokens at ' + trxId);
     getProfile(address.value);
   } else {
-    alert('Failed to mint tokens');
+    setError('Failed to mint tokens');
   }
 
   minting.value = false;
@@ -104,12 +112,12 @@ const approve = async (amount?: number) => {
   if (!amount) return;
 
   if (address == null) {
-    alert('Connect your Web3 wallet');
+    setError('Connect your Web3 wallet');
     return;
   }
 
   if (amount <= 0) {
-    alert('Enter a valid amount');
+    setError('Enter a valid amount');
     return;
   }
 
@@ -122,10 +130,10 @@ const approve = async (amount?: number) => {
   const trxId = await tryApprove(Converter.toWei(amount));
 
   if (trxId) {
-    alert('Approved tokens at ' + trxId);
+    setSuccess('Approved tokens at ' + trxId);
     getProfile(address.value);
   } else {
-    alert('Failed to approve tokens');
+    setError('Failed to approve tokens');
   }
 
   approving.value = false;
@@ -135,12 +143,12 @@ const sell = async (amount?: number) => {
   if (!amount) return;
 
   if (address == null) {
-    alert('Connect your Web3 wallet');
+    setError('Connect your Web3 wallet');
     return;
   }
 
   if (amount <= 0) {
-    alert('Enter a valid amount');
+    setError('Enter a valid amount');
     return;
   }
 
@@ -153,10 +161,10 @@ const sell = async (amount?: number) => {
   const trxId = await trySell(Converter.toWei(amount));
 
   if (trxId) {
-    alert('Sold tokens at ' + trxId);
+    setSuccess('Sold tokens at ' + trxId);
     getProfile(address.value);
   } else {
-    alert('Failed to sell tokens');
+    setError('Failed to sell tokens');
   }
 
   selling.value = false;
@@ -166,12 +174,12 @@ const buy = async (amount?: number) => {
   if (!amount) return;
 
   if (address == null) {
-    alert('Connect your Web3 wallet');
+    setError('Connect your Web3 wallet');
     return;
   }
 
   if (amount <= 0) {
-    alert('Enter a valid amount');
+    setError('Enter a valid amount');
     return;
   }
 
@@ -181,13 +189,13 @@ const buy = async (amount?: number) => {
 
   buying.value = true;
 
-  const trxId = await tryBuy(Converter.toWei(amount));
+  const trxId = await tryBuy(Converter.toWei((amount / 1_000_000)));
 
   if (trxId) {
-    alert('Bought tokens at ' + trxId);
+    setSuccess('Bought tokens at ' + trxId);
     getProfile(address.value);
   } else {
-    alert('Failed to buy tokens');
+    setError('Failed to buy tokens');
   }
 
   buying.value = false;
@@ -204,7 +212,7 @@ const buy = async (amount?: number) => {
 
     <div v-if="address?.valueOf()" class="connected">
       <div class="faucet">
-        <button class="faucet_button" @click="mint(amount?.valueOf())">
+        <button class="faucet_button" @click="mint()">
           {{ minting.valueOf() ? 'Minting...' : 'Mint Wrapped BNB' }}
         </button>
       </div>
@@ -230,7 +238,8 @@ const buy = async (amount?: number) => {
         </div>
 
         <div class="swap_actions">
-          <button class="buy" @click="buy(amount?.valueOf())">{{ buying.valueOf() ? 'Buying...' : 'Buy' }}</button>
+          <button class="buy" @click="buy(amount?.valueOf())">{{ buying.valueOf() ? 'Buying...' : 'Buy'
+            }}</button>
 
           <div>
             <button class="sell"
@@ -250,6 +259,14 @@ const buy = async (amount?: number) => {
         <p class="refresh" @click="getProfile(address.valueOf() as `0x${string}`)">
           {{ refreshing.valueOf() ? 'Refreshing...' : 'Refresh' }}
         </p>
+      </div>
+
+      <div class="error" :style="{ top: error?.valueOf() ? '40px' : '-100px' }">
+        <p>{{ error?.valueOf() }}</p>
+      </div>
+
+      <div class="success" :style="{ top: success?.valueOf() ? '40px' : '-100px' }">
+        <p>{{ success?.valueOf() }}</p>
       </div>
     </div>
   </main>
@@ -325,6 +342,10 @@ button {
   text-align: center;
 }
 
+.swap {
+  position: relative;
+}
+
 .swap_input {
   margin-top: 20px;
 }
@@ -363,5 +384,41 @@ button {
   user-select: none;
   color: teal;
   font-weight: 600;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: -100px;
+  left: 0;
+  transform: .2s;
+  position: absolute;
+}
+
+.error p {
+  background: #d20808;
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.success {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: -100px;
+  left: 0;
+  transform: .2s;
+  position: absolute;
+}
+
+.success p {
+  background: rgb(1, 63, 16);
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
 }
 </style>
