@@ -60,7 +60,7 @@ const tryBindWallet = async () => {
     if (binding.value) return;
     binding.value = true;
 
-    if (Converter.validateEmail(email.value)) {
+    if (!Converter.validateEmail(email.value)) {
       notify.push({
         title: 'Enter a valid email.',
         description: 'Error',
