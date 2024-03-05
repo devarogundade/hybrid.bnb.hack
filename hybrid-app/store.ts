@@ -6,6 +6,7 @@ import { createStore, Store } from 'vuex';
 export interface State {
     address: string;
     signer: string;
+    email: string;
     assets: [];
     approvals: [];
 }
@@ -17,6 +18,7 @@ export const store = createStore<State>({
     state: {
         address: null,
         signer: null,
+        email: null,
         assets: [],
         approvals: []
     },
@@ -26,6 +28,9 @@ export const store = createStore<State>({
         },
         setSigner(state: State, newSigner: string) {
             state.signer = newSigner;
+        },
+        setEmail(state: State, newEmail: string) {
+            state.email = newEmail;
         },
         setAssets(state: State, newAssets: []) {
             state.assets = newAssets;

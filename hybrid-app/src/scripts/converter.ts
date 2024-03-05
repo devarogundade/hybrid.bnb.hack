@@ -1,6 +1,11 @@
 import convert from './baseconverter';
 
 const Converter = {
+    validateEmail: (email: string) => {
+        const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    },
+
     fineHash: function (hash: string | null, space: number) {
         if (hash == null || hash.length == 0) return '- - - - -';
         return hash.substring(0, space) + '...' + hash.substring(hash.length - space, hash.length);

@@ -69,11 +69,11 @@ onMounted(() => {
         <div class="home_header">
           <div class="home_header_name">
             <HybridIcon />
-            <p>App</p>
+            <p>App</p>s
           </div>
 
           <div class="home_header_account">
-            <p>{{ Converter.fineHash(store.state.address, 3) }} + {{ Converter.fineHash(store.state.signer, 3) }}</p>
+            <p>{{ Converter.fineHash(store.state.address, 3) }} + {{ Converter.fineHash(store.state.email, 5) }}</p>
             <ProfileIcon />
           </div>
         </div>
