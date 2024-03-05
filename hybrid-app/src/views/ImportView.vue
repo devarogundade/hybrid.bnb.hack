@@ -48,7 +48,7 @@ const getSigner = async () => {
 
     if (result.code == OK) {
       store.commit('setSigner', signer);
-      store.commit('setEmail', result.data.email);
+      store.commit('setEmail', result.data.emailId);
     }
   }
 };
