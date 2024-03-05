@@ -69,7 +69,7 @@ onMounted(() => {
         <div class="home_header">
           <div class="home_header_name">
             <HybridIcon />
-            <p>App</p>s
+            <p>App</p>
           </div>
 
           <div class="home_header_account">
